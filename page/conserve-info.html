@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>"四好农村路"智慧管理云平台</title>
+	<meta name="viewport"
+		content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="stylesheet" href="../css/common.css" />
+	<link rel="stylesheet" href="../css/rural-roads.css">
+	<link rel="stylesheet" href=" ../layui/css/layui.css">
+	<link rel="stylesheet" href=" ../layui/layer/mobile/need/layer.css">
+	<link rel="stylesheet" type="text/css" href="../css/component.css" />
+	<style type="text/css">
+		.map-content-warp {
+			position: relative;
+		}
+
+		.map-content-warp,
+		#baiduMap {
+			width: 100%;
+			height: 100%;
+		}
+
+		.check-map-warp {
+			position: absolute;
+			width: 700px;
+			height: 100%;
+			left: 0;
+			background: rgba(255, 255, 255, 0.8);
+			z-index: 9;
+		}
+
+		.check-map-warp-con {
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+
+		.check-map-warp-header {
+			height: 56px;
+			box-shadow: 0px 2px 4px #dcdcdc;
+		}
+
+		.check-map-warp-content {
+			overflow: auto;
+			width: 720px;
+		}
+
+		.user-warp {
+			box-shadow: 0px 2px 4px #ececec;
+			padding: 0 40px 0 20px;
+		}
+
+		.user-warp-header {
+			height: 36px;
+			line-height: 36px;
+			color: #49a4f7;
+		}
+
+		.user-warp ul {
+			display: table;
+			width: 100%;
+		}
+
+		.user-warp ul li {
+			float: left;
+			width: 33.33%;
+			height: 66px;
+			margin-bottom: 23px;
+			font-size: 12px;
+			color: #636262;
+			cursor: pointer;
+		}
+
+		.user-warp ul li .li-con {
+			height: 100%;
+			width: 94%;
+			padding-left: 5px;
+			border: 1px solid rgba(0, 0, 0, 0);
+		}
+
+		.user-warp ul li .li-con.check {
+			background: #fff;
+			box-shadow: 0px 0px 5px #d3d5d6;
+		}
+
+		.user-warp .user-img {
+			width: 66px;
+			height: 100%;
+			border-radius: 50%;
+			background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA4RpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo3MmRhNWNkYS0wYjlhLTVjNDAtYmZmYi1iMTBlODM0NmYwNjMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RDUwMTI5RkI0QzdGMTFFOTgyMjlFNTdDMzNDNDQ5REUiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RDUwMTI5RkE0QzdGMTFFOTgyMjlFNTdDMzNDNDQ5REUiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6ZjhmMThmZjQtY2IyNS1lNjRmLWIzMGUtMTRlY2I1NzMyMmY2IiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6MjEzNmY4NTEtNGM2NS0xMWU5LWIyZTUt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");
+			background-size: 100% 100%;
+			float: left;
+			margin-right: 8px;
+			font-size: 12px;
+			color: #fff;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.user-warp .user-img span {
+			position: absolute;
+			width: 100%;
+			left: 0;
+			bottom: 0;
+			height: 22px;
+			line-height: 20px;
+			text-align: center;
+			background: #68d5ca;
+		}
+
+		.user-warp .li-con.on .user-img span {
+			background: #f58686;
+		}
+
+		.user-warp .name {
+			padding: 15px 0 5px 0;
+		}
+
+		.patrol-route-warp-header {
+			height: 55px;
+			line-height: 55px;
+			color: #49a4f7;
+		}
+
+		.patrol-route-warp-header .label-text {
+			float: left;
+			margin: 0 30px 0 20px;
+		}
+
+		.patrol-route-warp-header .text {
+			float: left;
+			color: #333;
+			margin-right: 10px;
+		}
+
+		#date {
+			width: 286px;
+			height: 33px;
+			line-height: 33px;
+			margin-top: 11px;
+			border-radius: 5px;
+			float: left;
+		}
+
+		.select-div {
+			float: left;
+			width: 180px;
+			margin-top: 10px;
+			margin-right: 10px;
+		}
+
+		.span {
+			height: 100%;
+			float: left;
+			line-height: 55px;
+			padding: 0 10px 0 20px;
+		}
+
+		.check-map-btn {
+			position: absolute;
+			width: 27px;
+			height: 151px;
+			background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAACXCAYAAADkpiD2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA4RpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo3MmRhNWNkYS0wYjlhLTVjNDAtYmZmYi1iMTBlODM0NmYwNjMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTlFRjA5OEI0QzgxMTFFOUE4OURBOEVFODM2NjAzNDIiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTlFRjA5OEE0QzgxMTFFOUE4OURBOEVFODM2NjAzNDIiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6M2I2YTI5ODctNTdjYS00YzQ0LThkOTktM2I2ZGQzMWFmZDE1IiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6MjEzNmY4NTEtNGM2NS0xMWU5LWIyZTUtZGFjNzJlZDgyNjg2Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+lcXxhAAABJRJREFUeNrsm29sE3UYx3/X611vwoZbmFqR0mSD2KUDC1udk+DARI0QXvCCEOWNCYqJIqIJQtRlZsOxgQlKjBGJxqgLGhMg/nlBsqECg/3BzlFxsqHMZasM3Zjb3LXX6/k87a9vSDbWsefe+HuSb++aNP3kfvc83+dJfz3p6sePPf/sez8dOnouEh/7fF2CEYZ0vWHtt3Bs7+ofrfN7csYpYQ58kR3S8qKF2XVwmk8OS14ik7xw2A8qJIfxyAPVgh6wA4ahgXaDNtgBS60qY0+BtoGc1LB0PAKqAs21A4axDLQP5LYDhnEPz9QiO2AYOaAaUIUdMAwF9BJoE08iUlg6U58E7eBwUlg6VvNlzbEDxnjC7OcJRA5jvCT28RIhhzFe9FXcBMhhjNvaNm5zEjUsHRu4kbvsgDHeot4E5doBw1gCegvktQPG+JhRD1phBwwjC1QJWmcHLH1RW+2CMbuWUcAETMAETMAETMAETMAETMAETMAETMD+lzB5flF21qMHyx3zvLeRwmR3Sa5r1RsIynOVvrB0ss/d8taH07Mq31W6vYTJqpz4p++6frrmPAlMKXzcrQaeCTBJdiSGuv/Sf6hst2Jj8VmHKb6NHtW/uZhJkmQOXojop6pCzIxNuY05I5h635YCZcl6H/46aw609OlnajuZZVo3XfLMMBJzBbf7nN6HC/Bd/ErT5WjrgV8Ys6Z3f6fPkSWtfFexvKDMg19udH/VFQt90JNRMk0vt1WHtrIyIN+5zM0sy4r93BA2Lh7pzThzb3pByhxZe6i6xJG3OB/uSyIWOtxh9Hw9MKMymRKk5SlaRU3QkbMwlyUMM9p2sD3ee/LajGtyUtCcu1xZFdVlcMy24roRPVvfakbahkm8USt/JYAgPDfCn4ZvFTQlTG+uC1njV0eTBezf7Ef/I4NZ439GJxp3NoPfDUtOTdHKd5c5F1Xkk8CSQH3I0Jt2tqDvodG6gi+WKoVr7ybrZ2isEyd3taL/oeGqga0BpWjTIrrmCQarf//6j2Z/yx9ovKr/iWI18HQhDSx5iaaln9nTGb/SeBk9Ulm8/l5XcIcvk03dDDu1xdB4jUvHu/Dc6V1ToD346lL0TbIZJNZxuCcWbriAPikvuN8DdrYc/ZNs4EEjjoXeD6FfyncUu7NW7w1K6lwn2XRl9HwzAMvaBglkglHP19bUl6Gfkk1X8d7vrunNtefQP8Gwb9dWvraCdJQzI+3D0VNVZxMjvUPRtnc6JzV3/CuU7JCSg4okTbO/i1lfwARMwARMwARMwARMwARMwARMwARMwARsynDaxMFtrkN2wEZAe0FhatjvLPWEySD1Mp4GvQ3SKe8Z/tj2GegLdsPG2mzDJljq6YMW6myMgKpBfdSp38FSjzeMUtfZcdCHoARlURugd0GN1A4yxFLPvfxKbVeXQHs4kNQbm/jSxSiNGG/+R6Bj1K4/xtM6RN1i+nihRqj7WSu3nn8pmyea55egTxib3R2MG2FR0AHeHujGAotZgxKTsNH9RjrwmAnrYv/f+suUoCQsGk+cqD/aXel7rnGEehj5T4ABAPOhaC69ZC3PAAAAAElFTkSuQmCC");
+			background-size: 100% 100%;
+			right: -27px;
+			top: 50%;
+			margin-top: -75px;
+			cursor: pointer;
+		}
+
+		.check-map-btn.on {
+			background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAACXCAYAAADkpiD2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA4RpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo3MmRhNWNkYS0wYjlhLTVjNDAtYmZmYi1iMTBlODM0NmYwNjMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OThCRTg4OUE0QzgyMTFFOUE0QjVBMDc2RjI0NkZFRTUiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OThCRTg4OTk0QzgyMTFFOUE0QjVBMDc2RjI0NkZFRTUiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6M2I2YTI5ODctNTdjYS00YzQ0LThkOTktM2I2ZGQzMWFmZDE1IiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6MjEzNmY4NTEtNGM2NS0xMWU5LWIyZTUtZGFjNzJlZDgyNjg2Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+MJelWAAABItJREFUeNrsm19sFFUUxu+d2dmdCq1uQ9UVKU0oxK0t0NpCXbUpaaIEMCY8GCK+mGgkUfybqBgkixZLW4yiMSZgNMbQqCEBIfhg0oKhQrslbLUrVFqU0rQbihZqW5nd2Z3xnN27LySFbumZB3NP8nUnadNf58x3vnsz0+GXvlr94qbPftlzoCOamPh2ncUIi19tWfsDfJ7qHRpvLC3Mm6SEKfhFVXhFyYLcRjgsIIelTpHxIvjYBSomh4nKBzWAHnQChqWDtoDWOwFLd5WxZ0CbQS5qWKYeBQVBc52AYS0DNYN8TsCw7hVOLXEChpUHqgfVOgHD0kCvgTYIE5HCMk7dCHpVwElhmVol2prnBIwJw+wSBiKHMTESzWJEyGFMDH1QhAA5jIlY2yxijlPDMrVeBLnHCRgTS9T7IK8TMKwloA9ARU7AmNhmNIEecAKGlQPaBlrnBCxzUs87BWNOtVHCJEzCJEzCJEzCJEzCJEzCJEzCJEzC/hcw5fai23Ie+ySgzivJJYd5ql4qA2C+p2Z7QPVVeklhRnv9aeufwavcpWt6YEu1a2FtARnMNkZNo+2NDmu07y+mulXPileqtOI1PjKD2PGJxLWjb4WSIz1RxlXFXb6pQvM/WUjnxmTcMn5653RyuPMi45y7y55e6l7+7CI669tJ22jf8WviQtt5vP2rLXnCD231Z/vQIos5s1ks9OFZs+9QLx67iuoW6Q+9vRTay8mGOh7e2x+PtPQw27bV+dWFes32CjCQQpYg5plvBuLde8PQXku9a5kvZ9XOKq7NUcniyuw7PBwL7e5ilplU8hcX6HXN1Vz3amTZmBg4etn4uaHDThimkrfAm1PXFOBz7vaQBXEy2nXFjOyL4DGAcvXAm+VkMNVX5dVKN5am/Dp5adw40Rie6mdv6bEw5iUEdiVTNBVy9IpxbGsIY27WYVrx2nvc5c8txxjD/ISU6bLNyeQN/7gZgUo2LHTf/1QpxhfmpnE8GMZYu2knsgXB2RRrix+/D6MqOdR50TjR0INxNq22Tx/DmWfFy36MqZTtL7Sehzk7i9E17Ws8PY7KYQEtU+evLMRfbp471Bvv/rw/a0Pd3NtuRX8kWK7eWebDPIz/1hLBuJqRe294Qu65Lr3m3UqIo3mYgxDC3Wb/keEZj8qUID1f02vrV0IM3YH5F+v6+FRi4NjlW5rLqb6hP7y1AkGYe7GTTSGMJbIND5xJjzU2MBo7Hjw5G6BUt/BfoVSFpwaS8yx8LPf6EiZhEiZhEiZhEiZhEiZhEiZhEiZhEiZhU5bLIU4CtMcJ2BhoJyhCDfuTpd8wGaFuYztoN8igvGZ4s20f6Dt23Q3k2YZdY+m3Dzqp3RgFvQcapLZ+N0u/3jBOPWffg74AWZRDjQ94PgW1UifIKEu/9/I7dVydA+0QQNJsbBOti1MGMV78L0EHqVN/Qtg6TL3EDIpBjVKvZyERPf9SLp4YnvtBXzM2u08wrofFQB+J5YFuW2Aze4QzjgvdH6QbnqRlnxn623idEpSCxRLWj00H+rb5X2gdo96M/CfAAAM6aF5yKRXWAAAAAElFTkSuQmCC");
+			background-size: 100% 100%;
+		}
+
+		.tabelBox li {
+			display: none;
+
+		}
+		.time-choose{
+			position: absolute;
+			top	:100px;
+			right: 100px;
+			width: 450px;
+		}
+		.choose-box{
+			width:100%;
+			height:45px;
+			box-shadow:0px 2px 5px 0px rgba(0, 0, 0, 0.2);
+opacity:0.88;
+border-radius:5px;
+background-color: #fff;
+		}
+		.time-img{
+			float: left;
+		margin: 5px 15px;
+		}
+		#date2{
+			float: left;
+		}
+		.layui-input.layui-date-input {
+    background: url(../images/icon-4.png) no-repeat 100% center;
+		background-color: #fff;
+		width: 385px;
+		height: 45px;
+		border: none
+}
+.levels-box{
+	margin-top: 10px;
+	height: 35px;
+	padding: 5px 0;
+	box-shadow:2px 2px 5px 0px rgba(0, 0, 0, 0.1);
+opacity:0.88;
+border-radius:5px;
+background-color: #fff;
+}
+.levels-list{
+	width: 111px;
+	border-right: 1px solid#E6E6E6;
+	height: 35px;
+	float: left
+}
+.levels-box .levels-list:nth-child(4){
+	border: none
+}
+.level-detail{
+	float:left;
+	width: 27px;
+	height:12px;
+
+	border-radius:2px;
+	margin:12px 5px 12px; 
+
+}
+.level-name{
+	font-size: 16px;
+	color: #333;
+	line-height: 35px;
+	/* margin-left: 5px; */
+}
+.detail-green{
+background-color: #44D268;
+}
+.detail-yellow{
+background-color: #F3BA58;
+}
+.detail-red{
+background-color: #FF0000;
+}
+.detail-gray{
+background-color: #999999;
+}
+/* 开始 */
+.tab-header{
+	width:100%;
+	height: 56px;
+	background-color: #fff;
+	overflow: hidden;
+
+}
+.tab-title-box{
+	float: left;
+}
+.btn-back{
+	float: right;
+    width: 108px;
+	height:32px;
+	text-align: center;
+	font-size: 14px;
+	color: #fff;
+	margin: 12px 80px 0 0;
+	background-color: #4AA3F6;
+	border: none;
+	line-height: 30px;
+
+}
+.info-title-list{
+	height: 56px;
+	width:192px;
+     float: left;
+background:rgba(255,255,255,1);
+border:1px solid rgba(230,230,230,1);
+font-size: 16px;
+text-align: center;
+line-height: 56px;
+color: #333;
+box-sizing:border-box;
+-moz-box-sizing:border-box; /* Firefox */
+-webkit-box-sizing:border-box; 
+
+}
+.active{
+	border-bottom: 5px solid #4784FD
+}
+.conserve-info{
+	width: 100%;
+    background-color: #fff;
+	margin-top: 10px;
+}
+.conserve-info li{
+	display: none;
+	margin-top：10px;
+}
+.baseBox,.basenowBox{
+       background-color: #fff;
+       box-shadow:0px 1px 5px 0px rgba(133,130,130,0.3);
+       padding-bottom: 30px;
+      
+   }
+   .basenowBox{
+       margin-top: 20px;
+
+   }
+   .out-base-title{
+       padding-left:20px;
+
+   }
+   .basetab{
+       height: 34px;
+   }
+   .basetitle{
+       color:#55A8FD;
+       font-size: 16px;
+       font-weight: bold;
+       padding: 20px 0;
+
+
+   }
+   .out-base-tab{
+       padding: 10px 30px 50px 30px;
+   }
+   .outTab{
+       font-size: 14px;
+       color: #4d4d4d;
+       margin-bottom: 35px;
+       width: 100%;
+
+   }
+   .out-s-title{
+       background-color: #f3f8fe;
+       text-align: center
+   }
+   .out-s-detail{
+       padding-left: 20px;
+	   text-align: left
+   }
+   .out-down-link{
+       font-size: 16px;
+       color: #FA905C;
+       text-decoration: underline;
+       margin-right: 45px;
+   }
+   .out-base-title .out-base-back{
+       margin-top: 10px !important;
+       right: 30px !important;
+   }
+/* out-detail */
+/* quality-detail */
+.out-s-detail>img{
+    width: 140px;
+    height: 160px;
+    margin-right: 40px;
+
+}
+.quality-more-img{
+    font-size: 16opx;
+    color: #4AA3F6;
+}
+.qualityBox{
+    overflow: auto;
+}
+/*  quality-detail */ 
+/*  quality-solve */ 
+.solve-box{
+    width: 75%;
+    height: 170px;
+    padding-left: 20px;
+    padding-top: 10px;
+    resize: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+}
+.solve-title{
+    font-size:16px;
+    color: #616161;
+    margin-right: 20px;
+
+}
+.solve-main{
+    overflow: auto;
+}
+.opacit{
+	opacity: 0;
+}
+/* .clearfloat:after{display:block;clear:both;content:"";visibility:hidden;height:0} */
+	</style>
+</head>
+
+<body class="table-page">
+	<div class="header">
+		<div class="name">"四好农村路"智慧管理云平台</div>
+		<img src="../images/tianqi.png" class="tianqi" style="position:absolute;top:15px;right:420px;">
+		<div class="adminer" style="right:230px;">
+			<div class="img"><img src="../images/userinfo.jpg"></div>
+			<div class="adminer-type">超级管理员</div>
+			<div class="adminer-con">
+				<ul>
+					<li>修改头像</li>
+					<li>个人资料</li>
+					<li>修改密码</li>
+					<li>信箱</li>
+					<li class="tuichu">安全退出</li>
+				</ul>
+			</div>
+		</div>
+		<div class="set" style="right:110px;">
+			个性设置
+		</div>
+		<div id="setColor"></div>
+		<div style="" id="dbsx">待办事项<i>3</i></div>
+	</div>
+	<div class="page-warp">
+		<!--左侧导航-->
+		<div class="page-nav">
+			<div class="page-nav-warp">
+				<ul class="layui-nav layui-nav-tree" lay-filter="test" lay-shrink="all">
+					<li class="layui-nav-item layui-nav-itemed"><a href="javascript:;"><img src="../images/level-1.png"
+								class="img">首页</a></li>
+					<li class="layui-nav-item">
+						<a href="javascript:;"><img src="../images/level-3.png" class="img">路产管理</a>
+						<dl class="layui-nav-child">
+							<dd><a href="javascript:;">选项2</a></dd>
+							<dd><a href="javascript:;">选项2</a></dd>
+							<dd>
+								<a href="javascript:;">选项1</a>
+								<dl class="layui-nav-child">
+									<dd><a href="javascript:;">选项1-1</a></dd>
+									<dd><a href="javascript:;">选项1-2</a></dd>
+								</dl>
+							</dd>
+							<dd>
+								<a href="javascript:;">选项2</a>
+								<dl class="layui-nav-child">
+									<dd><a href="javascript:;">选项2-1</a></dd>
+									<dd><a href="javascript:;">选项2-2</a></dd>
+								</dl>
+							</dd>
+							<dd><a href="javascript:;">选项2</a></dd>
+							<dd><a href="javascript:;">跳转</a></dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item">
+						<a href="javascript:;"><img src="../images/level-4.png" class="img">建设管理</a>
+						<dl class="layui-nav-child">
+							<dd><a href="javascript:;">移动模块</a></dd>
+							<dd><a href="javascript:;">后台模版</a></dd>
+							<dd><a href="javascript:;">电商平台</a></dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item">
+						<a href="javascript:;"><img src="../images/level-5.png" class="img">养护管理</a>
+						<dl class="layui-nav-child">
+							<dd><a href="javascript:;">移动模块</a></dd>
+							<dd><a href="javascript:;">后台模版</a></dd>
+							<dd><a href="javascript:;">电商平台</a></dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item">
+						<a href="javascript:;"><img src="../images/level-7.png" class="img">基础信息</a>
+						<dl class="layui-nav-child">
+							<dd><a href="javascript:;">移动模块</a></dd>
+							<dd><a href="javascript:;">后台模版</a></dd>
+							<dd><a href="javascript:;">电商平台</a></dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item">
+						<a href="javascript:;"><img src="../images/level-8.png" class="img">消息管理</a>
+						<dl class="layui-nav-child">
+							<dd><a href="javascript:;">移动模块</a></dd>
+							<dd><a href="javascript:;">后台模版</a></dd>
+							<dd><a href="javascript:;">电商平台</a></dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item">
+						<a href="javascript:;"><img src="../images/level-6.png" class="img">系统设置</a>
+						<dl class="layui-nav-child">
+							<dd><a href="javascript:;">移动模块</a></dd>
+							<dd><a href="javascript:;">后台模版</a></dd>
+							<dd><a href="javascript:;">电商平台</a></dd>
+						</dl>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="page-con">
+			<!-- tab导航 -->
+			<div class="breadcrumb-nav" id="breadcrumb-nav">
+				<div class="breadcrumb-nav-list l">
+					首页 > 路产管理 > 路产管理
+				</div>
+			</div>
+			<div class="nav-body">
+				<div class="iframe-content">
+					<div class="tab-header">
+						<ul class="tab-title-box">
+							<li class="info-title-list active">基本信息</li>
+							<li class="info-title-list">位置信息</li>
+							<li class="info-title-list">处理信息</li>
+						</ul>
+                        <a class="btn-back" href="javascript:history.go(-1)">返&nbsp;回</a>
+					</div>
+					<ul class="conserve-info clearfloat">
+						<li style="display:block">
+								<div class="out-base-tab">
+										<table border="1px" bordercolor="#d9d9d9" class="outTab">
+												<tbody>
+												   
+													<tr class="basetab">
+														<td width="20%" class="out-s-title">线路编码</td>
+														<td width="30%" class="out-s-detail">C709</td>
+														<td width="20%" class="out-s-title">线路名称</td>
+														<td width="30%" class="out-s-detail">晓河路</td>
+													   
+													</tr>
+							
+													<tr class="basetab">
+														<td class="out-s-title">桩号</td>
+														<td class="out-s-detail">K1+598</td>
+														<td class="out-s-title">养护类型</td>
+														<td class="out-s-detail">路面杂物</td>
+													   
+													</tr>
+													<tr class="basetab">
+															<td class="out-s-title">影响程度</td>
+															<td class="out-s-detail">一般事件</td>
+															<td class="out-s-title">采集时间</td>
+															<td class="out-s-detail">2019-03-25  10:38:50</td>
+														   
+														</tr>
+														<tr class="basetab">
+																<td class="out-s-title">巡查人员</td>
+																<td class="out-s-detail">张三</td>
+																<td class="out-s-title">建议措施</td>
+																<td class="out-s-detail">清扫</td>
+															   
+															</tr>
+													<tr class="basetab" style="height:100px">
+															<td class="out-s-title">图片展示</td>
+														  
+															<td class="out-s-detail" colspan="3" style="padding:20px 0 20px 60px">
+																<img src="../images/noneImg.png" alt="">
+																<img src="../images/noneImg.png" alt="">
+																<img src="../images/noneImg.png" alt="">
+																<img src="../images/noneImg.png" alt="">
+																<a href="" class="quality-more-img">更多图片></a>
+															</td>
+														   
+														</tr>
+							
+							
+							
+												</tbody>
+											</table>
+							
+		
+								</div>
+						</li>
+						<li id="baiduMap"></li>
+						
+								<li>
+										<div class="out-base-tab">
+												<table border="1px" bordercolor="#d9d9d9" class="outTab">
+														<tbody>
+														   
+															<tr class="basetab">
+																<td width="20%" class="out-s-title">处理时间</td>
+																<td width="30%" class="out-s-detail">2019-03-25 14:22:35</td>
+																<td width="20%" class="out-s-title"></td>
+																<td width="30%" class="out-s-detail opacit">1</td>
+															   
+															</tr>
+									
+															<tr class="basetab">
+																<td class="out-s-title">处理人</td>
+																<td class="out-s-detail">K1+598</td>
+																<td class="out-s-title"></td>
+																<td class="out-s-detail opacit">1</td>
+															   
+															</tr>
+															<tr class="basetab">
+																	<td class="out-s-title">备注</td>
+																	<td class="out-s-detail" colspan="3">清除肩杂物</td>
+																	
+																   
+																</tr>
+																
+															<tr class="basetab" style="height:100px">
+																	<td class="out-s-title">图片展示</td>
+																  
+																	<td class="out-s-detail" colspan="3" style="padding:20px 0 20px 60px">
+																		<img src="../images/noneImg.png" alt="">
+																		<img src="../images/noneImg.png" alt="">
+																		<img src="../images/noneImg.png" alt="">
+																		<img src="../images/noneImg.png" alt="">
+																		<a href="" class="quality-more-img">更多图片></a>
+																	</td>
+																   
+																</tr>
+									
+									
+									
+														</tbody>
+													</table>
+									
+				
+										</div>
+						</li>
+
+					</ul>
+					
+
+
+					
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/rural-roads.js"></script>
+	<script type="text/javascript" src="../layui/layui.js"></script>
+	<script type="text/javascript" src="../layui/layer/mobile/layer.js"></script>
+	<script type="text/javascript" src=" ../js/utils.js"></script>
+	<script type="text/javascript" src="../js/baidumap.js"></script>
+</body>
+
+</html>
+<script type="text/javascript">
+layInit(function(layui,$){
+	var map = new BMap.Map("baiduMap");    // 创建Map实例
+		map.centerAndZoom(new BMap.Point(118.652127, 32.361124), 12);  // 初始化地图,设置中心点坐标和地图级别
+		map.enableScrollWheelZoom(true);
+	$(".tab-title-box li").click(function () {
+			var i = $(this).index();
+			$(this).addClass("active").siblings().removeClass("active");
+			$(".conserve-info li").eq(i).show().siblings().hide();
+		});
+		$('.conserve-info').height($(window).height()-210)
+	});
+</script>

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+	<head>
+		<meta charset="UTF-8">
+		<title>南京市农路智慧管理平台</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/rural-roads.css">
+		<link rel="stylesheet" href="../layui/css/layui.css">
+		<link rel="stylesheet" href="../layui/component/formSelects-v4.css">
+		<link rel="stylesheet" type="text/css" href="../css/component.css"/>
+		<style type="text/css">
+			.layui-card-body {
+				height:450px;
+			}
+			.layui-card-top {
+				height:20px;
+				line-height:20px;
+				font-size:15px;
+				border-bottom:1px solid #e4e4e4;
+			}
+			.char {
+				width:100%;
+				height:100%;
+			}
+		</style>
+	</head>
+	<body class="dlgcxmzl-view">
+		<div class="iframe-content">
+			<div class="layui-tab layui-tab-brief"lay-filter="demo">
+			  <ul class="layui-tab-title">
+				<li class="layui-this">数据汇总</li>
+				<li>图表统计</li>
+			  </ul>
+			  <div class="layui-tab-content layui-col-sm12"style="width:100%;overflow:hidden;">
+				<div class="layui-tab-item layui-show">
+					<div class=""style="text-align:right;padding-bottom:10px;">
+						<button class="layui-btn" style="background:#01AAED;">导出年报</button>
+						<button class="layui-btn" style="background:#009688;">导出月报</button>
+					</div>
+					<table class="layui-hide" id="test"  lay-even="" lay-skin="nob"style=""></table>
+				</div>
+				<div class="layui-tab-item"style="">
+					<div class="layui-row layui-col-space15"style="height:450px;margin-bottom:30px;">
+						<p class="layui-card-top">项目计划</p>
+						<div class="layui-col-md4">
+						  <div class="layui-card">
+							<div class="layui-card-body"style="height:450px;">
+								<div id="char1" class="char"></div>
+							</div>
+						  </div>
+						</div>
+						<div class="layui-col-md4">
+						  <div class="layui-card">
+							<div class="layui-card-body">
+							  <div id="char2" class="char"></div>
+							</div>
+						  </div>
+						</div>
+						<div class="layui-col-md4">
+						  <div class="layui-card">
+							<div class="layui-card-body">
+							  <div id="char3" class="char"></div>
+							</div>
+						  </div>
+						</div>
+				</div>
+				<div class="layui-row layui-col-space15"style="height:450px;">
+					<p class="layui-card-top">工程管理</p>
+						<div class="layui-col-md4">
+						  <div class="layui-card">
+							<div class="layui-card-body">
+							 <div id="char4" class="char"></div>
+							</div>
+						  </div>
+						</div>
+						<div class="layui-col-md4">
+						  <div class="layui-card">
+							<div class="layui-card-body">
+							  <div id="char5" class="char"></div>
+							</div>
+						  </div>
+						</div>
+						<div class="layui-col-md4">
+						  <div class="layui-card">
+							<div class="layui-card-body">
+							  <div id="char6" class="char"></div>
+							</div>
+						  </div>
+						</div>
+				</div>
+			  </div>
+			</div> 
+		</div>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/rural-roads.js"></script>
+		<script type="text/javascript" src="../layui/layui.js"></script>
+		<script type="text/javascript" src="../js/echarts.min.js"></script>
+	</body>
+</html>
+<script type="text/javascript">
+	layui.use(['table','element'], function(){
+		layui.element.on('tab(demo)', function(data){
+		  char1();char2();char3();char4();char5();char6();
+		});
+		var table = layui.table;
+		table.render({
+			 elem: '#test',
+			 width:$(".iframe-content").width()-60,
+			  cols:  [
+				  [ //标题栏
+					 {field: 'th1', title: '项目类型代码', width:180, rowspan: 2},
+					 {field: 'th2', title: '项目类型含义', width:180, rowspan: 2},
+					 {field: 'th3', title: '合计', width:180, rowspan: 2},
+					 {align: 'center', title: '按技术等级分', width:180,colspan: 5},
+					 {align: 'center', title: '按路面类型分', width:180,colspan: 3},
+					 {field: 'th4', title: '收益村个数', width:180, rowspan: 2},
+					 {field: 'th5', title: '客运站(个)', width:180, rowspan: 2},
+					 {field: 'th6', title: '危桥改造(座)', width:180, rowspan: 2},
+					 {field: 'th7', title: '危桥改造(延米)', width:180, rowspan: 2},
+					 {field: 'th8', title: '计划年份', width:180, rowspan: 2},
+					 {field: 'th9', title: '合计(万元)', width:180, rowspan: 2},
+					 {field: 'th10', title: '省级补助投资(万元)', width:180, rowspan: 2},
+					 {field: 'th11', title: '地市补助投资(万元)', width:180, rowspan: 2},
+					 {field: 'th12', title: '地方自筹投资(万元)', width:180, rowspan: 2},
+					 {field: 'th13', title: '备注', width:180, rowspan: 2},
+				  ], 
+				  [
+					{field: 'th1-1',width:180, title: '一级'},
+					{field: 'th1-2',width:180, title: '二级'},
+					{field: 'th1-3', width:180,title: '三级'},
+					{field: 'th1-4',width:180, title: '四级'},
+					{field: 'th1-5',width:180, title: '等外'},
+					
+					{field: 'th2-1', width:180,title: '沥青混凝土路面'},
+					{field: 'th2-2',width:180, title: '水泥混凝土路面'},
+					{field: 'th2-3',width:180, title: '其他路面类型'}
+				  ]
+			],
+			data: [
+				{"th1":"10","th2":"路网提挡升级","th3":"54.498","th4":"0","th5":"0","th6":"0","th7":"0","th8":"0","th9":"0","th10":"0","th11":"0","th12":"0","th13":"0","th1-1":"0.000","th1-2":"0.000","th1-3":"0.000","th1-4":"0.000","th1-5":"0.000","th2-1":"0.000","th2-2":"54.498","th2-3":"0"},
+				{"th1":"10","th2":"路网提挡升级","th3":"54.498","th4":"0","th5":"0","th6":"0","th7":"0","th8":"0","th9":"0","th10":"0","th11":"0","th12":"0","th13":"0","th1-1":"0.000","th1-2":"0.000","th1-3":"0.000","th1-4":"0.000","th1-5":"0.000","th2-1":"0.000","th2-2":"54.498","th2-3":"0"},
+				{"th1":"10","th2":"路网提挡升级","th3":"54.498","th4":"0","th5":"0","th6":"0","th7":"0","th8":"0","th9":"0","th10":"0","th11":"0","th12":"0","th13":"0","th1-1":"0.000","th1-2":"0.000","th1-3":"0.000","th1-4":"0.000","th1-5":"0.000","th2-1":"0.000","th2-2":"54.498","th2-3":"0"},
+				{"th1":"10","th2":"路网提挡升级","th3":"54.498","th4":"0","th5":"0","th6":"0","th7":"0","th8":"0","th9":"0","th10":"0","th11":"0","th12":"0","th13":"0","th1-1":"0.000","th1-2":"0.000","th1-3":"0.000","th1-4":"0.000","th1-5":"0.000","th2-1":"0.000","th2-2":"54.498","th2-3":"0"},
+				{"th1":"10","th2":"路网提挡升级","th3":"54.498","th4":"0","th5":"0","th6":"0","th7":"0","th8":"0","th9":"0","th10":"0","th11":"0","th12":"0","th13":"0","th1-1":"0.000","th1-2":"0.000","th1-3":"0.000","th1-4":"0.000","th1-5":"0.000","th2-1":"0.000","th2-2":"54.498","th2-3":"0"},
+				{"th1":"10","th2":"路网提挡升级","th3":"54.498","th4":"0","th5":"0","th6":"0","th7":"0","th8":"0","th9":"0","th10":"0","th11":"0","th12":"0","th13":"0","th1-1":"0.000","th1-2":"0.000","th1-3":"0.000","th1-4":"0.000","th1-5":"0.000","th2-1":"0.000","th2-2":"54.498","th2-3":"0"},
+				{"th1":"10","th2":"路网提挡升级","th3":"54.498","th4":"0","th5":"0","th6":"0","th7":"0","th8":"0","th9":"0","th10":"0","th11":"0","th12":"0","th13":"0","th1-1":"0.000","th1-2":"0.000","th1-3":"0.000","th1-4":"0.000","th1-5":"0.000","th2-1":"0.000","th2-2":"54.498","th2-3":"0"},
+				{"th1":"10","th2":"路网提挡升级","th3":"54.498","th4":"0","th5":"0","th6":"0","th7":"0","th8":"0","th9":"0","th10":"0","th11":"0","th12":"0","th13":"0","th1-1":"0.000","th1-2":"0.000","th1-3":"0.000","th1-4":"0.000","th1-5":"0.000","th2-1":"0.000","th2-2":"54.498","th2-3":"0"},
+				{"th1":"10","th2":"路网提挡升级","th3":"54.498","th4":"0","th5":"0","th6":"0","th7":"0","th8":"0","th9":"0","th10":"0","th11":"0","th12":"0","th13":"0","th1-1":"0.000","th1-2":"0.000","th1-3":"0.000","th1-4":"0.000","th1-5":"0.000","th2-1":"0.000","th2-2":"54.498","th2-3":"0"},
+				{"th1":"10","th2":"路网提挡升级","th3":"54.498","th4":"0","th5":"0","th6":"0","th7":"0","th8":"0","th9":"0","th10":"0","th11":"0","th12":"0","th13":"0","th1-1":"0.000","th1-2":"0.000","th1-3":"0.000","th1-4":"0.000","th1-5":"0.000","th2-1":"0.000","th2-2":"54.498","th2-3":"0"}
+			]
+			,even: true
+			,page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+				layout: [ 'prev', 'page', 'next','count'] //自定义分页布局
+				//,curr: 5 //设定初始在第 5 页
+				,groups: 1 //只显示 1 个连续页码
+				,first: false //不显示首页
+				,last: false //不显示尾页
+				,jump: function(obj, first){
+			}
+				
+			}
+		});
+		function char1(){
+			var charContent = document.getElementById('char1');
+			var barChar = echarts.init(charContent);
+			var options = {
+				color:["#36a4f7","#f35858","#f3ba58","#a683eb","#44d268"],
+				tooltip : {
+					trigger: 'item',
+					formatter: "{a} <br/>{b} : {c} ({d}%)"
+				},
+				title : {
+					text: '项目数量(个)',
+					left:"center",
+					textStyle:{
+						color:"#737373",
+					}
+				},
+				legend: {
+					bottom:"20",
+					data: ['行政村通达双车道','镇村公交配套','危桥改造'],
+					textStyle:{
+						color:"#737373"
+					}
+				},
+				series : [
+					{
+						type: 'pie',
+						radius : '30%',
+						center: ['46%', '50%'],
+						data:[
+							{value:14, name:'行政村通达双车道'},
+							{value:2, name:'镇村公交配套'},
+							{value:7, name:'危桥改造'}
+						],
+						itemStyle: {
+							normal: {
+								label:{ 
+									formatter: '{b}{c}个' 
+								}
+							},
+							emphasis: {
+								shadowBlur: 10,
+								shadowOffsetX: 0,
+								shadowColor: 'rgba(0, 0, 0, 0.5)'
+							}
+						}
+					}
+				]
+			};
+			barChar.setOption(options);
+			$(window).resize(function() {
+				barChar.resize();
+			});
+		}
+		function char2(){
+			var charContent = document.getElementById('char2');
+			var barChar = echarts.init(charContent);
+			var options = {
+				color:["#36a4f7","#f35858","#f3ba58","#a683eb","#44d268"],
+				tooltip : {
+					trigger: 'item',
+					formatter: "{a} <br/>{b} : {c} ({d}%)"
+				},
+				title : {
+					text: '项目投资(万元)',
+					left:"center",
+					textStyle:{
+						color:"#737373",
+					}
+				},
+				legend: {
+					bottom:"20",
+					data: ['行政村通达双车道','镇村公交配套','危桥改造'],
+					textStyle:{
+						color:"#737373"
+					}
+				},
+				series : [
+					{
+						type: 'pie',
+						radius : '30%',
+						center: ['46%', '50%'],
+						data:[
+							{value:4796.51, name:'行政村通达双车道'},
+							{value:340.91, name:'镇村公交配套'},
+							{value:3887, name:'危桥改造'}
+						],
+						itemStyle: {
+							normal: {
+								label:{ 
+									formatter: '{b}{c}万元' 
+								}
+							},
+							emphasis: {
+								shadowBlur: 10,
+								shadowOffsetX: 0,
+								shadowColor: 'rgba(0, 0, 0, 0.5)'
+							}
+						}
+					}
+				]
+			};
+			barChar.setOption(options);
+			$(window).resize(function() {
+				barChar.resize();
+			});
+		}
+		function char3(){
+			var charContent = document.getElementById('char3');
+			var barChar = echarts.init(charContent);
+			var options = {
+				color:["#36a4f7","#f35858","#f3ba58","#a683eb","#44d268"],
+				tooltip : {
+					trigger: 'item',
+					formatter: "{a} <br/>{b} : {c} ({d}%)"
+				},
+				title : {
+					text: '道路项目(公里)',
+					left:"center",
+					textStyle:{
+						color:"#737373",
+					}
+				},
+				legend: {
+					bottom:"20",
+					data: ['行政村通达双车道','镇村公交配套'],
+					textStyle:{
+						color:"#737373"
+					}
+				},
+				series : [
+					{
+						type: 'pie',
+						radius : '30%',
+						center: ['46%', '50%'],
+						data:[
+							{value:54.498, name:'行政村通达双车道'},
+							{value:3.875, name:'镇村公交配套'}
+						],
+						itemStyle: {
+							normal: {
+								label:{ 
+									formatter: '{b}{c}公里' 
+								}
+							},
+							emphasis: {
+								shadowBlur: 10,
+								shadowOffsetX: 0,
+								shadowColor: 'rgba(0, 0, 0, 0.5)'
+							}
+						}
+					}
+				]
+			};
+			barChar.setOption(options);
+			$(window).resize(function() {
+				barChar.resize();
+			});
+		}
+		function char4(){
+			var charContent = document.getElementById('char4');
+			var barChar = echarts.init(charContent);
+			var options = {
+				color:["#36a4f7","#f35858","#f3ba58","#a683eb","#44d268"],
+				tooltip : {
+					trigger: 'item',
+					formatter: "{a} <br/>{b} : {c} ({d}%)"
+				},
+				title : {
+					text: '项目数量(个)',
+					left:"center",
+					textStyle:{
+						color:"#737373",
+					}
+				},
+				legend: {
+					bottom:"20",
+					data: ['行政村通达双车道','镇村公交配套','危桥改造'],
+					textStyle:{
+						color:"#737373"
+					}
+				},
+				series : [
+					{
+						type: 'pie',
+						radius : '30%',
+						center: ['46%', '50%'],
+						data:[
+							{value:9, name:'行政村通达双车道'},
+							{value:0, name:'镇村公交配套'},
+							{value:2, name:'危桥改造'}
+						],
+						itemStyle: {
+							normal: {
+								label:{ 
+									formatter: '{b}{c}个' 
+								}
+							},
+							emphasis: {
+								shadowBlur: 10,
+								shadowOffsetX: 0,
+								shadowColor: 'rgba(0, 0, 0, 0.5)'
+							}
+						}
+					}
+				]
+			};
+			barChar.setOption(options);
+			$(window).resize(function() {
+				barChar.resize();
+			});
+		}
+		function char5(){
+			var charContent = document.getElementById('char5');
+			var barChar = echarts.init(charContent);
+			var options = {
+				color:["#36a4f7","#f35858","#f3ba58","#a683eb","#44d268"],
+				tooltip : {
+					trigger: 'item',
+					formatter: "{a} <br/>{b} : {c} ({d}%)"
+				},
+				title : {
+					text: '完成投资(万元)',
+					left:"center",
+					textStyle:{
+						color:"#737373",
+					}
+				},
+				legend: {
+					bottom:"20",
+					data: ['行政村通达双车道','镇村公交配套','危桥改造'],
+					textStyle:{
+						color:"#737373"
+					}
+				},
+				series : [
+					{
+						type: 'pie',
+						radius : '30%',
+						center: ['46%', '50%'],
+						data:[
+							{value:988.38, name:'行政村通达双车道'},
+							{value:0, name:'镇村公交配套'},
+							{value:0, name:'危桥改造'}
+						],
+						itemStyle: {
+							normal: {
+								label:{ 
+									formatter: '{b}{c}万元' 
+								}
+							},
+							emphasis: {
+								shadowBlur: 10,
+								shadowOffsetX: 0,
+								shadowColor: 'rgba(0, 0, 0, 0.5)'
+							}
+						}
+					}
+				]
+			};
+			barChar.setOption(options);
+			$(window).resize(function() {
+				barChar.resize();
+			});
+		}
+		function char6(){
+			var charContent = document.getElementById('char6');
+			var barChar = echarts.init(charContent);
+			var options = {
+				color:["#36a4f7","#f35858","#f3ba58","#a683eb","#44d268"],
+				tooltip : {
+					trigger: 'item',
+					formatter: "{a} <br/>{b} : {c} ({d}%)"
+				},
+				title : {
+					text: '道路完成里程(公里)',
+					left:"center",
+					textStyle:{
+						color:"#737373",
+					}
+				},
+				legend: {
+					bottom:"20",
+					data: ['行政村通达双车道','镇村公交配套'],
+					textStyle:{
+						color:"#737373"
+					}
+				},
+				series : [
+					{
+						type: 'pie',
+						radius : '30%',
+						center: ['46%', '50%'],
+						data:[
+							{value:10.17, name:'行政村通达双车道'},
+							{value:0, name:'镇村公交配套'}
+						],
+						itemStyle: {
+							normal: {
+								label:{ 
+									formatter: '{b}{c}万元' 
+								}
+							},
+							emphasis: {
+								shadowBlur: 10,
+								shadowOffsetX: 0,
+								shadowColor: 'rgba(0, 0, 0, 0.5)'
+							}
+						}
+					}
+				]
+			};
+			barChar.setOption(options);
+			$(window).resize(function() {
+				barChar.resize();
+			});
+		}
+		
+		
+	});
+</script>

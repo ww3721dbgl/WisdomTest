@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>南京市农路智慧管理平台</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/rural-roads.css">
+		<link rel="stylesheet" href="../../layui/css/layui.css">
+		<link rel="stylesheet" href="../../layui/component/formSelects-v4.css">
+		<link rel="stylesheet" type="text/css" href="../../css/component.css"/>
+	</head>
+	<body class="home-page">
+		<div class="iframe-content">
+			<div class="layui-form">
+				<div class="layui-form-item">
+					<label class="layui-form-label">行政区划</label>
+					<div class="layui-input-block">
+					 <select name="city" xm-select="selectId3" xm-select-search="" xm-select-search-type="dl">
+							<option value="1">栖霞区</option>
+							<option value="2">雨花台区</option>
+							<option value="3">浦口区</option>
+							<option value="4">江宁区</option>
+							<option value="5">六合区</option>
+							<option value="6">溧水区</option>
+							<option value="7">高淳区</option>
+							<option value="8">江北新区</option>
+					 </select>
+					</div>
+			  </div>
+			</div>
+			<div class="top-con">
+				<ul class="ul">
+					<li class="li">
+						<div class="li-header"><span>公路行政等级里程</span></div>
+						<div class="li-content" id="highway-admin-grade"></div>
+					</li>
+					<li class="li">
+						<div class="li-header"><span>公路技术等级里程</span></div>
+						<div class="li-content" id="highway-technology-grade"></div>
+					</li>
+					<li class="li">
+						<div class="li-header"><span>行政等级公路桥梁</span></div>
+						<div class="li-content"id="road-maintenance-grade"></div>
+					</li>
+					<li  class="li" style="margin:0;">
+						<div class="li-header"><span>待办事项</span></div>
+						<div class="li-content"id="todo">
+							<ul>
+								<li><i></i><b>项目资料审批</b><span>2019-01-10 10:12:40</span></li>
+								<li><i></i><b>道路工程项目资料上报</b><span>2019-01-10 09:50:39</span></li>
+								<li><i></i><b>大中修资料上报</b><span>2019-01-09 14:36:16</span></li>
+								<li><i></i><b>江宁区资料上报</b><span>2019-01-09 11:05:45</span></li>
+								<li><i></i><b>栖霞区道路计划上报</b><span>2018-12-17 18:12:26</span></li>
+								<li><i></i><b>大中修资料上报</b><span>2018-12-17 18:12:26</span></li>
+								<li><i></i><b>道路工程项目资料上报</b><span>2018-12-17 18:12:26</span></li>
+								<li><i></i><b>计划办理</b><span>2018-12-17 18:12:26</span></li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="center-con">
+				<ul class="ul">
+					<li class="li l">
+						<div class="li-header"><span>道路类型里程统计</span></div>
+						<div class="li-content"id="road-type"></div>
+					</li>
+					<li class="li r">
+						<div class="li-header"><span>近年公路里程增长</span></div>
+						<div class="li-content"id="highway-add"></div>
+					</li>
+				</ul>
+			</div>
+			<div class="bottom-con">
+			<ul class="ul">
+				<li class="li">
+					<div class="li-header"><span>行政等级公路桥梁</span></div>
+					<div class="li-content"id="admin-highway-bridges"></div>
+				</li>
+				<li class="li">
+					<div class="li-header"><span>桥梁技术情况</span></div>
+					<div class="li-content"id="bridge-technology"></div>
+				</li>
+				<li  class="li"style="margin:0;">
+					<div class="li-header"><span>公路桥梁大小统计</span></div>
+					<div class="li-content"id="highway-bridge-size"></div>
+				</li>
+			</ul>
+		</div>
+		</div>
+		<div class="iframe-btn">
+			<div class="iframe-btn-list toHome"data-url="首页/home-iframe.html">
+				<div class="img">
+					<img src="../../images/toHome.png" >
+				</div>
+				首页
+			</div>
+			<div class="iframe-btn-list toMap"data-url="首页/农路地图.html">
+				<div class="img">
+					<img src="../../images/toMap.png" >
+				</div>
+				农路地图
+			</div>
+		</div>
+		<script type="text/javascript" src="../../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../../js/rural-roads.js"></script>
+		<script type="text/javascript" src="../../layui/layui.js"></script>
+		<script type="text/javascript" src="../../js/echarts.min.js"></script>
+		<script src="../../layui/component/formSelects-v4.js"></script>
+	</body>
+</html>
+<script type="text/javascript">
+	$(".iframe-btn .iframe-btn-list").click(function(){
+		if($(this).attr("data-url")!="首页/home-iframe.html"){
+			$('iframe', window.parent.document).attr("src",$(this).attr("data-url"));
+		}
+	});
+$(function(){
+	highwayAdminGrade();
+	highwayTechnologyGrade();
+	roadMaintenanceGrade();
+	roadType();
+	highwayAdd();
+	adminHighwayBridges();
+	bridgeTechnology();
+	highwayBridgeSize();
+})
+	function highwayAdminGrade(){
+		var charContent = document.getElementById('highway-admin-grade');
+		var barChar = echarts.init(charContent);
+		var options = {
+			color:["#0099ff"],
+			tooltip : {
+				trigger: 'axis',
+				axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+					type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+				}
+			},
+			grid:{
+				top:"20%",
+				left:"15%"
+			},
+			xAxis: {
+				type: 'category',
+				data: ['县道', '乡道', '村道'],
+				axisTick:{
+					show:false
+				},
+				nameTextStyle:{
+					color:"#737373"
+				},
+				axisLabel:{
+					color:"#737373"
+				},
+				axisLine:{
+				   lineStyle:{
+						color:"#d9d9d9"
+					}
+				},
+				splitLine:{
+					lineStyle:{
+						color:"#ededed"
+					}
+				}
+			},
+			yAxis: {
+				splitNumber:4,
+				name:"单位:公里",
+				type: 'value',
+				axisTick:{
+					show:false
+				},
+				nameTextStyle:{
+					color:"#737373"
+				},
+				axisLabel:{
+					color:"#737373"
+				},
+				axisLine:{
+				   lineStyle:{
+						color:"#d9d9d9"
+					}
+				},
+				splitLine:{
+					lineStyle:{
+						color:"#ededed"
+					}
+				}
+			},
+			series: [{
+				barWidth:"20%",
+				data: [13.9,970.6,6038, 400],
+				type: 'bar',
+				label: {
+					normal: {
+						color:"#484848",
+						show: true,
+						position: 'top'
+					}
+				}
+			}]
+		};
+		barChar.setOption(options);
+		$(window).resize(function() {
+			barChar.resize();
+		});
+	}
+	//公路技术等级里程
+	function highwayTechnologyGrade(){
+		var charContent = document.getElementById('highway-technology-grade');
+		var barChar = echarts.init(charContent);
+		var options = {
+			color:["#f3ba58"],
+			tooltip : {
+				trigger: 'axis',
+				axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+					type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+				}
+			},
+			grid:{
+				top:"20%",
+				left:"15%"
+			},
+			xAxis: {
+				type: 'category',
+				data: ['一级公路', '二级公路', '三级公路', '四级公路','等外公路'],
+				axisTick:{
+					show:false
+				},
+				nameTextStyle:{
+					color:"#737373"
+				},
+				axisLabel:{
+					color:"#737373"
+				},
+				axisLine:{
+				   lineStyle:{
+						color:"#d9d9d9"
+					}
+				},
+				splitLine:{
+					lineStyle:{
+						color:"#ededed"
+					}
+				}
+			},
+			yAxis: {
+				splitNumber:4,
+				name:"单位:公里",
+				type: 'value',
+				axisTick:{
+					show:false
+				},
+				nameTextStyle:{
+					color:"#737373"
+				},
+				axisLabel:{
+					color:"#737373"
+				},
+				axisLine:{
+				   lineStyle:{
+						color:"#d9d9d9"
+					}
+				},
+				splitLine:{
+					lineStyle:{
+						color:"#ededed"
+					}
+				}
+			},
+			series: [{
+				barWidth:"20%",
+				data: [752.9, 217.7,661.3, 5376.7, 13.9],
+				type: 'bar',
+				label: {
+					normal: {
+						color:"#484848",
+						show: true,
+						position: 'top'
+					}
+				}
+			}]
+		};
+		barChar.setOption(options);
+		$(window).resize(function() {
+			barChar.resize();
+		});
+	}
+	//道路养护等级
+	function roadMaintenanceGrade(){
+		var charContent = document.getElementById('road-maintenance-grade');
+		var barChar = echarts.init(charContent);
+		var options = {
+			color:["#44d268"],
+			tooltip : {
+				trigger: 'axis',
+				axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+					type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+				}
+			},
+			grid:{
+				top:"20%",
+				left:"15%"
+			},
+			xAxis: {
+				type: 'category',
+				data: ['一级公路', '二级公路', '三级公路'],
+				axisTick:{
+					show:false
+				},
+				nameTextStyle:{
+					color:"#737373"
+				},
+				axisLabel:{
+					color:"#737373"
+				},
+				axisLine:{
+				   lineStyle:{
+						color:"#d9d9d9"
+					}
+				},
+				splitLine:{
+					lineStyle:{
+						color:"#ededed"
+					}
+				}
+			},
+			yAxis: {
+				splitNumber:4,
+				name:"单位:座",
+				type: 'value',
+				axisTick:{
+					show:false
+				},
+				nameTextStyle:{
+					color:"#737373"
+				},
+				axisLabel:{
+					color:"#737373"
+				},
+				axisLine:{
+				   lineStyle:{
+						color:"#d9d9d9"
+					}
+				},
+				splitLine:{
+					lineStyle:{
+						color:"#ededed"
+					}
+				}
+			},
+			series: [{
+				barWidth:"20%",
+				data: [857, 743, 1456, 400],
+				type: 'bar',
+				label: {
+					normal: {
+						color:"#484848",
+						show: true,
+						position: 'top'
+					}
+				}
+			}]
+		};
+		barChar.setOption(options);
+		$(window).resize(function() {
+			barChar.resize();
+		});
+	}
+	
+	//道路类型里程统计
+	function roadType(){
+		var charContent = document.getElementById('road-type');
+		var barChar = echarts.init(charContent);
+		var options = {
+			color:["#36a4f7","#f3ba58","#f35858"],
+			tooltip : {
+				trigger: 'axis',
+				axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+					type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+				}
+			},
+			grid:{
+				top:"20%",
+				left:"10%"
+			},
+			legend: {
+				itemGap:50,
+				data:['县道','乡道','村道'],
+				top:"5%",
+				textStyle:{
+					color:"#737373"
+				}
+			},
+			xAxis: {
+				type: 'category',
+				data: ['一级公路', '二级公路', '三级公路', '四级公路', '等外公路'],
+				axisTick:{
+					show:false
+				},
+				nameTextStyle:{
+					color:"#737373"
+				},
+				axisLabel:{
+					color:"#737373"
+				},
+				axisLine:{
+				   lineStyle:{
+						color:"#d9d9d9"
+					}
+				},
+				splitLine:{
+					lineStyle:{
+						color:"#ededed"
+					}
+				}
+			},
+			yAxis: {
+				splitNumber:4,
+				name:"单位:公里",
+				type: 'value',
+				axisTick:{
+					show:false
+				},
+				nameTextStyle:{
+					color:"#737373"
+				},
+				axisLabel:{
+					color:"#737373"
+				},
+				axisLine:{
+				   lineStyle:{
+						color:"#d9d9d9"
+					}
+				},
+				splitLine:{
+					lineStyle:{
+						color:"#ededed"
+					}
+				}
+			},
+			series: [{
+				barWidth:"12%",
+				name:"县道",
+				data: [752.9, 217.7, 0, 0,0],
+				type: 'bar'
+			},{
+				barWidth:"12%",
+				name:"乡道",
+				data: [661.3, 5376.7, 0, 0,0],
+				type: 'bar'
+			},{
+				barWidth:"12%",
+				name:"村道",
+				data: [13.9, 0, 0, 0,0],
+				type: 'bar'
+			}]
+		};
+		barChar.setOption(options);
+		$(window).resize(function() {
+			barChar.resize();
+		});
+	}
+	//近年公路里程增长
+	function highwayAdd(){
+		var charContent = document.getElementById('highway-add');
+		var barChar = echarts.init(charContent);
+		var options = {
+			color:["#ff5b9d","#29bbb8"],
+			tooltip : {
+				trigger: 'axis',
+				axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+					type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+				}
+			},
+			grid:{
+				top:"20%",
+				left:"10%"
+			},
+			legend: {
+				itemGap:50,
+				data:['2016年','2017年'],
+				top:"5%",
+				textStyle:{
+					color:"#737373"
+				}
+			},
+			xAxis: {
+				type: 'category',
+				data: ['一级公路', '二级公路', '三级公路', '四级公路', '等外公路'],
+				axisTick:{
+					show:false
+				},
+				nameTextStyle:{
+					color:"#737373"
+				},
+				axisLabel:{
+					color:"#737373"
+				},
+				axisLine:{
+				   lineStyle:{
+						color:"#d9d9d9"
+					}
+				},
+				splitLine:{
+					lineStyle:{
+						color:"#ededed"
+					}
+				}
+			},
+			yAxis: {
+				splitNumber:4,
+				name:"单位:公里",
+				type: 'value',
+				axisTick:{
+					show:false
+				},
+				nameTextStyle:{
+					color:"#737373"
+				},
+				axisLabel:{
+					color:"#737373"
+				},
+				axisLine:{
+				   lineStyle:{
+						color:"#d9d9d9"
+					}
+				},
+				splitLine:{
+					lineStyle:{
+						color:"#ededed"
+					}
+				}
+			},
+			series: [{
+				name:"2016年",
+				data: [262.9, 64.7, 214.8, 1795.9,0],
+				type: 'line'
+			},{
+				name:"2017年",
+				data: [255.2, 69.1, 226.1, 1700.4,0],
+				type: 'line'
+			}]
+		};
+		barChar.setOption(options);
+		$(window).resize(function() {
+			barChar.resize();
+		});
+	}
+	//行政等级公路桥梁
+	function adminHighwayBridges(){
+		var charContent = document.getElementById('admin-highway-bridges');
+		var barChar = echarts.init(charContent);
+		var options = {
+			color:["#36a4f7","#f35858","#f3ba58"],
+			tooltip : {
+				trigger: 'item',
+				formatter: "{a} <br/>{b} : {c} ({d}%)"
+			},
+			title : {
+				text: '单位:  座',
+				left:'20',
+				top:"5%",
+				textStyle:{
+					color:"#737373",
+					fontStyle:{
+						fontSize:12
+					}
+				}
+			},
+			legend: {
+				orient: 'vertical',
+				right:"30",
+				top:"20",
+				data: ['县道','乡道','村道'],
+				textStyle:{
+					color:"#737373"
+				}
+			},
+			series : [
+				{
+					type: 'pie',
+					radius : '55%',
+					center: ['46%', '50%'],
+					data:[
+						{value:22, name:'县道'},
+						{value:980, name:'乡道'}
+					],
+					itemStyle: {
+						normal: {
+							label:{ 
+								formatter: '{b}{c}座' 
+							}
+						},
+						emphasis: {
+							shadowBlur: 10,
+							shadowOffsetX: 0,
+							shadowColor: 'rgba(0, 0, 0, 0.5)'
+						}
+					}
+				}
+			]
+		};
+		barChar.setOption(options);
+		$(window).resize(function() {
+			barChar.resize();
+		});
+	}
+	//桥梁技术情况
+	function bridgeTechnology(){
+		var charContent = document.getElementById('bridge-technology');
+		var barChar = echarts.init(charContent);
+		var options = {
+			color:["#36a4f7","#f35858","#f3ba58","#a683eb","#44d268"],
+			tooltip : {
+				trigger: 'item',
+				formatter: "{a} <br/>{b} : {c} ({d}%)"
+			},
+			title : {
+				text: '单位:  座',
+				left:'20',
+				top:"5%",
+				textStyle:{
+					color:"#737373",
+					fontStyle:{
+						fontSize:12
+					}
+				}
+			},
+			legend: {
+				orient: 'vertical',
+				right:"30",
+				top:"20",
+				data: ['一类','二类','三类','四类','五类'],
+				textStyle:{
+					color:"#737373"
+				}
+			},
+			series : [
+				{
+					name: '访问来源',
+					type: 'pie',
+					radius : '55%',
+					center: ['46%', '50%'],
+					data:[
+						{value:349, name:'一类'},
+						{value:575, name:'二类'},
+						{value:56, name:'三类'},
+						{value:16, name:'四类'},
+						{value:6, name:'五类'}
+					],
+					itemStyle: {
+						normal: {
+							label:{ 
+								formatter: '{b}{c}座' 
+							}
+						},
+						emphasis: {
+							shadowBlur: 10,
+							shadowOffsetX: 0,
+							shadowColor: 'rgba(0, 0, 0, 0.5)'
+						}
+					}
+				}
+			]
+		};
+		barChar.setOption(options);
+		$(window).resize(function() {
+			barChar.resize();
+		});
+	}
+	//行政等级公路桥梁
+	function highwayBridgeSize(){
+		var charContent = document.getElementById('highway-bridge-size');
+		var barChar = echarts.init(charContent);
+		var options = {
+			color:["#44d268","#36a4f7","#f35858"],
+			tooltip : {
+				trigger: 'item',
+				formatter: "{a} <br/>{b} : {c} ({d}%)"
+			},
+			title : {
+				text: '单位:  座',
+				left:'20',
+				top:"5%",
+				textStyle:{
+					color:"#737373",
+					fontStyle:{
+						fontSize:12
+					}
+				}
+			},
+			legend: {
+				orient: 'vertical',
+				right:"30",
+				top:"20",
+				data: ['大桥','中桥','小桥'],
+				textStyle:{
+					color:"#737373"
+				}
+			},
+			series : [
+				{
+					type: 'pie',
+					radius : '55%',
+					center: ['46%', '50%'],
+					data:[
+						{value:30, name:'大桥'},
+						{value:168, name:'中桥'},
+						{value:800, name:'小桥'}
+					],
+					itemStyle: {
+						normal: {
+							label:{ 
+								formatter: '{b}{c}座' 
+							}
+						},
+						emphasis: {
+							shadowBlur: 10,
+							shadowOffsetX: 0,
+							shadowColor: 'rgba(0, 0, 0, 0.5)'
+						}
+					}
+				}
+			]
+		};
+		barChar.setOption(options);
+		$(window).resize(function() {
+			barChar.resize();
+		});
+	}
+	
+	
+	if($(".home-page #todo  ul li").length>6){
+			var time  = 500;
+			function marginTo(){
+				$(".home-page #todo  ul li").eq(0).stop().animate({
+						marginTop:-38
+				},time,function(){
+					$(".home-page #todo  ul li").slice(0,1).css("margin",0).addClass($(this).attr("class")).appendTo($(".home-page #todo ul"));
+				});
+			};
+	
+			setInterval(function(){
+				marginTo();
+			},2000);
+		}
+</script>

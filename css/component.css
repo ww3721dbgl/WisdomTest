@@ -1,0 +1,104 @@
+/**************** �������� *****************/
+
+/* ��ѯ��ť */
+.layui-btn.search-btn {
+	background:#4aa3f6;
+	height:32px;
+	line-height:32px;
+	padding:0 40px;
+	border-radius:5px;
+}
+/* ���ð�ť */
+.layui-btn.reset-btn {
+	background:#fa905c;
+	height:32px;
+	line-height:32px;
+	padding:0 40px;
+	border-radius:5px;
+}
+
+/****************** table����ť ******************/
+
+/* ������ť */
+.layui-btn.add-btn {
+	background:#32cdbd;
+	height:36px;
+	line-height:36px;
+	padding:0 40px;
+	border-radius:5px;
+}
+/* ɾ��ť */
+.layui-btn.del-btn {
+	background:#fa6f5c;
+	height:36px;
+	line-height:36px;
+	padding:0 40px;
+	border-radius:5px;
+}
+.layui-btn.yellow-big-btn {
+	background:#f5ab47;
+	height:36px;
+	line-height:36px;
+	padding:0 40px;
+	border-radius:5px;
+	text-align:center;
+}
+.layui-btn.import-btn {
+	background:#4cb0e7;
+	height: 36px;
+    line-height: 36px;
+    padding: 0 40px;
+    border-radius: 5px;
+}
+.layui-btn.export-btn {
+	background:#F4AA4C;
+	height: 36px;
+    line-height: 36px;
+    padding: 0 40px;
+    border-radius: 5px;
+}
+/****************** td�еİ�ť ******************/
+table .blue-btn {
+	background:#3198ff;
+}
+table .yellow-btn {
+	background:#f3aa4b;
+}
+table .oregin-btn {
+	background:#fa905c;
+}
+table .purple-btn {
+	background:#cc85ff;
+}
+/* ������ť */
+.page-pop-footer .layui-btn{
+	width:108px;
+	height:36px;
+	line-height:36px;
+	border-radius:5px;
+}
+.page-pop-footer .layui-btn.red-btn {
+	background:#fa6f5c;
+}
+.page-pop-footer .layui-btn.blue-btn {
+	background:#32cdbd;
+}
+.page-pop-footer .layui-btn.yellow-btn {
+	background:#f3aa4b;
+}
+.confrim-pop  .page-pop-footer .layui-btn.cancel-btn {
+	background:#fff;
+	color:#333;
+	border:1px solid #cccccc;
+}
+.confrim-pop  .page-pop-footer .layui-btn.confirm-btn {
+	background:#4886fd;
+	margin-right:38px;
+}
+.layui-btn.back-btn {
+	height:32px;
+	width:108px;
+	line-height:32px;
+	border-radius:5px;
+	background:#4aa3f6;
+}

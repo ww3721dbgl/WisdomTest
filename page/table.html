@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>"四好农村路"智慧管理云平台</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/rural-roads.css">
+		<link rel="stylesheet" href=" ../layui/css/layui.css">
+		<link rel="stylesheet" href=" ../layui/layer/mobile/need/layer.css">
+		<link rel="stylesheet" type="text/css" href="../css/component.css"/>
+	</head>
+	<body class="table-page">
+		<div class="header">
+			<div class="name">"四好农村路"智慧管理云平台</div>
+			<img src="../images/tianqi.png" class="tianqi"style="position:absolute;top:15px;right:420px;">
+			<div class="adminer"style="right:230px;">
+				<div class="img"><img src="../images/userinfo.jpg" ></div>
+				<div class="adminer-type">超级管理员</div>
+				<div class="adminer-con">
+					<ul>
+						<li>修改头像</li>
+						<li>个人资料</li>
+						<li>修改密码</li>
+						<li>信箱</li>
+						<li class="tuichu">安全退出</li>
+					</ul>
+				</div>
+			</div>
+			<div class="set"style="right:110px;">
+				个性设置
+			</div>
+			<div id="setColor"></div>
+			<div style=""id="dbsx">待办事项<i>3</i></div>
+		</div>
+		<div class="page-warp">
+			<!--左侧导航-->
+			<div class="page-nav">
+				<div class="page-nav-warp">
+					<ul class="layui-nav layui-nav-tree" lay-filter="test"lay-shrink="all">
+						  <li class="layui-nav-item layui-nav-itemed"><a href="javascript:;"><img src="../images/level-1.png" class="img">首页</a></li>
+						  <li class="layui-nav-item">
+						    <a href="javascript:;"><img src="../images/level-3.png" class="img">路产管理</a>
+						    <dl class="layui-nav-child">
+						    	  <dd><a href="javascript:;">选项2</a></dd>
+						    	  <dd><a href="javascript:;">选项2</a></dd>
+							      <dd>
+							      	<a href="javascript:;">选项1</a>
+							      	<dl class="layui-nav-child">
+							      		<dd><a href="javascript:;">选项1-1</a></dd>
+							     		<dd><a href="javascript:;">选项1-2</a></dd>
+							      	</dl>
+							      </dd>
+							      <dd>
+							      	<a href="javascript:;">选项2</a>
+							      	<dl class="layui-nav-child">
+							      		<dd><a href="javascript:;">选项2-1</a></dd>
+							     		<dd><a href="javascript:;">选项2-2</a></dd>
+							      	</dl>
+							      </dd>
+							      <dd><a href="javascript:;">选项2</a></dd>
+							      <dd><a href="javascript:;">跳转</a></dd>
+						    </dl>
+						  </li>
+						  <li class="layui-nav-item">
+						    <a href="javascript:;"><img src="../images/level-4.png" class="img">建设管理</a>
+						    <dl class="layui-nav-child">
+						      <dd><a href="javascript:;">移动模块</a></dd>
+						      <dd><a href="javascript:;">后台模版</a></dd>
+						      <dd><a href="javascript:;">电商平台</a></dd>
+						    </dl>
+						  </li>
+						  <li class="layui-nav-item">
+						    <a href="javascript:;"><img src="../images/level-5.png" class="img">养护管理</a>
+						    <dl class="layui-nav-child">
+						      <dd><a href="javascript:;">移动模块</a></dd>
+						      <dd><a href="javascript:;">后台模版</a></dd>
+						      <dd><a href="javascript:;">电商平台</a></dd>
+						    </dl>
+						  </li>
+						  <li class="layui-nav-item">
+						    <a href="javascript:;"><img src="../images/level-7.png" class="img">基础信息</a>
+						    <dl class="layui-nav-child">
+						      <dd><a href="javascript:;">移动模块</a></dd>
+						      <dd><a href="javascript:;">后台模版</a></dd>
+						      <dd><a href="javascript:;">电商平台</a></dd>
+						    </dl>
+						  </li>
+						  <li class="layui-nav-item">
+						    <a href="javascript:;"><img src="../images/level-8.png" class="img">消息管理</a>
+						    <dl class="layui-nav-child">
+						      <dd><a href="javascript:;">移动模块</a></dd>
+						      <dd><a href="javascript:;">后台模版</a></dd>
+						      <dd><a href="javascript:;">电商平台</a></dd>
+						    </dl>
+						  </li>
+						  <li class="layui-nav-item">
+						    <a href="javascript:;"><img src="../images/level-6.png" class="img">系统设置</a>
+						    <dl class="layui-nav-child">
+						      <dd><a href="javascript:;">移动模块</a></dd>
+						      <dd><a href="javascript:;">后台模版</a></dd>
+						      <dd><a href="javascript:;">电商平台</a></dd>
+						    </dl>
+						  </li>
+					</ul>
+				</div>
+				</div>
+			<div class="page-con">
+				<!-- tab导航 -->
+				<div class="breadcrumb-nav"id="breadcrumb-nav">
+					<div class="breadcrumb-nav-list l">
+						首页 > 路产管理 > 路产管理
+					</div>
+				</div>
+				<div class="nav-body">
+					<div class="iframe-content">
+						<div class="iframe-content">
+							<!-- 搜索区域 -->
+							<div class="search-warp">
+								<form class="layui-form l" action="">
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md4">
+										<label class="layui-form-label">项目名称</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input">
+										</div>
+									  </div>
+									  <div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md4">
+											<label class="layui-form-label">道路名称</label>
+											<div class="layui-input-block">
+											  <input type="text" class="layui-input">
+											</div>
+										</div>
+										<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md4">
+											<label class="layui-form-label">审核状态</label>
+											<div class="layui-input-block">
+											  <select name="city" xm-select="selectId3" xm-select-search="" xm-select-search-type="dl">
+												<option value="1">未提交</option>
+												<option value="2">未审核</option>
+												<option value="3">审核通过</option>
+												<option value="4">已退回</option>
+											  </select>
+											</div>
+										  </div>
+										<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md4">
+											<label class="layui-form-label">填报单位</label>
+											<div class="layui-input-block">
+											  <input type="text" class="layui-input">
+											</div>
+										</div>
+								</form>
+								<div class="search-btn-warp r"style="width:410px;">
+									<button class="layui-btn search-btn">查询</button>
+									<button class="layui-btn reset-btn">重置</button>
+								</div>
+							</div>
+							<!-- table区域 -->
+							<style type="text/css">
+								tr th {
+									border:1px solid #e6e6e6!important;
+									border-top:none!important;
+								}
+							</style>
+							<div class="table-con"style="margin-top:10px;width:100%;overflow:auto;">
+								<table class="layui-hide" id="test"  lay-even="" lay-skin="nob"></table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/rural-roads.js"></script>
+		<script type="text/javascript" src="../layui/layui.js"></script>
+		<script type="text/javascript" src="../layui/layer/mobile/layer.js"></script>
+		<script type="text/javascript" src=" ../js/utils.js"></script>
+		<script type="text/javascript" src="../js/baidumap.js"></script>
+	</body>
+</html>
+<script type="text/javascript">
+	layInit(function(layui,$){
+		layui.table.render({
+		  	elem: '#test',
+		  	width:2300,
+		  	cols: [
+			  	[
+			  		{field: 'th11', title: '2019-02农村公路完成情况',colspan:15}
+			  	],
+			  	[
+			  		{field: 'th1', title: '区属',rowspan:4,width:140},
+					{field: 'th22', title: '省计划',colspan:5},
+					{field: 'th33', title: '市计划',colspan:5},
+					{field: 'th44', title: '桥梁',colspan:4}
+			  	],
+			  	[
+					{field: 'th2', title: '项目计划个数(个)'},
+					{field: 'th3', title: '完成项目数(个)'},
+					{field: 'th4', title: '计划公里数(公里)'},
+					{field: 'th5', title: '完成公里数(公里)'},
+					{field: 'th6', title: '完成里程百分比'},
+					
+					{field: 'th7', title: '项目计划个数(个)'},
+					{field: 'th8', title: '完成项目数(个)'},
+					{field: 'th9', title: '计划公里数(公里)'},
+					{field: 'th10', title: '完成公里数(公里)'},
+					{field: 'th11', title: '完成里程百分比'},
+					
+					{field: 'th12', title: '省计划数(座)'},
+					{field: 'th13', title: '省计划完成数(座)'},
+					{field: 'th14', title: '市计划数(公里)'},
+					{field: 'th15', title: '完成公里数(公里)'}
+			  	]
+		  	],
+			data: [
+				{"th1":"常乐镇人民政府","th2":2,"th3":3,"th4":4,"th5":"0","th6":2,"th7":3,"th8":4,"th9":"0","th10":2,"th11":3,"th12":4,"th13":"0","th14":2,"th15":3},
+				{"th1":"常乐镇人民政府","th2":2,"th3":3,"th4":4,"th5":"0","th6":2,"th7":3,"th8":4,"th9":"0","th10":2,"th11":3,"th12":4,"th13":"0","th14":2,"th15":3},
+				{"th1":"常乐镇人民政府","th2":2,"th3":3,"th4":4,"th5":"0","th6":2,"th7":3,"th8":4,"th9":"0","th10":2,"th11":3,"th12":4,"th13":"0","th14":2,"th15":3},
+				{"th1":"常乐镇人民政府","th2":2,"th3":3,"th4":4,"th5":"0","th6":2,"th7":3,"th8":4,"th9":"0","th10":2,"th11":3,"th12":4,"th13":"0","th14":2,"th15":3},
+				{"th1":"常乐镇人民政府","th2":2,"th3":3,"th4":4,"th5":"0","th6":2,"th7":3,"th8":4,"th9":"0","th10":2,"th11":3,"th12":4,"th13":"0","th14":2,"th15":3},
+				{"th1":"常乐镇人民政府","th2":2,"th3":3,"th4":4,"th5":"0","th6":2,"th7":3,"th8":4,"th9":"0","th10":2,"th11":3,"th12":4,"th13":"0","th14":2,"th15":3},
+				{"th1":"常乐镇人民政府","th2":2,"th3":3,"th4":4,"th5":"0","th6":2,"th7":3,"th8":4,"th9":"0","th10":2,"th11":3,"th12":4,"th13":"0","th14":2,"th15":3},
+				{"th1":"常乐镇人民政府","th2":2,"th3":3,"th4":4,"th5":"0","th6":2,"th7":3,"th8":4,"th9":"0","th10":2,"th11":3,"th12":4,"th13":"0","th14":2,"th15":3}
+		  	]
+				
+		  	,skin:"nob"
+		  	,even: true
+		  	,page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+		  		layout: [ 'prev', 'page', 'next', 'skip','count'] //自定义分页布局
+		  		//,curr: 5 //设定初始在第 5 页
+		  		,groups: 1 //只显示 1 个连续页码
+		  		,first: false //不显示首页
+		  		,last: false //不显示尾页
+		  		,jump: function(obj, first){
+		  		alert(1)
+		  	}
+		  		
+		  	}
+	  });
+	});
+</script>

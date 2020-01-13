@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+	<head>
+		<meta charset="UTF-8">
+		<title>南京市农路智慧管理平台</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link rel="stylesheet" href=" ../../../css/common.css" />
+		<link rel="stylesheet" href=" ../../../css/rural-roads.css">
+		<link rel="stylesheet" href=" ../../../layui/css/layui.css">
+		<link rel="stylesheet" href=" ../../../layui/component/formSelects-v4.css">
+		<link rel="stylesheet" type="text/css" href="../../../css/component.css"/>
+	</head>
+	<body class="dlgcxmzl-view">
+		<style type="text/css">
+			.no-img {
+				width:141px;
+				height:165px;
+				background:red;
+				float:left;
+				margin:10px 10px 10px 0;
+			}
+			.no-img img {
+				width:100%;
+				height:100%;
+			}
+			.more-img {
+				margin-top:80px;
+				margin-left:20px;
+				display:inline-block;
+				color:#4aa3f6;
+			}
+		</style>
+		
+		<style type="text/css">
+			.map-pop {
+				position:fixed;
+				width:100%;
+				height:100%;
+				top:0;
+				left:0;
+				background:rgba(0,0,0,0.35);
+				display:none;
+				z-index:99999999999;
+			}
+			.map-pop .map-pop-warp{
+				width:900px;
+				height:600px;
+				background:#fff;
+				position:fixed;
+				top:50%;
+				left:50%;
+				margin-top:-300px;
+				margin-left:-450px;
+				box-shadow:2px 2px 10px #A1A1A1;
+				border-radius:5px;
+			}
+			.map-pop-header {
+				height:50px;
+				line-height:50px;
+				background:#1E9FFF;
+				color:#fff;
+				padding-left:20px;
+				position:relative;
+				font-size:18px;
+			}
+			.layui-input-block input {
+				width:300px;
+			}
+			.layui-form {
+				padding-top:10px;
+			}
+			.close-pop-btn {
+				position: absolute;
+				top: 50%;
+				right: 20px;
+				width: 29px;
+				height: 29px;
+				background:#fff url(../../../images/close-pop-btn.png) no-repeat center center;
+				border-radius:50%;
+				margin-top: -15px;
+				cursor: pointer;
+			}
+		</style>
+		
+		<div class="iframe-content">
+			<div class="layui-tab layui-tab-brief"lay-filter="demo">
+			  <ul class="layui-tab-title">
+				<li class="layui-this">项目基本信息</li>
+				<li>年度计划信息</li>
+				<li>桥梁建设规模信息</li>
+				<li>位置信息</li>
+				<button class="layui-btn back-btn r">返回</button>
+			  </ul>
+			  <div class="layui-tab-content layui-col-sm12" style="height: 100px;">
+				<div class="layui-tab-item layui-show">
+					<div class="card">
+						<ul>
+							<li>
+								<div class="layui-form">
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">项目唯一编码<span style="color: red;">*</span></label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">项目名称<span style="color: red;">*</span></label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">项目类型<span style="color: red;">*</span></label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">所在行政区划<span style="color: red;">*</span></label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">所在行政区划乡镇<span style="color: red;">*</span></label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">建设性质<span style="color: red;">*</span></label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">填报单位代码<span style="color: red;">*</span></label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">备注</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">项目状态</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="layui-tab-item">
+					<div class="layui-tab-item layui-show">
+					<div class="card">
+						<ul>
+							<li>
+								<div class="layui-form">
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">计划年份<span style="color: red;">*</span></label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">总投资（万元） 	</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">省级补助投资（万元）</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">省级补助标准（ 万元/ 公里）</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">地市补助投资（万元）</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">地市补助标准（万元）</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">地方自筹（万元）</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">主要建设内容<span style="color: red;">*</span></label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">项目进度跟踪代码<span style="color: red;">*</span></label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">备注</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				</div>
+				<div class="layui-tab-item">
+				<div class="layui-tab-item layui-show">
+					<div class="card">
+						<ul>
+							<li>
+								<div class="layui-form">
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">线路编码</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">线路名称</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">桥梁编码</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">桥梁名称</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">原有桥梁建设年度</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">路线技术等级</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">中心桩号(公里)</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">路面宽度</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">桥梁桥跨组合（改造前）</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">桥梁桥跨组合（改造后）</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">桥梁技术等级(改造前)</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">桥梁技术等级(改造后)</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">按跨径分(改造前)</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">按跨径分(改造后)</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">桥梁长度(米)(改造前)</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">桥梁长度(米)(改造后)</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">桥面全宽(米)(改造前)</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">桥面全宽(米)(改造后)</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">桥面净宽(米)(改造前)</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">桥面净宽(米)(改造后)</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">备注</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				</div>
+				<div class="layui-tab-item">
+					<div id="map"></div>
+				</div>
+			  </div>
+			</div> 
+		</div>
+		<script type="text/javascript" src=" ../../../js/jquery.min.js"></script>
+		<script type="text/javascript" src=" ../../../js/rural-roads.js"></script>
+		<script type="text/javascript" src=" ../../../layui/layui.js"></script>
+		<script type="text/javascript" src=" ../../../js/utils.js"></script>
+		<script type="text/javascript"src="http://api.map.baidu.com/api?v=3.0&ak=EMU0q1jOBYqmg8Tvl2RYws7hNw6PHyyR"></script>
+	</body>
+</html>
+<script type="text/javascript">
+	layInit(function(layui,$){
+		layui.element.on('tab(demo)', function(data){
+			  setTimeout(function(){
+				var map = new BMap.Map("map");    // 创建Map实例
+				map.centerAndZoom(new BMap.Point(118.732139,32.288014),16);  //初始化地图,设置中心点坐标和地图级别
+				$(".search-btn").click(function(){
+					drawPolyline(map,1);
+					map.centerAndZoom(new BMap.Point(118.732076,32.289808),17);  //初始化地图,设置中心点坐标和地图级别
+				});
+				map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+				drawPolyline(map,0);
+			  },100);
+		});
+		
+		//绘制折线
+		/*function drawPolyline(map,flag){
+			
+			if(flag==0){
+				var polyline = new BMap.Polyline([
+					new BMap.Point(118.739765,32.292677),
+					new BMap.Point(118.737699,32.293272),
+					new BMap.Point(118.736442,32.293463),
+					new BMap.Point(118.734915,32.293737),
+					new BMap.Point(118.734358,32.293814),
+					new BMap.Point(118.733881,32.293898),
+					new BMap.Point(118.73328,32.293936),
+				    new BMap.Point(118.732615,32.29405),
+					
+					new BMap.Point(118.732148,32.294012),
+					new BMap.Point(118.732274,32.292597),
+					new BMap.Point(118.732211,32.292021),
+					new BMap.Point(118.732229,32.291845),
+					new BMap.Point(118.732211,32.29167),
+					new BMap.Point(118.732202,32.29128),
+					new BMap.Point(118.732202,32.291143),
+					new BMap.Point(118.732148,32.290639),
+					new BMap.Point(118.732049,32.289998),
+					new BMap.Point(118.732175,32.288983),
+					new BMap.Point(118.732121,32.288045),
+					new BMap.Point(118.732139,32.287236),
+					new BMap.Point(118.732256,32.284161),
+				], {strokeColor:"#fa5546", strokeWeight:7, strokeOpacity:"1"});  //创建折线
+			}else{
+				if($("input").val()=='城王路'){
+					var polyline = new BMap.Polyline([
+						new BMap.Point(118.732148,32.294012),
+						new BMap.Point(118.732274,32.292597),
+						new BMap.Point(118.732211,32.292021),
+						new BMap.Point(118.732229,32.291845),
+						new BMap.Point(118.732211,32.29167),
+						new BMap.Point(118.732202,32.29128),
+						new BMap.Point(118.732202,32.291143),
+						new BMap.Point(118.732148,32.290639),
+						new BMap.Point(118.732049,32.289998),
+						new BMap.Point(118.732175,32.288983),
+						new BMap.Point(118.732121,32.288045),
+						new BMap.Point(118.732139,32.287236),
+						new BMap.Point(118.732256,32.284161),
+					], {strokeColor:"blue", strokeWeight:7, strokeOpacity:"1"});  //创建折线
+				}
+			}
+			
+			
+			  //增加折线
+			  map.addOverlay(polyline);  
+			  
+			  //折现点击事件
+			  function attribute(e){
+				$('iframe', window.parent.document).css('z-index','999999999999999');
+				$(".map-pop").show();
+			  };
+			  polyline.addEventListener("click",attribute);
+			  
+			  //添加文本
+			  var opts = {
+				  position : new BMap.Point(118.676228,32.101334),
+				  offset   : new BMap.Size(-70,-20)
+				}
+			 var label = new BMap.Label("G40 隐患", opts);
+				label.setStyle({
+					 color : "red",
+					 fontSize : "12px",
+					 height : "20px",
+					 lineHeight : "20px",
+					 fontFamily:"微软雅黑",
+					 border:"none",
+					 background:"none"
+				 });
+			 map.addOverlay(label);   
+		};*/
+		
+		$(".back-btn").click(function(){
+			$('iframe', window.parent.document).attr("src","建设工程/计划管理/项目编制列表.html");
+		});
+		
+	});
+</script>

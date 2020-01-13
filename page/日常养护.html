@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+	<head>
+		<meta charset="UTF-8">
+		<title>南京市农路智慧管理平台</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/rural-roads.css">
+		<link rel="stylesheet" href="../layui/css/layui.css">
+		<link rel="stylesheet" href="../layui/component/formSelects-v4.css">
+		<link rel="stylesheet" type="text/css" href="../css/component.css"/>
+		<style type="text/css">
+			.layui-card-body {
+				height:450px;
+			}
+			.layui-card-top {
+				height:20px;
+				line-height:20px;
+				font-size:15px;
+				border-bottom:1px solid #e4e4e4;
+			}
+			.char {
+				width:100%;
+				height:100%;
+			}
+		</style>
+	</head>
+	<body class="dlgcxmzl-view">
+		<div class="iframe-content">
+			
+			<div class="layui-tab layui-tab-brief"lay-filter="demo">
+			  <ul class="layui-tab-title">
+				<li class="layui-this">道路养护</li>
+				<li>桥梁养护</li>
+				<!--<li>公路绿化养护</li>-->
+			  </ul>
+			  <div class="layui-tab-content layui-col-sm12">
+				<div class="layui-tab-item  layui-show">
+					<div class="tab-search-warp "style="display:table;width:100%;">
+						<div class="layui-form layui-col-xs8 layui-col-sm8 layui-col-md8">
+							<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+								<label class="layui-form-label">道路名称</label>
+								<div class="layui-input-block">
+								  <select name="city" xm-select="selectId1" xm-select-search="" xm-select-search-type="dl"></select>
+								</div>
+							 </div>
+							<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+								<label class="layui-form-label">行政区划</label>
+								<div class="layui-input-block">
+								  <select name="city" xm-select="selectId1" xm-select-search="" xm-select-search-type="dl"></select>
+								</div>
+							 </div>
+							 <div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+							 	<label class="layui-form-label">负责人</label>
+							 	<div class="layui-input-block">
+							 	  <select name="city" xm-select="selectId1" xm-select-search="" xm-select-search-type="dl"></select>
+							 	</div>
+							  </div>
+							 <div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+							 	<label class="layui-form-label">所属乡镇</label>
+							 	<div class="layui-input-block">
+							 	  <select name="city" xm-select="selectId1" xm-select-search="" xm-select-search-type="dl"></select>
+							 	</div>
+							  </div>
+						</div>
+						<div class="search-btn-warp r layui-col-xs4 layui-col-sm4 layui-col-md4" style="text-align:right;">
+							<button class="layui-btn search-btn">查询</button>
+							<button class="layui-btn reset-btn">重置</button>
+						</div>
+					</div>
+					<table class="layui-hide" id="test"  lay-even="" lay-skin="nob"></table>
+				</div>
+				<div class="layui-tab-item">
+					<div class="tab-search-warp "style="display:table;width:100%;">
+						<div class="layui-form layui-col-xs8 layui-col-sm8 layui-col-md8">
+							<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+								<label class="layui-form-label">桥梁名称</label>
+								<div class="layui-input-block">
+								  <select name="city" xm-select="selectId1" xm-select-search="" xm-select-search-type="dl"></select>
+								</div>
+							 </div>
+							<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+								<label class="layui-form-label">行政区划</label>
+								<div class="layui-input-block">
+								  <select name="city" xm-select="selectId1" xm-select-search="" xm-select-search-type="dl"></select>
+								</div>
+							 </div>
+							 <div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+							 	<label class="layui-form-label">负责人</label>
+							 	<div class="layui-input-block">
+							 	  <select name="city" xm-select="selectId1" xm-select-search="" xm-select-search-type="dl"></select>
+							 	</div>
+							  </div>
+							  <div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+							 	<label class="layui-form-label">所属乡镇</label>
+							 	<div class="layui-input-block">
+							 	  <select name="city" xm-select="selectId1" xm-select-search="" xm-select-search-type="dl"></select>
+							 	</div>
+							  </div>
+						</div>
+						<div class="search-btn-warp r layui-col-xs4 layui-col-sm4 layui-col-md4" style="text-align:right;">
+							<button class="layui-btn search-btn">查询</button>
+							<button class="layui-btn reset-btn">重置</button>
+						</div>
+					</div>
+				   <table class="layui-hide" id="test2"  lay-even="" lay-skin="nob"></table>
+			   </div>
+			   <div class="layui-tab-item">
+				   <div class="tab-search-warp "style="display:table;width:100%;">
+				   	<div class="layui-form layui-col-xs8 layui-col-sm8 layui-col-md8">
+				   		<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+				   			<label class="layui-form-label">公路名称</label>
+				   			<div class="layui-input-block">
+				   			  <select name="city" xm-select="selectId1" xm-select-search="" xm-select-search-type="dl"></select>
+				   			</div>
+				   		 </div>
+				   		<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+				   			<label class="layui-form-label">行政区划</label>
+				   			<div class="layui-input-block">
+				   			  <select name="city" xm-select="selectId1" xm-select-search="" xm-select-search-type="dl"></select>
+				   			</div>
+				   		 </div>
+						 <div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+						 	<label class="layui-form-label">负责人</label>
+						 	<div class="layui-input-block">
+						 	  <select name="city" xm-select="selectId1" xm-select-search="" xm-select-search-type="dl"></select>
+						 	</div>
+						  </div>
+						  <div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+						 	<label class="layui-form-label">所属乡镇</label>
+						 	<div class="layui-input-block">
+						 	  <select name="city" xm-select="selectId1" xm-select-search="" xm-select-search-type="dl"></select>
+						 	</div>
+						  </div>
+				   	</div>
+				   	<div class="search-btn-warp r layui-col-xs4 layui-col-sm4 layui-col-md4" style="text-align:right;">
+				   		<button class="layui-btn search-btn">查询</button>
+				   		<button class="layui-btn reset-btn">重置</button>
+				   	</div>
+				   </div>
+			   	   <table class="layui-hide" id="test3"  lay-even="" lay-skin="nob"></table>
+			   </div>
+			</div> 
+		</div>
+		<style type="text/css">
+			table {
+				border:1px solid #e6e6e6;
+			}
+			th div,td div {
+				margin:0 auto;
+			}
+			.tab-search-warp .layui-form-item {
+				border:none!important;
+			}
+			.tab-search-warp .layui-form-label{
+				width:120px!important;
+				background:none!important;
+				margin-bottom:15px;
+				text-align:right!important;
+			}
+			.tab-search-warp .layui-input {
+				border:1px solid #E6E6E6!important;
+			}
+			.dlgcxmzl-view .layui-tab-content .tab-search-warp .layui-input-block {
+				margin-left:150px!important;
+			}
+		</style>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/rural-roads.js"></script>
+		<script type="text/javascript" src="../layui/layui.js"></script>
+		<script type="text/javascript" src="../layui/component/formSelects-v4.js"></script>
+	</body>
+</html>
+<script type="text/javascript">
+	layui.use(['jquery','element','form','table','laydate','layer','laypage','upload','colorpicker'], function(){
+		layui.table.render({
+			elem: '#test',
+			cols: [[
+					{field: 'th1', title: '道路名称', width:180},
+					{field: 'th2', title: '起点'},
+					{field: 'th3', title: '终点'},
+					{field: 'th4', title: '所属行政区划'},
+					{field: 'th5', title: '所属乡镇'},
+					{field: 'th6', title: '里程'},
+					{field: 'th7', title: '负责人'},
+					{field: 'th8', title: '养护内容'},
+					{field: 'th9', title: '养护时间',width:180},
+					{field: 'th10', title: '操作', width:280}
+			]],
+			data: [
+				{"th1": "道路1","th2": "起点","th3": "终点","th4": "栖霞区","th5": "庙后镇","th6": "20","th7": "张三","th9": "2019-01-07 10:41:21","th8": "加固路肩及边坡","th10": "<button class='layui-btn blue-btn'>查看</button>"},
+				{"th1": "道路2","th2": "起点","th3": "终点","th4": "栖霞区","th5": "庙后镇","th6": "20","th7": "张三","th9": "2018-12-26 15:58:20","th8": "加固路肩及边坡","th10": "<button class='layui-btn blue-btn'>查看</button>"},
+				{"th1": "道路3","th2": "起点","th3": "终点","th4": "栖霞区","th5": "庙后镇","th6": "20","th7": "张三","th9": "2018-12-26 15:58:20","th8": "加固路肩及边坡","th10": "<button class='layui-btn blue-btn'>查看</button>"},
+				{"th1": "道路4","th2": "起点","th3": "终点","th4": "栖霞区","th5": "庙后镇","th6": "20","th7": "张三","th9": "2018-12-26 15:58:20","th8": "加固路肩及边坡","th10": "<button class='layui-btn blue-btn'>查看</button>"},
+				{"th1": "道路6","th2": "起点","th3": "终点","th4": "江宁区","th5": "湖熟镇","th6": "20","th7": "张三","th9": "2018-12-26 15:58:20","th8": "加固路肩及边坡","th10": "<button class='layui-btn blue-btn'>查看</button>"},
+				{"th1": "道路7","th2": "起点","th3": "终点","th4": "江宁区","th5": "湖熟镇","th6": "20","th7": "张三","th9": "2018-12-26 15:58:20","th8": "加固路肩及边坡","th10": "<button class='layui-btn blue-btn'>查看</button>"},
+				{"th1": "道路8","th2": "起点","th3": "终点","th4": "江宁区","th5": "湖熟镇","th6": "20","th7": "张三","th9": "2018-12-26 15:50:44","th8": "加固路肩及边坡","th10": "<button class='layui-btn blue-btn'>查看</button>"},
+				{"th1": "道路9","th2": "起点","th3": "终点","th4": "江宁区","th5": "湖熟镇","th6": "20","th7": "张三","th9": "2018-12-26 15:50:44","th8": "加固路肩及边坡","th10": "<button class='layui-btn blue-btn'>查看</button>"},
+				{"th1": "道路10","th2":"起点","th3": "终点","th4": "江宁区","th5": "湖熟镇","th6": "20","th7": "张三","th9": "2018-12-26 15:50:44","th8": "加固路肩及边坡","th10": "<button class='layui-btn blue-btn'>查看</button>"},
+			]
+			,skin:"nob"
+			,even: true
+			,page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+				layout: [ 'prev', 'page', 'next', 'skip','count'] //自定义分页布局
+				//,curr: 5 //设定初始在第 5 页
+				,groups: 1 //只显示 1 个连续页码
+				,first: false //不显示首页
+				,last: false //不显示尾页
+				,jump: function(obj, first){
+				alert(1)
+			}
+				
+			}
+		}
+		);
+		
+		layui.table.render({
+			elem: '#test2',
+			cols: [[
+					{field: 'th1', title: '桥梁名称', width:180},
+					{field: 'th2', title: '起点'},
+					{field: 'th3', title: '终点'},
+					{field: 'th4', title: '所属行政区划'},
+					{field: 'th5', title: '所属乡镇'},
+					{field: 'th6', title: '里程'},
+					{field: 'th7', title: '负责人'},
+					{field: 'th8', title: '所属线路'},
+					{field: 'th9', title: '桩号'},
+					{field: 'th10', title: '养护内容'},
+					{field: 'th11', title: '养护时间',width:180},
+					{field: 'th12', title: '操作', width:280}
+			]],
+			data: [
+				{"th1": "桥梁1","th2": "起点","th3": "终点","th4": "栖霞区","th5": "庙后镇","th6": "20","th7": "张三","th8": "线路1","th9": "K63+3","th11": "2019-01-07 10:41:21","th10": "桥面清洁","th12": "<button class='layui-btn blue-btn'>查看</button>"},
+				{"th1": "桥梁2","th2": "起点","th3": "终点","th4": "栖霞区","th5": "庙后镇","th6": "20","th7": "张三","th8": "线路1","th9": "K63+3","th11": "2018-12-26 15:58:20","th10": "桥面清洁","th12": "<button class='layui-btn blue-btn'>查看</button>"},
+				{"th1": "桥梁3","th2": "起点","th3": "终点","th4": "栖霞区","th5": "庙后镇","th6": "20","th7": "张三","th8": "线路1","th9": "K63+3","th11": "2018-12-26 15:58:20","th10": "桥面清洁","th12": "<button class='layui-btn blue-btn'>查看</button>"},
+				{"th1": "桥梁4","th2": "起点","th3": "终点","th4": "栖霞区","th5": "庙后镇","th6": "20","th7": "张三","th8": "线路1","th9": "K63+3","th11": "2018-12-26 15:58:20","th10": "桥面清洁","th12": "<button class='layui-btn blue-btn'>查看</button>"},
+				{"th1": "桥梁5","th2": "起点","th3": "终点","th4": "江宁区","th5": "湖熟镇","th6": "20","th7": "张三","th8": "线路1","th9": "K63+3","th11": "2018-12-26 15:58:20","th10": "桥面清洁","th12": "<button class='layui-btn blue-btn'>查看</button>"},
+				{"th1": "桥梁6","th2": "起点","th3": "终点","th4": "江宁区","th5": "湖熟镇","th6": "20","th7": "张三","th8": "线路1","th9": "K63+3","th11": "2018-12-26 15:58:20","th10": "桥面清洁","th12": "<button class='layui-btn blue-btn'>查看</button>"},
+				{"th1": "桥梁7","th2": "起点","th3": "终点","th4": "江宁区","th5": "湖熟镇","th6": "20","th7": "张三","th8": "线路1","th9": "K63+3","th11": "2018-12-26 15:50:44","th10": "桥面清洁","th12": "<button class='layui-btn blue-btn'>查看</button>"},
+				{"th1": "桥梁8","th2": "起点","th3": "终点","th4": "江宁区","th5": "湖熟镇","th6": "20","th7": "张三","th8": "线路1","th9": "K63+3","th11": "2018-12-26 15:50:44","th10": "桥面清洁","th12": "<button class='layui-btn blue-btn'>查看</button>"},
+				{"th1": "桥梁9","th2":"起点","th3": "终点","th4": "江宁区","th5": "湖熟镇","th6": "20","th7": "张三","th8": "线路1","th9": "K63+3","th11": "2018-12-26 15:50:44","th10": "桥面清洁","th12": "<button class='layui-btn blue-btn'>查看</button>"},
+			]
+			,skin:"nob"
+			,even: true
+			,page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+				layout: [ 'prev', 'page', 'next', 'skip','count'] //自定义分页布局
+				//,curr: 5 //设定初始在第 5 页
+				,groups: 1 //只显示 1 个连续页码
+				,first: false //不显示首页
+				,last: false //不显示尾页
+				,jump: function(obj, first){
+				alert(1)
+			}
+				
+			}
+		});
+// 		
+		layui.table.render({
+			elem: '#test3',
+			cols: [[
+					{field: 'th1', title: '公路名称', width:180},
+					{field: 'th2', title: '起点'},
+					{field: 'th2', title: '终点'},
+					{field: 'th3', title: '所属行政区划'},
+					{field: 'th4', title: '所属乡镇'},
+					{field: 'th5', title: '里程'},
+					{field: 'th5', title: '负责人'},
+					{field: 'th5', title: '养护内容'},
+					{field: 'th5', title: '所属线路'},
+					{field: 'th6', title: '操作', width:280}
+			]],
+			data: [
+				
+			]
+			,skin:"nob"
+			,even: true
+			,page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+				layout: [ 'prev', 'page', 'next', 'skip','count'] //自定义分页布局
+				//,curr: 5 //设定初始在第 5 页
+				,groups: 1 //只显示 1 个连续页码
+				,first: false //不显示首页
+				,last: false //不显示尾页
+				,jump: function(obj, first){
+				alert(1)
+			}
+				
+			}
+		});
+		
+	});
+</script>

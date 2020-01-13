@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+	<head>
+		<meta charset="UTF-8">
+		<title>南京市农路智慧管理平台</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link rel="stylesheet" href=" ../../../css/common.css" />
+		<link rel="stylesheet" href=" ../../../css/rural-roads.css">
+		<link rel="stylesheet" href=" ../../../layui/css/layui.css">
+		<link rel="stylesheet" href=" ../../../layui/component/formSelects-v4.css">
+		<link rel="stylesheet" type="text/css" href=" ../../../css/component.css"/>
+	</head>
+	<body class="table-page">
+		<style type="text/css">
+			table .layui-btn {
+				float:left;
+			}
+			.layui-upload-img {
+				width:112px;
+				height:112px;
+				background:#eee;
+				border:none!important;
+				cursor:pointer;
+			}
+		</style>
+		<div class="iframe-content">
+			<!-- 搜索区域 -->
+			<div class="search-warp">
+				<form class="layui-form l" action="">
+					<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md4">
+						<label class="layui-form-label">渡口名称</label>
+						<div class="layui-input-block">
+						  <select name="city" xm-select="selectId1" xm-select-search="" xm-select-search-type="dl">
+						  </select>
+						</div>
+					  </div>
+					  <div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md4">
+						<label class="layui-form-label">渡口编码</label>
+						<div class="layui-input-block">
+						  <select name="city" xm-select="selectId2" xm-select-search="" xm-select-search-type="dl">
+						  </select>
+						</div>
+					 </div>
+					 <div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md4">
+						<label class="layui-form-label">填报单位</label>
+						<div class="layui-input-block">
+						  <select name="city" xm-select="selectId2" xm-select-search="" xm-select-search-type="dl">
+						  </select>
+						</div>
+					 </div>
+					 <div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md4">
+						<label class="layui-form-label">起点名称</label>
+						<div class="layui-input-block">
+						  <select name="city" xm-select="selectId2" xm-select-search="" xm-select-search-type="dl">
+						  </select>
+						</div>
+					 </div>
+					 <div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md4">
+						<label class="layui-form-label">终点名称</label>
+						<div class="layui-input-block">
+						  <select name="city" xm-select="selectId2" xm-select-search="" xm-select-search-type="dl">
+						  </select>
+						</div>
+					 </div>
+				</form>
+				<div class="search-btn-warp r"style="width:410px;">
+					<button class="layui-btn search-btn">查询</button>
+					<button class="layui-btn reset-btn">重置</button>
+				</div>
+			</div>
+			<!-- table区域 -->
+			<div class="table-con"style="width:100%;">
+				<div class="table-top-btn">
+					<button class="layui-btn"style="background:#01AAED;">excel模板下载</button>
+					<button class="layui-btn"style="background:#5FB878;">excel数据导入</button>
+					<button class="layui-btn"style="background:#009688;">excel数据导出</button>
+					<button class="layui-btn add-btn"><!--onclick="$('iframe', window.parent.document).css('z-index','999999999999999');$('.add-pop').show()">-->新增</button>
+				</div>
+				<table class="layui-hide" id="test"  lay-even="" lay-skin="nob"width="100%"></table>
+			</div>
+		</div>
+		<!-- 新增弹窗 -->
+		<div class="page-layer add-pop">
+			<div class="dlgc-add-pop page-pop">
+				<div class="dlgc-add-pop-header pop-header">
+					<span class="header-text">新增文件</span>
+					<div class="close-pop-btn closePop"></div>
+				</div>
+				<div class="dlgc-add-pop-content">
+					<form class="layui-form" action="">
+						<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md12">
+							<label class="layui-form-label">标识牌名称</label>
+							<div class="layui-input-block">
+							  <input type="text" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md12">
+							<label class="layui-form-label">标识牌编码</label>
+							<div class="layui-input-block">
+								<input type="text" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs6 layui-col-sm6 layui-col-md6">
+							<label class="layui-form-label">起点名称</label>
+							<div class="layui-input-block">
+							  <input type="text" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs6 layui-col-sm6 layui-col-md6">
+							<label class="layui-form-label">终点名称</label>
+							<div class="layui-input-block">
+							  <input type="text" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs6 layui-col-sm6 layui-col-md6">
+							<label class="layui-form-label">起点是否为分界线</label>
+							<div class="layui-input-block">
+								<select name="city" xm-select="selectId2" xm-select-search="" xm-select-search-type="dl">
+								</select>
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs6 layui-col-sm6 layui-col-md6">
+							<label class="layui-form-label">终点是否为分界线</label>
+							<div class="layui-input-block">
+								<select name="city" xm-select="selectId2" xm-select-search="" xm-select-search-type="dl">
+								</select>
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs6 layui-col-sm6 layui-col-md6">
+							<label class="layui-form-label">起点行政区域</label>
+							<div class="layui-input-block">
+								<input type="text"class="upload-input layui-input" disabled="disabled" style="width:155px;float:left;border-radius:2px 0 0 2px;">
+								<button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs6 layui-col-sm6 layui-col-md6">
+							<label class="layui-form-label">终点行政区域</label>
+							<div class="layui-input-block">
+								<input type="text"class="upload-input layui-input" disabled="disabled" style="width:155px;float:left;border-radius:2px 0 0 2px;">
+								<button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md12">
+							<label class="layui-form-label">填报单位</label>
+							<div class="layui-input-block">
+								<input type="text"class="upload-input layui-input" disabled="disabled" style="width:575px;float:left;border-radius:2px 0 0 2px;">
+								<button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md12">
+							<label class="layui-form-label">上传图片</label>
+							<div class="layui-input-block">
+								<div class="layui-upload-list">
+									<img class="layui-upload-img" src=" ../../../images/upimgBtn.png" id="demo1">
+								  </div>
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md12">
+							<label class="layui-form-label">备注</label>
+							<div class="layui-input-block">
+								<textarea placeholder="请输入内容" class="layui-textarea"style="height:120px;"></textarea>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="dlgc-add-pop-footer page-pop-footer">
+					<button class="layui-btn red-btn closePop">取消</button>
+					<button class="layui-btn blue-btn">保存</button>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src=" ../../../js/jquery.min.js"></script>
+		<script type="text/javascript" src=" ../../../js/rural-roads.js"></script>
+		<script type="text/javascript" src=" ../../../layui/layui.js"></script>
+		<script type="text/javascript" src=" ../../../js/utils.js"></script>
+	</body>
+</html>
+<script type="text/javascript">
+	layInit(function(layui,$){
+		//普通图片上传
+	  layui.upload.render({
+	  	elem: '#demo1'
+	  	,auto: false
+	  	,choose: function(res){
+	  	  res.preview(function(index, file, result){
+			$('#demo1').attr("src",result);
+	  	  });
+	  	}
+	    });
+		//文件上传
+		layui.upload.render({
+			elem: '#test8'
+			,auto: false
+			,choose: function(res){
+			  res.preview(function(index, file, result){
+				  $(".upload-input").val(file.name);
+			  });
+			}
+		  });
+		var table = layui.table;
+// 		layui.formSelects.on('selectId1', function(id, vals, val, isAdd, isDisabled){
+// 		    //id:           点击select的id
+// 		    //vals:         当前select已选中的值
+// 		    //val:          当前select点击的值
+// 		    //isAdd:        当前操作选中or取消
+// 		    //isDisabled:   当前选项是否是disabled
+// 		    console.log("当前选择了: " + JSON.stringify(vals));
+// 		}, true);
+	  layui.table.render({
+	  	elem: '#test',
+	  	cols: [[
+	  		{field: 'th1', title: '渡口编码', width:180},
+	  		{field: 'th2', title: '渡口名称'},
+			{field: 'th3', title: '路线名称'},
+			{field: 'th5', title: '填报人'},
+			{field: 'th6', title: '填报单位'},
+			{field: 'th7', title: '填报时间'},
+			{field: 'th8', title: '备注'},
+			{field: 'th9', title: '操作', width:180,className:"qweqwe"},
+	  	]],
+	  	data: [
+			{"th1": "123","th2": " 渡口名称","th3": "111", "th5": "张三","th6":"填报单位","th7": "2019-01-07 10:41:21","th8":"","th9": "<button class='layui-btn blue-btn'>查看</button><button class='layui-btn yellow-btn'>编辑</button>"},
+			{"th1": "123","th2": " 渡口名称","th3": "111", "th5": "张三","th6":"填报单位","th7": "2018-12-26 15:58:20	","th8":"","th9": "<button class='layui-btn blue-btn'>查看</button><button class='layui-btn yellow-btn'>编辑</button>"},
+			{"th1": "123","th2": " 渡口名称","th3": "111", "th5": "张三","th6":"填报单位","th7": "2018-12-26 15:58:20","th8":"","th9": "<button class='layui-btn blue-btn'>查看</button><button class='layui-btn yellow-btn'>编辑</button>"},
+			{"th1": "123","th2": " 渡口名称","th3": "111", "th5": "张三","th6":"填报单位","th7": "2018-12-26 15:58:20","th8":"","th9": "<button class='layui-btn blue-btn'>查看</button><button class='layui-btn yellow-btn'>编辑</button>"},
+			{"th1": "123","th2": " 渡口名称","th3": "111", "th5": "张三","th6":"填报单位","th7": "2018-12-26 15:58:20","th8":"","th9": "<button class='layui-btn blue-btn'>查看</button><button class='layui-btn yellow-btn'>编辑</button>"},
+			{"th1": "123","th2": " 渡口名称","th3": "111", "th5": "张三","th6":"填报单位","th7": "2018-12-26 15:58:20","th8":"","th9": "<button class='layui-btn blue-btn'>查看</button><button class='layui-btn yellow-btn'>编辑</button>"},
+			{"th1": "123","th2": " 渡口名称","th3": "111", "th5": "张三","th6":"填报单位","th7": "2018-12-26 15:50:44","th8":"","th9": "<button class='layui-btn blue-btn'>查看</button><button class='layui-btn yellow-btn'>编辑</button>"},
+			{"th1": "123","th2": " 渡口名称","th3": "111", "th5": "张三","th6":"填报单位","th7": "2018-12-26 15:50:44","th8":"","th9": "<button class='layui-btn blue-btn'>查看</button><button class='layui-btn yellow-btn'>编辑</button>"},
+			{"th1": "123","th2": " 渡口名称","th3": "111", "th5": "张三","th6":"填报单位","th7": "2018-12-26 15:50:44","th8":"","th9": "<button class='layui-btn blue-btn'>查看</button><button class='layui-btn yellow-btn'>编辑</button>"},
+			
+	  	]
+	  	,skin:"nob"
+	  	,even: true
+	  	,page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+	  		layout: [ 'prev', 'page', 'next', 'skip','count'] //自定义分页布局
+	  		//,curr: 5 //设定初始在第 5 页
+	  		,groups: 1 //只显示 1 个连续页码
+	  		,first: false //不显示首页
+	  		,last: false //不显示尾页
+	  		,jump: function(obj, first){
+	  		alert(1)
+	  	}
+	  		
+	  	}
+	  });
+		$("table .blue-btn").click(function(){
+//			$('iframe', window.parent.document).attr("src","路产管理/渡口管理/渡口管理-查看01.html");
+		});
+		$("table .yellow-btn").click(function(){
+//			$('iframe', window.parent.document).css('z-index','999999999999999');$('.add-pop').show();
+		});
+		
+	});
+</script>

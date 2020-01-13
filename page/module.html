@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>"四好农村路"智慧管理云平台</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/rural-roads.css">
+		<link rel="stylesheet" href=" ../layui/css/layui.css">
+		<style type="text/css">
+			
+		</style>
+	</head>
+	<body class="module-page">
+		<div class="header">
+			<div class="name">"四好农村路"智慧管理云平台</div>
+			<div class="adminer"style="right:40px;">
+				<div class="img"><img src="../images/userinfo.jpg" ></div>
+				<div class="adminer-type">超级管理员</div>
+				<div class="adminer-con"style="color:#333!important;">
+					<ul>
+						<li>修改头像</li>
+						<li>个人资料</li>
+						<li>修改密码</li>
+						<li>信箱</li>
+						<li class="tuichu">安全退出</li>
+					</ul>
+				</div>
+			</div>
+			<!-- <div class="set">
+				个性设置
+			</div>
+			<div id="setColor"></div>	 -->
+		</div>
+		<div class="page-warp">
+			<div class="page-warp-con">
+				<div class="page-warp-con-left l">
+					<div class="page-warp-con-left-top page-warp-con-left-con">
+						<ul>
+							<li><img src="../images/loginBg%20.png" alt=""></li>
+							<li><img src="../images/loginBg%20.png" alt=""></li>
+						</ul>
+						<div class="page-warp-con-left-top-footer">
+							<div>
+								<span class="on"data-name="农农村公路农村公路111"></span>
+								<span data-name="农农村公路农村公路222"></span>
+							</div>
+							<p>农农村公路农村公路111</p>
+						</div>
+					</div>
+					<div class="page-warp-con-left-bottom page-warp-con-left-con">
+						<div class="page-warp-con-left-bottom-header">待办事项<a href="#">更多</a></div>
+						<ul>
+							<li><p class="p1 l"><span>项目资料审批</span></p><p class="p2 r"><span>2019-01-10</span></p></li>
+							<li><p class="p1 l"><span>道路工程项目资料上报</span></p><p class="p2 r"><span>2019-01-10</span></p></li>
+						</ul>
+					</div>
+				</div>
+				<div class="page-warp-con-right r">
+					<div class="page-warp-con-right-con page-warp-con-right-con-top">
+						<ul>
+							<li class="li-1" style="margin-right:18px;"><a href="home.html"><span>首页</span></a></li>
+							<li class="li-2" style="margin-right:18px;"><a href="home.html"><span>待办事项</span></a></li>
+							<li class="li-3" style="margin-right:18px;"><a href="home.html?url=路产管理/路线管理/路线管理.html" class="a"><span>路产管理</span></a></li>
+							<li class="li-8" ><a href="home.html?url=建设工程/计划管理/计划管理列表.html" class="a"><span>建设管理</span></a></li>
+						</ul>
+					</div>
+					<div class="page-warp-con-right-con page-warp-con-right-con-bottom">
+						<ul>
+							<li class="li-4"  style="margin-right:18px;"><a href="home.html?url=日常养护.html" class="a"><span>养护管理</span></a></li>
+							<li class="li-5"  style="margin-right:18px;"><a href="home.html?url=基础信息管理.html" class="a"><span>基础信息管理</span></a></li>
+							<li class="li-6"  style="margin-right:18px;"><a href="home.html?url=消息管理.html" class="a"><span>消息管理</span></a></li>
+							<li class="li-7" ><a href="home.html?url=系统设置/用户管理/用户管理.html" class="a"><span>系统设置</span></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="page-warp-footer">技术支持：江苏东交工程检测股份有限公司</div>
+		</div>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/rural-roads.js"></script>
+		<script type="text/javascript" src=" ../layui/layui.js"></script>
+	</body>
+</html>
+<script type="text/javascript">
+	layui.use(['form','colorpicker'], function(){
+		//退出
+		$(".tuichu").click(function(){
+			window.location.replace("登录.html");
+		});
+		 layui.colorpicker.render({
+			elem: '#setColor',
+			// colors: ['#ff8c00','#00ced1','#9d8a0e'],
+			predefine: true,
+			done: function(color){ //颜色改变的回调
+			  $(".header").css("background-color",color)
+			}
+		  });
+	});
+</script>

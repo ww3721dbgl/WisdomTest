@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>"四好农村路"智慧管理云平台</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/rural-roads.css">
+		<link rel="stylesheet" href=" ../layui/css/layui.css">
+		<link rel="stylesheet" href=" ../layui/layer/mobile/need/layer.css">
+		<link rel="stylesheet" type="text/css" href="../css/component.css"/>
+	</head>
+	<body class="table-page">
+		<div class="header">
+			<div class="name">"四好农村路"智慧管理云平台</div>
+			<img src="../images/tianqi.png" class="tianqi"style="position:absolute;top:15px;right:420px;">
+			<div class="adminer"style="right:230px;">
+				<div class="img"><img src="../images/userinfo.jpg" ></div>
+				<div class="adminer-type">超级管理员</div>
+				<div class="adminer-con">
+					<ul>
+						<li>修改头像</li>
+						<li>个人资料</li>
+						<li>修改密码</li>
+						<li>信箱</li>
+						<li class="tuichu">安全退出</li>
+					</ul>
+				</div>
+			</div>
+			<div class="set"style="right:110px;">
+				个性设置
+			</div>
+			<div id="setColor"></div>
+			<div style=""id="dbsx">待办事项<i>3</i></div>
+		</div>
+		<div class="page-warp">
+			<!--左侧导航-->
+			<div class="page-nav">
+				<div class="page-nav-warp">
+					<ul class="layui-nav layui-nav-tree" lay-filter="test"lay-shrink="all">
+						  <li class="layui-nav-item layui-nav-itemed"><a href="javascript:;"><img src="../images/level-1.png" class="img">首页</a></li>
+						  <li class="layui-nav-item">
+						    <a href="javascript:;"><img src="../images/level-3.png" class="img">路产管理</a>
+						    <dl class="layui-nav-child">
+						    	  <dd><a href="javascript:;">选项2</a></dd>
+						    	  <dd><a href="javascript:;">选项2</a></dd>
+							      <dd>
+							      	<a href="javascript:;">选项1</a>
+							      	<dl class="layui-nav-child">
+							      		<dd><a href="javascript:;">选项1-1</a></dd>
+							     		<dd><a href="javascript:;">选项1-2</a></dd>
+							      	</dl>
+							      </dd>
+							      <dd>
+							      	<a href="javascript:;">选项2</a>
+							      	<dl class="layui-nav-child">
+							      		<dd><a href="javascript:;">选项2-1</a></dd>
+							     		<dd><a href="javascript:;">选项2-2</a></dd>
+							      	</dl>
+							      </dd>
+							      <dd><a href="javascript:;">选项2</a></dd>
+							      <dd><a href="javascript:;">跳转</a></dd>
+						    </dl>
+						  </li>
+						  <li class="layui-nav-item">
+						    <a href="javascript:;"><img src="../images/level-4.png" class="img">建设管理</a>
+						    <dl class="layui-nav-child">
+						      <dd><a href="javascript:;">移动模块</a></dd>
+						      <dd><a href="javascript:;">后台模版</a></dd>
+						      <dd><a href="javascript:;">电商平台</a></dd>
+						    </dl>
+						  </li>
+						  <li class="layui-nav-item">
+						    <a href="javascript:;"><img src="../images/level-5.png" class="img">养护管理</a>
+						    <dl class="layui-nav-child">
+						      <dd><a href="javascript:;">移动模块</a></dd>
+						      <dd><a href="javascript:;">后台模版</a></dd>
+						      <dd><a href="javascript:;">电商平台</a></dd>
+						    </dl>
+						  </li>
+						  <li class="layui-nav-item">
+						    <a href="javascript:;"><img src="../images/level-7.png" class="img">基础信息</a>
+						    <dl class="layui-nav-child">
+						      <dd><a href="javascript:;">移动模块</a></dd>
+						      <dd><a href="javascript:;">后台模版</a></dd>
+						      <dd><a href="javascript:;">电商平台</a></dd>
+						    </dl>
+						  </li>
+						  <li class="layui-nav-item">
+						    <a href="javascript:;"><img src="../images/level-8.png" class="img">消息管理</a>
+						    <dl class="layui-nav-child">
+						      <dd><a href="javascript:;">移动模块</a></dd>
+						      <dd><a href="javascript:;">后台模版</a></dd>
+						      <dd><a href="javascript:;">电商平台</a></dd>
+						    </dl>
+						  </li>
+						  <li class="layui-nav-item">
+						    <a href="javascript:;"><img src="../images/level-6.png" class="img">系统设置</a>
+						    <dl class="layui-nav-child">
+						      <dd><a href="javascript:;">移动模块</a></dd>
+						      <dd><a href="javascript:;">后台模版</a></dd>
+						      <dd><a href="javascript:;">电商平台</a></dd>
+						    </dl>
+						  </li>
+					</ul>
+				</div>
+				</div>
+			<div class="page-con">
+				<!-- tab导航 -->
+				<div class="breadcrumb-nav"id="breadcrumb-nav">
+					<div class="breadcrumb-nav-list l">
+						首页 > 路产管理 > 路产管理
+					</div>
+				</div>
+				<div class="nav-body">
+					<div class="iframe-content">
+						<!-- 搜索区域 -->
+						<div class="search-warp">
+							<form class="layui-form l" action="">
+								<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md4">
+									<label class="layui-form-label">路线名称</label>
+									<div class="layui-input-block">
+									  <select name="city" xm-select="selectId1" xm-select-search="" xm-select-search-type="dl">
+									  </select>
+									</div>
+								  </div>
+								  <div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md4">
+									<label class="layui-form-label">路线编码</label>
+									<div class="layui-input-block">
+									  <select name="city" xm-select="selectId2" xm-select-search="" xm-select-search-type="dl">
+									  </select>
+									</div>
+								 </div>
+								 <div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md4">
+									<label class="layui-form-label">填报单位</label>
+									<div class="layui-input-block">
+									  <select name="city" xm-select="selectId2" xm-select-search="" xm-select-search-type="dl">
+									  </select>
+									</div>
+								 </div>
+								 <div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md4">
+									<label class="layui-form-label">起点名称</label>
+									<div class="layui-input-block">
+									  <select name="city" xm-select="selectId2" xm-select-search="" xm-select-search-type="dl">
+									  </select>
+									</div>
+								 </div>
+								 <div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md4">
+									<label class="layui-form-label">终点名称</label>
+									<div class="layui-input-block">
+									  <select name="city" xm-select="selectId2" xm-select-search="" xm-select-search-type="dl">
+									  </select>
+									</div>
+								 </div>
+							</form>
+							<div class="search-btn-warp r"style="width:410px;">
+								<button class="layui-btn search-btn">查询</button>
+								<button class="layui-btn reset-btn">重置</button>
+							</div>
+						</div>
+						<!-- table区域 -->
+						<div class="table-con"style="width:100%;">
+							<div class="table-top-btn">
+								<button class="layui-btn"style="background:#01AAED;">excel模板下载</button>
+								<button class="layui-btn"style="background:#5FB878;">excel数据导入</button>
+								<button class="layui-btn"style="background:#009688;">excel数据导出</button>
+								<button class="layui-btn add-btn"onclick="$('iframe', window.parent.document).css('z-index','999999999999999');$('.add-pop').show()">新增</button>
+								<button class="layui-btn del-btn"onclick="$('iframe', window.parent.document).css('z-index','999999999999999');$('.del-pop').show()">删除</button>
+							</div>
+							<table class="layui-hide" id="test"  lay-even="" lay-skin="nob"width="100%"></table>
+						</div>
+					</div>
+		
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/rural-roads.js"></script>
+		<script type="text/javascript" src="../layui/layui.js"></script>
+		<script type="text/javascript" src="../layui/layer/mobile/layer.js"></script>
+		<script type="text/javascript" src=" ../js/utils.js"></script>
+	</body>
+</html>
+<script type="text/javascript">
+	layInit(function(layui,$){
+		
+	 //普通弹窗
+//	 layer.open({
+//		  type: 2,
+//		  area: ['800px', '600px'],
+//		  btn: ['取消', '保存','提交审核'],
+//		  title: '一列弹窗通用布局',
+//		  fixed: false, //不固定
+//		  maxmin: false,
+//		  btnAlign:'c',
+//		  content: '弹窗/详情弹窗(两列)tabs.html'
+//	 });	
+	 
+	 //详情弹窗 两列+建议宽度 10000
+//	 layer.open({
+//		  type: 2,
+//		  area: ['1200px', '640px'],
+//		  btn: ['取消','确定'],
+//		  title: '一列弹窗通用布局',
+//		  fixed: false, //不固定
+//		  maxmin: false,
+//		  btnAlign:'c',
+//		  content: '弹窗/列表弹窗(iframe).html'
+//	 });	
+	 
+	 
+	 
+	  //数据表格	
+	  layui.table.render({
+	  	elem: '#test',
+	  	cols: [[
+	  		{field: 'th1', title: '项目名称', width:180},
+	  		{field: 'th2', title: '文件名称'},
+			{field: 'th3', title: '文件类型'},
+			{field: 'th9', title: '审核状态'},
+			{field: 'th5', title: '上报人'},
+			{field: 'th4', title: '上报单位'},
+			{field: 'th6', title: '更新时间'},
+			{field: 'th7', title: '备注'},
+			{field: 'th8', title: '操作', width:180},
+	  	]],
+	  	data: [
+			{"th1": "123","th2": "施工许可","th3": "","th4": "设计单位","th5": "","th6": "2018-12-26 15:50:44","th7": "","th8": "<button class='layui-btn blue-btn'>查看</button><button class='layui-btn yellow-btn'>编辑</button>","th9": "<span style='color:#0099ff'>未审核</span>"}
+	  	]
+	  	,skin:"nob"
+	  	,even: true
+	  	,page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+	  		layout: [ 'prev', 'page', 'next', 'skip','count'] //自定义分页布局
+	  		,groups: 1 //只显示 1 个连续页码
+	  		,first: false //不显示首页
+	  		,last: false //不显示尾页
+	  		,jump: function(obj, first){
+	  		alert(1)
+	  	}
+	  		
+	  	}
+	  });
+	});
+</script>

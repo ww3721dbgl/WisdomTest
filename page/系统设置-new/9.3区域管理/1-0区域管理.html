@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+	<head>
+		<meta charset="UTF-8">
+		<title>南京市农路智慧管理平台</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link rel="stylesheet" href="../../../css/common.css" />
+		<link rel="stylesheet" href="../../../css/rural-roads.css">
+		<link rel="stylesheet" href="../../../layui/css/layui.css">
+		<link rel="stylesheet" href="../../../layui/component/formSelects-v4.css">
+		<link rel="stylesheet" type="text/css" href="../../../css/component.css"/>
+		<link rel="stylesheet" href="../../../css/zTreeStyle/zTreeStyle.css" />
+	</head>
+	<body class="user-admin-warp-page">
+		<div class="iframe-content">
+			<div class="nl-fuild-warp">
+				<div class="fuild-warp-fuild l">
+					<div class="fuild-warp-fuild-content">
+						<div class="fuild-warp-fuild-search-result-warp">
+							<div class="table-top-btn">
+								<button class="layui-btn add-btn">新增</button>
+								<button class="layui-btn del-btn"onclick="$('iframe', window.parent.document).css('z-index','999999999999999');$('.del-pop').show()">删除</button>
+							</div>
+							<table class="layui-table layui-form" id="tree-table"></table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--删除弹窗-->
+		<div class="page-layer del-pop ">
+			<div class="page-pop confrim-pop">
+				<div class="confrim-pop-content">
+					<p class="p1">您确定删除这项内容吗?</p>
+					<p class="p2">删除这项内容后，将无法恢复。</p>
+				</div>
+				<div class="page-pop-footer">
+					<button class="layui-btn cancel-btn closePop">取消</button>
+					<button class="layui-btn confirm-btn closePop">确定</button>
+				</div>
+			</div>
+		</div> 
+		<script type="text/javascript" src="../../../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../../../js/rural-roads.js"></script>
+		<script type="text/javascript" src="../../../layui/layui.js"></script>
+		<script type="text/javascript" src="../../../js/utils.js"></script>
+		<script type="text/javascript" src="../../../js/jquery.ztree.core.js"></script>
+		<script type="text/javascript" src="../../../js/treeTable.js"></script>
+	</body>
+</html>
+<script type="text/javascript">
+	layInit(function(layui,$){
+		//树形菜单
+		var setting = {
+			data: {
+				simpleData: {
+					enable: true
+				}
+			}
+		};
+		var zNodes =[
+			{ id:3, pId:0, name:"海门市交通局", open:true,iconOpen:"../../../images/1_open.png", iconClose:"../../../images/1_open.png"},
+			{ id:31, pId:3, name:"海门市公路站",icon:"../../../images/ztreeicon.png"},
+			{ id:32, pId:3, name:"海门市公路站",icon:"../../../images/ztreeicon.png"},
+			{ id:32, pId:3, name:"海门市公路站",icon:"../../../images/ztreeicon.png"},
+			{ id:33, pId:3, name:"海门市公路站",icon:"../../../images/ztreeicon.png"},
+			{ id:34, pId:3, name:"监理单位",icon:"../../../images/ztreeicon.png"}
+		];
+		$(document).ready(function(){
+			$.fn.zTree.init($("#ztree"), setting, zNodes);
+		});
+		
+		//树形表格
+	  	layui.treeTable.render({
+			elem: '#tree-table',
+			//设置表头
+			cols: [
+				{
+					key: 'title',
+					title: '机构名称',
+					width: '100px',
+					template: function(item){
+						return item.title;
+					}
+				},
+				{
+					key: 'th1',
+					title: '归属区域',
+					width: '100px',
+					align: 'center',
+				},
+				{
+					key: 'th2',
+					title: '机构编码',
+					width: '100px',
+					align: 'center',
+				},
+				{
+					key: 'th3',
+					title: '机构类型',
+					width: '100px',
+					align: 'center',
+				},
+				{
+					key: 'th4',
+					title: '备注',
+					width: '100px',
+					align: 'center',
+				},
+				{
+					key: 'th5',
+					title: '操作',
+					width: '200px',
+					align: 'center',
+				}
+			],
+			//设置表格体数据
+			data: [
+					{"id":1,"pid":0,"title":"海门市交通局1","th1":"海门市1","th2":"321060841","th3":"单位","th4":"备注信息","th5":"<button class='layui-btn blue-btn'lay-filter='viewDetails'>查看</button><button class='layui-btn yellow-btn'lay-filter='eritorDetails'>修改</button><button class='layui-btn oregin-btn'lay-filter='addLower'>添加下级区域</button>"},
+					{"id":11,"pid":1,"title":"海门市公路站1-1","th1":"海门市2","th2":"321060842","th3":"其他","th4":"备注信息备注信息","th5":"<button class='layui-btn blue-btn'lay-filter='viewDetails'>查看</button><button class='layui-btn yellow-btn'lay-filter='eritorDetails'>修改</button><button class='layui-btn oregin-btn'lay-filter='addLower'>添加下级区域</button>"},
+					{"id":12,"pid":1,"title":"海门市公路站1-1","th1":"海门市2","th2":"321060842","th3":"其他","th4":"备注信息备注信息","th5":"<button class='layui-btn blue-btn'lay-filter='viewDetails'>查看</button><button class='layui-btn yellow-btn'lay-filter='eritorDetails'>修改</button><button class='layui-btn oregin-btn'lay-filter='addLower'>添加下级区域</button>"},
+					{"id":13,"pid":1,"title":"海门市公路站1-1","th1":"海门市2","th2":"321060842","th3":"其他","th4":"备注信息备注信息","th5":"<button class='layui-btn blue-btn'lay-filter='viewDetails'>查看</button><button class='layui-btn yellow-btn'lay-filter='eritorDetails'>修改</button><button class='layui-btn oregin-btn'lay-filter='addLower'>添加下级区域</button>"},
+				
+					{"id":2,"pid":0,"title":"海门市交通局2","th1":"海门市1","th2":"321060841","th3":"单位","th4":"备注信息","th5":"<button class='layui-btn blue-btn'lay-filter='viewDetails'>查看</button><button class='layui-btn yellow-btn'lay-filter='eritorDetails'>修改</button><button class='layui-btn oregin-btn'lay-filter='addLower'>添加下级区域</button>"},
+					{"id":21,"pid":2,"title":"海门市公路站2-1","th1":"海门市2","th2":"321060842","th3":"其他","th4":"备注信息备注信息","th5":"<button class='layui-btn blue-btn'lay-filter='viewDetails'>查看</button><button class='layui-btn yellow-btn'lay-filter='eritorDetails'>修改</button><button class='layui-btn oregin-btn'lay-filter='addLower'>添加下级区域</button>"},
+					{"id":21,"pid":2,"title":"海门市公路站2-1","th1":"海门市2","th2":"321060842","th3":"其他","th4":"备注信息备注信息","th5":"<button class='layui-btn blue-btn'lay-filter='viewDetails'>查看</button><button class='layui-btn yellow-btn'lay-filter='eritorDetails'>修改</button><button class='layui-btn oregin-btn'lay-filter='addLower'>添加下级区域</button>"},
+					{"id":23,"pid":2,"title":"海门市公路站2-1","th1":"海门市2","th2":"321060842","th3":"其他","th4":"备注信息备注信息","th5":"<button class='layui-btn blue-btn'lay-filter='viewDetails'>查看</button><button class='layui-btn yellow-btn'lay-filter='eritorDetails'>修改</button><button class='layui-btn oregin-btn'lay-filter='addLower'>添加下级区域</button>"}
+			],
+			icon_key: 'title',
+			is_checkbox: true,
+			end: function(e){
+				//重新渲染form组件
+				layui.form.render();
+			},
+		});
+		//监听查看按钮
+		layui.treeTable.on('tree(viewDetails)',function(data){
+			$('iframe', window.parent.document).attr("src","系统设置-new/9.3区域管理/1-2查看详情.html");
+			console.log(data);
+		});
+		//监听修改按钮
+		layui.treeTable.on('tree(eritorDetails)',function(data){
+			layer.open({
+				  type: 2,
+				  area: ['800px', '550px'],
+				  btn: ['取消','保存'],
+				  title: '修改区域',
+				  fixed: false, //不固定
+				  maxmin: false,
+				  btnAlign:'c',
+				  content: '../../弹窗/系统设置/1-0区域管理-新增弹窗.html'
+			});	
+			console.log(data);
+		});
+		//监听添加下级区域按钮
+		layui.treeTable.on('tree(addLower)',function(data){
+			layer.open({
+				  type: 2,
+				  area: ['800px', '550px'],
+				  btn: ['取消','保存'],
+				  title: '添加下级区域',
+				  fixed: false, //不固定
+				  maxmin: false,
+				  btnAlign:'c',
+				  content: '../../弹窗/系统设置/1-0区域管理-新增弹窗.html'
+			});	
+			console.log(data);
+		});
+		
+		//新增弹窗
+	  $(".add-btn").click(function(){
+	  		layer.open({
+				  type: 2,
+				  area: ['800px', '550px'],
+				  btn: ['取消','保存'],
+				  title: '新增区域',
+				  fixed: false, //不固定
+				  maxmin: false,
+				  btnAlign:'c',
+				  content: '../../弹窗/系统设置/1-0区域管理-新增弹窗.html'
+			});	
+	  });
+		
+	});
+</script>

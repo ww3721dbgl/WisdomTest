@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>"四好农村路"智慧管理云平台</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/rural-roads.css">
+		<link rel="stylesheet" href=" ../layui/css/layui.css">
+		<style type="text/css">
+			
+		</style>
+	</head>
+	<body>
+		<div class="header">
+			<div class="name">"四好农村路"智慧管理云平台</div>
+			<img src="../images/tianqi.png" class="tianqi"style="position:absolute;top:15px;right:420px;">
+			<div class="adminer"style="right:240px;">
+				<div class="img"><img src="../images/userinfo.jpg"></div>
+				<div class="adminer-type">超级管理员</div>
+				<div class="adminer-con">
+					<ul>
+						<li>修改头像</li>
+						<li>个人资料</li>
+						<li>修改密码</li>
+						<li>信箱</li>
+						<li class="tuichu">安全退出</li>
+					</ul>
+				</div>
+			</div>
+			<div class="set"style="right:130px;">
+				个性设置
+			</div>
+			<div id="setColor"></div>	
+			<div style="position:absolute;right:40px;top:26px;font-size:15px;cursor:pointer;"id="dbsx">待办事项<i style="position:absolute;width:16px;height:16px;line-height:16px;;border-radius:50%;background:red;top:-6px;text-align:center;color:#fff;">3</i></div>
+		</div>
+		<div class="page-warp">
+			<div class="page-nav">
+				<div class="one-level level-con">
+					<div class="level-con-warp">
+						<div class="layui-form"style="display:table;width:100%;">
+							
+						</div>
+						<ul class="one-level-ul">
+							<li data-two="0"data-url="首页/home-iframe.html"><img src="../images/level-1.png" class="img"><img src="../images/level-on-1.png"class="img-on">首页</li>
+							<!-- <li data-two="1"><img src="../images/level-2.png" class="img"><img src="../images/level-on-2.png" class="img-on">待办事项</li> -->
+							<li data-two="1"><img src="../images/level-3.png" class="img"><img src="../images/level-on-3.png" class="img-on">路产管理</li>
+							<li data-two="1"><img src="../images/level-4.png" class="img"><img src="../images/level-on-4.png" class="img-on">建设管理</li>
+							<li data-two="1"><img src="../images/level-5.png" class="img"><img src="../images/level-on-5.png" class="img-on">养护管理</li>
+							<li data-two="0"data-url="基础信息管理.html"><img src="../images/level-7.png" class="img"><img src="../images/level-on-7.png"class="img-on">基础信息</li>
+							<li data-two="0"data-url="消息管理.html"><img src="../images/level-8.png" class="img"><img src="../images/level-on-8.png"class="img-on">消息管理</li>
+							<li data-two="1"><img src="../images/level-6.png" class="img"><img src="../images/level-on-6.png" class="img-on">系统设置</li>
+							<li data-two="0"id="dp"><img src="../images/level-9.png" class="img"><img src="../images/level-on-9.png" class="img-on">大屏演示</li>
+						</ul>
+					</div>
+				</div>
+				<div class="two-level level-con">
+					<!-- 首页 -->
+					<div class="level-con-warp"></div>
+					<!-- 待办事项 -->
+					<!-- <div class="level-con-warp">
+						<ul>
+							<li data-three="jszlsb">建设资料上报办理</li>
+							<li data-three="dzxzlsb">大中修资料上报办理</li>
+						</ul>
+					</div> -->
+					<!-- 路产管理 -->
+					<div class="level-con-warp">
+						<ul>
+							<li data-three="0"data-url = "路产管理/路线管理/路线管理.html">路线管理</li>
+							<li data-three="0"data-url = "路产管理/桥梁管理/桥梁管理.html">桥梁管理</li>
+							<li data-three="0"data-url = "路产管理/隧道管理/隧道管理.html">隧道管理</li>
+							<li data-three="0"data-url = "路产管理/涵洞管理/涵洞管理.html">涵洞管理</li>
+							<li data-three="0"data-url = "路产管理/渡口管理/渡口管理.html">渡口管理</li>
+							<li data-three="0"data-url = "路产管理/冶超站管理/冶超站管理.html">冶超站管理</li>
+							<li data-three="0"data-url = "路产管理/交叉口管理/交叉口管理.html">交叉口管理</li>
+							<li data-three="0"data-url = "路产管理/标识牌管理/标识牌管理.html">标识牌管理</li>
+							<!--<li data-three="0"data-url = "路产管理/客运站管理/客运站管理.html">客运站管理</li>-->
+							<li data-three="0"data-url = "路产管理/建制村管理/建制村管理.html">建制村管理</li>
+							<li data-three="0"data-url = "路产管理/加油站管理/加油站管理.html">加油站管理</li>
+							<!--<li data-three="0"data-url = "路产管理/公交站管理/公交站管理.html">公交站管理</li>-->
+						</ul>
+					</div>
+					<!-- 建设工程 -->
+					<div class="level-con-warp">
+						<ul>
+							<!--<li data-three="jhgl"data-url = "建设工程/计划管理/计划管理列表.html">计划管理</li>-->
+							<li data-three="jhgl">计划管理</li>
+							<li data-three="xmgl">项目管理</li>
+						</ul>
+					</div>
+					<!-- 养护工程 -->
+					<div class="level-con-warp">
+						<ul>
+							<li data-three="0"data-url = "日常养护.html">日常养护</li>
+							<li data-three="0"data-url = "应急抢险.html">应急抢险</li>
+							<li data-three="rcxc">巡查监管</li>
+							<li data-three="dzxgl">大中修管理</li>
+							<li data-three="0"data-url = "养护工程/小修保养管理/小修保养管理.html">小修保养管理</li>
+							<li data-three="0"data-url = "养护工程/定期检测管理/定期检测管理.html">定期检测管理</li>
+							<li data-three="yhgchztj">汇总统计</li>
+						</ul>
+					</div>
+					<div class="level-con-warp"></div>
+					<div class="level-con-warp"></div>
+					<!-- 系统设置 -->
+					<div class="level-con-warp">
+						<ul>
+							<li data-three="0"data-url = "系统设置/用户管理/用户管理.html">用户管理</li>
+							<li data-three="0"data-url = "系统设置/角色管理/角色管理.html">角色管理</li>
+							<li data-three="0"data-url = "系统设置/单位管理/单位管理.html">单位管理</li>
+						</ul>
+					</div>
+				</div>
+				<div class="three-level level-con">
+					<!-- 待办事项-建设资料上报办理 -->
+					<!-- <div class="level-con-warp" id="jszlsb">
+						<div class="three-level-warp">
+							<div class="l">
+								<div class="l-header">道路工程</div>
+								<ul>
+									<li data-url="待办事项/待办事项/道路工程项目资料.html">道路工程项目资料</li>
+								</ul>
+							</div>
+							<div class="l">
+								<div class="l-header">桥梁建设</div>
+								<ul>
+									<li  data-url="待办事项/待办事项/桥梁项目资料.html">桥梁工程项目资料</li>
+								</ul>
+							</div>
+							<div class="l">
+								<div class="l-header">生命安全防护</div>
+								<ul>
+									<li  data-url="待办事项/待办事项/生命安全防护工程项目资料.html">生命安全防护工程项目资料</li>
+								</ul>
+							</div>
+						</div>
+					</div> -->
+					<!-- 待办事项-大中修资料上报办理 -->
+					<!-- <div class="level-con-warp" id="dzxzlsb">
+						<div class="three-level-warp">
+							<div class="l">
+								<div class="l-header">大中修桥梁</div>
+								<ul>
+									<li data-url="待办事项/待办事项/大中修-桥梁(桥梁工程项目资料).html">大中修桥梁资料</li>
+								</ul>
+							</div>
+							<div class="l">
+								<div class="l-header">大中修道路</div>
+								<ul>
+									<li data-url="待办事项/待办事项/大中修-道路(道路工程项目资料).html">大中修道路资料</li>
+								</ul>
+							</div>
+						</div>
+					</div> -->
+					
+					
+					<!-- 建设管理-项目管理 -->
+					<div class="level-con-warp" id="jhgl">
+						<div class="three-level-warp">
+							<div class="l">
+								<div class="l-header">计划编制</div>
+								<ul>
+									<li data-url="建设工程/计划管理/项目编制列表.html">项目编制</li>
+								</ul>
+							</div>
+							<div class="l">
+								<div class="l-header">报送审批</div>
+								<ul>
+									<li data-url="建设工程/计划管理/报送审批-区局.html">区级=》上报建设计划项目</li>
+									<li data-url="建设工程/计划管理/地市-审批建设计划项目.html">地市=》审批建设计划项目</li>
+								</ul>
+							</div>
+							<div class="l">
+								<div class="l-header">计划查询</div>
+								<ul>
+									<li data-url="建设工程/计划管理/道路项目查询列表.html">道路项目查询</li>
+									<li data-url="建设工程/计划管理/桥梁项目查询列表.html">桥梁项目查询</li>
+									<li data-url="建设工程/计划管理/生命安全防护查询列表.html">生命安全防护查询</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					
+					
+					<!-- 建设管理-项目管理 -->
+					<div class="level-con-warp" id="xmgl">
+						<div class="three-level-warp">
+							<div class="l">
+								<div class="l-header">项目信息管理</div>
+								<ul>
+									<li data-url="建设工程/项目管理/项目信息管理-道路工程项目.html">道路工程项目</li>
+									<li data-url="建设工程/项目管理/项目信息管理-桥梁工程项目.html">桥梁建设项目</li>
+									<li data-url="建设工程/项目管理/项目信息管理-生命安全防护.html">生命安全防护工程项目</li>
+								</ul>
+							</div>
+							<div class="l">
+								<div class="l-header">项目进度管理</div>
+								<ul>
+									<li data-url="建设工程/项目管理/项目执行管理-道路审核.html">道路工程项目进度</li>
+									<li data-url="建设工程/项目管理/项目执行管理-桥梁审核.html">桥梁建设项目进度</li>
+									<li data-url="建设工程/项目管理/项目执行管理-生命安全防护工程审核.html">生命安全防护工程项目进度</li>
+								</ul>
+							</div>
+							<div class="l">
+								<div class="l-header">汇总统计</div>
+								<ul>
+									<li data-url="建设工程/项目管理/汇总统计.html">各类项目数量统计</li>
+									<li data-url="建设工程/项目管理/汇总统计.html">各类项目总投资金额统计</li>
+									<li data-url="建设工程/项目管理/汇总统计.html">道路工程项目</li>
+									<li data-url="建设工程/项目管理/汇总统计.html">桥梁建设项目</li>
+									<li data-url="建设工程/项目管理/汇总统计.html">生命安全防护工程</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- 养护管理-日常巡查 -->
+					<div class="level-con-warp" id="rcxc">
+						<div class="three-level-warp">
+							<div class="l">
+								<div class="l-header">巡查计划</div>
+								<ul>
+									<li data-url="养护工程/日常巡查/巡查计划.html">巡查计划</li>
+								</ul>
+							</div>
+							<div class="l">
+								<div class="l-header">巡查报告</div>
+								<ul>
+									<li data-url="养护工程/日常巡查/巡查报告.html">巡查报告</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- 养护管理-大中修管理 -->
+					<div class="level-con-warp" id="dzxgl">
+						<div class="three-level-warp">
+							<div class="l">
+								<div class="l-header">大中修计划</div>
+								<ul>
+									<li data-url="养护工程/大中修管理/大中修计划管理.html">大中修计划管理</li>
+								</ul>
+							</div>
+							<div class="l">
+								<div class="l-header">大中修计划</div>
+								<ul>
+									<li data-url="养护工程/大中修管理/大中修计划上报.html">大中修计划上报</li>
+								</ul>
+							</div>
+							<div class="l">
+								<div class="l-header">大中修工程管理</div>
+								<ul>
+									<li  data-url="养护工程/大中修管理/大中修工程管理-道路.html">道路工程</li>
+									<li  data-url="养护工程/大中修管理/大中修工程管理-桥梁.html">桥梁工程</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- 养护管理-汇总统计 -->
+					<div class="level-con-warp" id="yhgchztj">
+						<div class="three-level-warp">
+							<div class="l">
+								<div class="l-header">汇总统计</div>
+								<ul>
+									<li data-url="养护工程/汇总统计/汇总统计.html">汇总统计</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="page-con">
+				<!-- tab导航 -->
+				<div class="breadcrumb-nav"id="breadcrumb-nav">
+					<div class="tab-warp l">
+						<div class="left-btn tab-btn"></div>
+						<div class="right-btn tab-btn"></div>
+						<div class="home-tab">首页</div>
+						<div class="tabs-list">
+							<ul>
+								<!-- <li class="on"data-url = "123" ><p>1道路工11111程项目资料</p><img src="../images/closetab.png" alt=""></li> -->
+							</ul>
+						</div>
+					</div>
+					<div class="right r">
+						<div class="l close-btn">
+							关闭操作
+							<div class="close-btn-warp">
+								<ul>
+									<li>定位当前选项卡</li>
+									<li>关闭全部选项卡</li>
+									<li>关闭其他选项卡</li>
+								</ul>
+							</div>
+						</div>
+						<div class="l exit-btn">退出</div>
+					</div>
+				</div>
+				<div class="nav-body">
+					<iframe  class="pageIframe" src="系统设置-new/9.1用户管理/1-0用户管理.html" width="100%" height="100%"iframeborder="no"></iframe>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/rural-roads.js"></script>
+		<script type="text/javascript" src="../layui/layui.js"></script>
+	</body>
+</html>
+<script type="text/javascript">
+	
+	//退出
+	$(".exit-btn,.tuichu").click(function(){
+		window.location.replace("登录.html");
+	});
+	
+	var myVideo=document.getElementById("video");
+	$("#dp").click(function(){
+		fullScreen();
+		setTimeout(function(){
+			$("#dp-layer").stop().animate({
+				top:0
+			},500);
+		},300);
+		myVideo.load()
+		myVideo.play();
+		calculatePx();
+	});
+	$(".tabs-btn div").click(function(){
+		var index = $(this).index();
+		if(index<2){
+			$(this).addClass("on").siblings().removeClass("on");
+			$("#dp-layer ul").stop().animate({
+				top:-$("#dp-layer ul").height()*index
+			},300);
+		}
+		calculatePx();
+	});
+	$(".close").click(function(){
+		$("#dp-layer").stop().animate({
+			top:"-100%"
+		},500,function(){
+			exitFullscreen();
+		});
+		myVideo.pause();
+		calculatePx();
+	});
+	
+	$("#dbsx").click(function(){
+		$("iframe").attr("src","待办事项/待办事项/道路工程项目资料.html");
+	});
+	
+	function fullScreen() {
+		var elem = document.body;
+		if (elem.webkitRequestFullScreen) {
+			elem.webkitRequestFullScreen();
+		} else if (elem.mozRequestFullScreen) {
+			elem.mozRequestFullScreen();
+		} else if (elem.requestFullScreen) {
+			elem.requestFullscreen();
+		} else {
+			notice.notice_show("浏览器不支持全屏API或已被禁用", null, null, null, true, true);
+		}
+	}
+	function exitFullscreen(){
+		calculatePx();
+		var elem=document;
+		if(elem.webkitCancelFullScreen){
+			elem.webkitCancelFullScreen();    
+		}else if(elem.mozCancelFullScreen){
+			elem.mozCancelFullScreen();
+		}else if(elem.cancelFullScreen){
+			elem.cancelFullScreen();
+		}else if(elem.exitFullscreen){
+			elem.exitFullscreen();
+		}else{
+			//浏览器不支持全屏API或已被禁用
+		}
+	}
+	function getQueryString(name) { 
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	    var r = window.location.search.substr(1).match(reg);  //获取url中"?"符后的字符串并正则匹配            
+	    var context = "";             
+	    if (r != null)
+	        context = r[2];             
+		reg = null;             
+		r = null; 
+	    return context == null || context == "" || context == "undefined" ? "" : context;  
+	} 
+	layui.use(['form','colorpicker'], function(){
+		if(getQueryString("url")){
+			$("iframe").attr("src",decodeURI(getQueryString("url")))
+		}else{
+			
+		}
+		 layui.colorpicker.render({
+			elem: '#setColor',
+			// colors: ['#ff8c00','#00ced1','#9d8a0e'],
+			predefine: true,
+			done: function(color){ //颜色改变的回调
+			  $(".page-nav .one-level,.breadcrumb-nav,.two-level,.three-level").css("background",color);
+			}
+		  });
+	});
+</script>

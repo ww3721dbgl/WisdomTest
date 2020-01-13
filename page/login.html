@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>"四好农村路"智慧管理云平台</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/rural-roads.css">
+		<link rel="stylesheet" href="../layui/css/layui.css">
+	</head>
+	<body class="login-page">
+		<img src="../images/loginbg2.png">
+		<div class="login-page-warp">
+			<div class="login-page-warp-header"></div>
+			<div class="login-page-warp-content layui-form">
+				<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md12">
+					<label class="layui-form-label">账号</label>
+					<div class="layui-input-block">
+					  <input type="text" class="layui-input account"value=""autocomplete="off">
+					</div>
+				</div>
+				<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md12">
+					<label class="layui-form-label">密码</label>
+					<div class="layui-input-block">
+					  <input type="password" class="layui-input pwd"value=""autocomplete="off">
+					</div>
+				</div>
+				<button class="layui-btn">登录</button>
+			</div>
+		</div>
+		<div class="error-msg"></div>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/rural-roads.js"></script>
+		<script type="text/javascript" src="../layui/layui.js"></script>
+	</body>
+</html>
+<script type="text/javascript">
+	$(".layui-btn").click(function(){
+		if($(".account").val()=="admin" && $(".pwd").val()=="admin"){
+			window.location.replace("module.html");
+		}else{
+			alert("用户名或密码错误！")
+		}
+	});
+</script>

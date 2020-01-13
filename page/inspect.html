@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>"四好农村路"智慧管理云平台</title>
+	<meta name="viewport"
+		content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="stylesheet" href="../css/common.css" />
+	<link rel="stylesheet" href="../css/rural-roads.css">
+	<link rel="stylesheet" href=" ../layui/css/layui.css">
+	<link rel="stylesheet" href=" ../layui/layer/mobile/need/layer.css">
+	<link rel="stylesheet" type="text/css" href="../css/component.css" />
+	<style type="text/css">
+		.map-content-warp {
+			position: relative;
+		}
+
+		.map-content-warp,
+		#baiduMap {
+			width: 100%;
+			height: 100%;
+		}
+
+		.check-map-warp {
+			position: absolute;
+			width: 700px;
+			height: 100%;
+			left: 0;
+			background: rgba(255, 255, 255, 0.8);
+			z-index: 9;
+		}
+
+		.check-map-warp-con {
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+
+		.check-map-warp-header {
+			height: 56px;
+			box-shadow: 0px 2px 4px #dcdcdc;
+		}
+
+		.check-map-warp-content {
+			overflow: auto;
+			width: 720px;
+		}
+
+		.user-warp {
+			box-shadow: 0px 2px 4px #ececec;
+			padding: 0 40px 0 20px;
+		}
+
+		.user-warp-header {
+			height: 36px;
+			line-height: 36px;
+			color: #49a4f7;
+		}
+
+		.user-warp ul {
+			display: table;
+			width: 100%;
+		}
+
+		.user-warp ul li {
+			float: left;
+			width: 33.33%;
+			height: 66px;
+			margin-bottom: 23px;
+			font-size: 12px;
+			color: #636262;
+			cursor: pointer;
+		}
+
+		.user-warp ul li .li-con {
+			height: 100%;
+			width: 94%;
+			padding-left: 5px;
+			border: 1px solid rgba(0, 0, 0, 0);
+		}
+
+		.user-warp ul li .li-con.check {
+			background: #fff;
+			box-shadow: 0px 0px 5px #d3d5d6;
+		}
+
+		.user-warp .user-img {
+			width: 66px;
+			height: 100%;
+			border-radius: 50%;
+			background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA4RpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo3MmRhNWNkYS0wYjlhLTVjNDAtYmZmYi1iMTBlODM0NmYwNjMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RDUwMTI5RkI0QzdGMTFFOTgyMjlFNTdDMzNDNDQ5REUiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RDUwMTI5RkE0QzdGMTFFOTgyMjlFNTdDMzNDNDQ5REUiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6ZjhmMThmZjQtY2IyNS1lNjRmLWIzMGUtMTRlY2I1NzMyMmY2IiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6MjEzNmY4NTEtNGM2NS0xMWU5LWIyZTUt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");
+			background-size: 100% 100%;
+			float: left;
+			margin-right: 8px;
+			font-size: 12px;
+			color: #fff;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.user-warp .user-img span {
+			position: absolute;
+			width: 100%;
+			left: 0;
+			bottom: 0;
+			height: 22px;
+			line-height: 20px;
+			text-align: center;
+			background: #68d5ca;
+		}
+
+		.user-warp .li-con.on .user-img span {
+			background: #f58686;
+		}
+
+		.user-warp .name {
+			padding: 15px 0 5px 0;
+		}
+
+		.patrol-route-warp-header {
+			height: 55px;
+			line-height: 55px;
+			color: #49a4f7;
+		}
+
+		.patrol-route-warp-header .label-text {
+			float: left;
+			margin: 0 30px 0 20px;
+		}
+
+		.patrol-route-warp-header .text {
+			float: left;
+			color: #333;
+			margin-right: 10px;
+		}
+
+		#date {
+			width: 286px;
+			height: 33px;
+			line-height: 33px;
+			margin-top: 11px;
+			border-radius: 5px;
+			float: left;
+		}
+
+		.select-div {
+			float: left;
+			width: 180px;
+			margin-top: 10px;
+			margin-right: 10px;
+		}
+
+		.span {
+			height: 100%;
+			float: left;
+			line-height: 55px;
+			padding: 0 10px 0 20px;
+		}
+
+		.check-map-btn {
+			position: absolute;
+			width: 27px;
+			height: 151px;
+			background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAACXCAYAAADkpiD2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA4RpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo3MmRhNWNkYS0wYjlhLTVjNDAtYmZmYi1iMTBlODM0NmYwNjMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTlFRjA5OEI0QzgxMTFFOUE4OURBOEVFODM2NjAzNDIiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTlFRjA5OEE0QzgxMTFFOUE4OURBOEVFODM2NjAzNDIiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6M2I2YTI5ODctNTdjYS00YzQ0LThkOTktM2I2ZGQzMWFmZDE1IiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6MjEzNmY4NTEtNGM2NS0xMWU5LWIyZTUtZGFjNzJlZDgyNjg2Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+lcXxhAAABJRJREFUeNrsm29sE3UYx3/X611vwoZbmFqR0mSD2KUDC1udk+DARI0QXvCCEOWNCYqJIqIJQtRlZsOxgQlKjBGJxqgLGhMg/nlBsqECg/3BzlFxsqHMZasM3Zjb3LXX6/k87a9vSDbWsefe+HuSb++aNP3kfvc83+dJfz3p6sePPf/sez8dOnouEh/7fF2CEYZ0vWHtt3Bs7+ofrfN7csYpYQ58kR3S8qKF2XVwmk8OS14ik7xw2A8qJIfxyAPVgh6wA4ahgXaDNtgBS60qY0+BtoGc1LB0PAKqAs21A4axDLQP5LYDhnEPz9QiO2AYOaAaUIUdMAwF9BJoE08iUlg6U58E7eBwUlg6VvNlzbEDxnjC7OcJRA5jvCT28RIhhzFe9FXcBMhhjNvaNm5zEjUsHRu4kbvsgDHeot4E5doBw1gCegvktQPG+JhRD1phBwwjC1QJWmcHLH1RW+2CMbuWUcAETMAETMAETMAETMAETMAETMAETMD+lzB5flF21qMHyx3zvLeRwmR3Sa5r1RsIynOVvrB0ss/d8taH07Mq31W6vYTJqpz4p++6frrmPAlMKXzcrQaeCTBJdiSGuv/Sf6hst2Jj8VmHKb6NHtW/uZhJkmQOXojop6pCzIxNuY05I5h635YCZcl6H/46aw609OlnajuZZVo3XfLMMBJzBbf7nN6HC/Bd/ErT5WjrgV8Ys6Z3f6fPkSWtfFexvKDMg19udH/VFQt90JNRMk0vt1WHtrIyIN+5zM0sy4r93BA2Lh7pzThzb3pByhxZe6i6xJG3OB/uSyIWOtxh9Hw9MKMymRKk5SlaRU3QkbMwlyUMM9p2sD3ee/LajGtyUtCcu1xZFdVlcMy24roRPVvfakbahkm8USt/JYAgPDfCn4ZvFTQlTG+uC1njV0eTBezf7Ef/I4NZ439GJxp3NoPfDUtOTdHKd5c5F1Xkk8CSQH3I0Jt2tqDvodG6gi+WKoVr7ybrZ2isEyd3taL/oeGqga0BpWjTIrrmCQarf//6j2Z/yx9ovKr/iWI18HQhDSx5iaaln9nTGb/SeBk9Ulm8/l5XcIcvk03dDDu1xdB4jUvHu/Dc6V1ToD346lL0TbIZJNZxuCcWbriAPikvuN8DdrYc/ZNs4EEjjoXeD6FfyncUu7NW7w1K6lwn2XRl9HwzAMvaBglkglHP19bUl6Gfkk1X8d7vrunNtefQP8Gwb9dWvraCdJQzI+3D0VNVZxMjvUPRtnc6JzV3/CuU7JCSg4okTbO/i1lfwARMwARMwARMwARMwARMwARMwARMwARsynDaxMFtrkN2wEZAe0FhatjvLPWEySD1Mp4GvQ3SKe8Z/tj2GegLdsPG2mzDJljq6YMW6myMgKpBfdSp38FSjzeMUtfZcdCHoARlURugd0GN1A4yxFLPvfxKbVeXQHs4kNQbm/jSxSiNGG/+R6Bj1K4/xtM6RN1i+nihRqj7WSu3nn8pmyea55egTxib3R2MG2FR0AHeHujGAotZgxKTsNH9RjrwmAnrYv/f+suUoCQsGk+cqD/aXel7rnGEehj5T4ABAPOhaC69ZC3PAAAAAElFTkSuQmCC");
+			background-size: 100% 100%;
+			right: -27px;
+			top: 50%;
+			margin-top: -75px;
+			cursor: pointer;
+		}
+
+		.check-map-btn.on {
+			background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAACXCAYAAADkpiD2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA4RpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo3MmRhNWNkYS0wYjlhLTVjNDAtYmZmYi1iMTBlODM0NmYwNjMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OThCRTg4OUE0QzgyMTFFOUE0QjVBMDc2RjI0NkZFRTUiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OThCRTg4OTk0QzgyMTFFOUE0QjVBMDc2RjI0NkZFRTUiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6M2I2YTI5ODctNTdjYS00YzQ0LThkOTktM2I2ZGQzMWFmZDE1IiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6MjEzNmY4NTEtNGM2NS0xMWU5LWIyZTUtZGFjNzJlZDgyNjg2Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+MJelWAAABItJREFUeNrsm19sFFUUxu+d2dmdCq1uQ9UVKU0oxK0t0NpCXbUpaaIEMCY8GCK+mGgkUfybqBgkixZLW4yiMSZgNMbQqCEBIfhg0oKhQrslbLUrVFqU0rQbihZqW5nd2Z3xnN27LySFbumZB3NP8nUnadNf58x3vnsz0+GXvlr94qbPftlzoCOamPh2ncUIi19tWfsDfJ7qHRpvLC3Mm6SEKfhFVXhFyYLcRjgsIIelTpHxIvjYBSomh4nKBzWAHnQChqWDtoDWOwFLd5WxZ0CbQS5qWKYeBQVBc52AYS0DNYN8TsCw7hVOLXEChpUHqgfVOgHD0kCvgTYIE5HCMk7dCHpVwElhmVol2prnBIwJw+wSBiKHMTESzWJEyGFMDH1QhAA5jIlY2yxijlPDMrVeBLnHCRgTS9T7IK8TMKwloA9ARU7AmNhmNIEecAKGlQPaBlrnBCxzUs87BWNOtVHCJEzCJEzCJEzCJEzCJEzCJEzCJEzC/hcw5fai23Ie+ySgzivJJYd5ql4qA2C+p2Z7QPVVeklhRnv9aeufwavcpWt6YEu1a2FtARnMNkZNo+2NDmu07y+mulXPileqtOI1PjKD2PGJxLWjb4WSIz1RxlXFXb6pQvM/WUjnxmTcMn5653RyuPMi45y7y55e6l7+7CI669tJ22jf8WviQtt5vP2rLXnCD231Z/vQIos5s1ks9OFZs+9QLx67iuoW6Q+9vRTay8mGOh7e2x+PtPQw27bV+dWFes32CjCQQpYg5plvBuLde8PQXku9a5kvZ9XOKq7NUcniyuw7PBwL7e5ilplU8hcX6HXN1Vz3amTZmBg4etn4uaHDThimkrfAm1PXFOBz7vaQBXEy2nXFjOyL4DGAcvXAm+VkMNVX5dVKN5am/Dp5adw40Rie6mdv6bEw5iUEdiVTNBVy9IpxbGsIY27WYVrx2nvc5c8txxjD/ISU6bLNyeQN/7gZgUo2LHTf/1QpxhfmpnE8GMZYu2knsgXB2RRrix+/D6MqOdR50TjR0INxNq22Tx/DmWfFy36MqZTtL7Sehzk7i9E17Ws8PY7KYQEtU+evLMRfbp471Bvv/rw/a0Pd3NtuRX8kWK7eWebDPIz/1hLBuJqRe294Qu65Lr3m3UqIo3mYgxDC3Wb/keEZj8qUID1f02vrV0IM3YH5F+v6+FRi4NjlW5rLqb6hP7y1AkGYe7GTTSGMJbIND5xJjzU2MBo7Hjw5G6BUt/BfoVSFpwaS8yx8LPf6EiZhEiZhEiZhEiZhEiZhEiZhEiZhEiZhU5bLIU4CtMcJ2BhoJyhCDfuTpd8wGaFuYztoN8igvGZ4s20f6Dt23Q3k2YZdY+m3Dzqp3RgFvQcapLZ+N0u/3jBOPWffg74AWZRDjQ94PgW1UifIKEu/9/I7dVydA+0QQNJsbBOti1MGMV78L0EHqVN/Qtg6TL3EDIpBjVKvZyERPf9SLp4YnvtBXzM2u08wrofFQB+J5YFuW2Aze4QzjgvdH6QbnqRlnxn623idEpSCxRLWj00H+rb5X2gdo96M/CfAAAM6aF5yKRXWAAAAAElFTkSuQmCC");
+			background-size: 100% 100%;
+		}
+
+		.tabelBox li {
+			display: none;
+
+		}
+
+		.time-choose {
+			position: absolute;
+			top: 30px;
+			right: 100px;
+			width: 450px;
+			display: none;
+		}
+
+		.choose-box {
+			width: 100%;
+			height: 45px;
+			box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.2);
+			opacity: 0.88;
+			border-radius: 5px;
+			background-color: #fff;
+		}
+
+		.time-img {
+			float: left;
+			margin: 5px 15px;
+		}
+
+		#date2 {
+			float: left;
+		}
+
+		.layui-input.layui-date-input {
+			background: url(../images/icon-4.png) no-repeat 100% center;
+			background-color: #fff;
+			width: 385px;
+			height: 45px;
+			border: none
+		}
+
+		.levels-box {
+			margin-top: 10px;
+			height: 35px;
+			padding: 5px 0;
+			box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.1);
+			opacity: 0.88;
+			border-radius: 5px;
+			background-color: #fff;
+		}
+
+		.levels-list {
+			width: 111px;
+			border-right: 1px solid#E6E6E6;
+			height: 35px;
+			float: left
+		}
+
+		.levels-box .levels-list:nth-child(4) {
+			border: none
+		}
+
+		.level-detail {
+			float: left;
+			width: 27px;
+			height: 12px;
+
+			border-radius: 2px;
+			margin: 12px 5px 12px;
+
+		}
+
+		.level-name {
+			font-size: 16px;
+			color: #333;
+			line-height: 35px;
+			/* margin-left: 5px; */
+		}
+
+		.detail-green {
+			background-color: #44D268;
+		}
+
+		.detail-yellow {
+			background-color: #F3BA58;
+		}
+
+		.detail-red {
+			background-color: #FF0000;
+		}
+
+		.detail-gray {
+			background-color: #999999;
+		}
+
+		.layui-laypage-default {
+			float: right
+		}
+	</style>
+</head>
+
+<body class="table-page">
+	<div class="header">
+		<div class="name">"四好农村路"智慧管理云平台</div>
+		<img src="../images/tianqi.png" class="tianqi" style="position:absolute;top:15px;right:420px;">
+		<div class="adminer" style="right:230px;">
+			<div class="img"><img src="../images/userinfo.jpg"></div>
+			<div class="adminer-type">超级管理员</div>
+			<div class="adminer-con">
+				<ul>
+					<li>修改头像</li>
+					<li>个人资料</li>
+					<li>修改密码</li>
+					<li>信箱</li>
+					<li class="tuichu">安全退出</li>
+				</ul>
+			</div>
+		</div>
+		<div class="set" style="right:110px;">
+			个性设置
+		</div>
+		<div id="setColor"></div>
+		<div style="" id="dbsx">待办事项<i>3</i></div>
+	</div>
+	<div class="page-warp">
+		<!--左侧导航-->
+		<div class="page-nav">
+			<div class="page-nav-warp">
+				<ul class="layui-nav layui-nav-tree" lay-filter="test" lay-shrink="all">
+					<li class="layui-nav-item layui-nav-itemed"><a href="javascript:;"><img src="../images/level-1.png"
+								class="img">首页</a></li>
+					<li class="layui-nav-item">
+						<a href="javascript:;"><img src="../images/level-3.png" class="img">路产管理</a>
+						<dl class="layui-nav-child">
+							<dd><a href="javascript:;">选项2</a></dd>
+							<dd><a href="javascript:;">选项2</a></dd>
+							<dd>
+								<a href="javascript:;">选项1</a>
+								<dl class="layui-nav-child">
+									<dd><a href="javascript:;">选项1-1</a></dd>
+									<dd><a href="javascript:;">选项1-2</a></dd>
+								</dl>
+							</dd>
+							<dd>
+								<a href="javascript:;">选项2</a>
+								<dl class="layui-nav-child">
+									<dd><a href="javascript:;">选项2-1</a></dd>
+									<dd><a href="javascript:;">选项2-2</a></dd>
+								</dl>
+							</dd>
+							<dd><a href="javascript:;">选项2</a></dd>
+							<dd><a href="javascript:;">跳转</a></dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item">
+						<a href="javascript:;"><img src="../images/level-4.png" class="img">建设管理</a>
+						<dl class="layui-nav-child">
+							<dd><a href="javascript:;">移动模块</a></dd>
+							<dd><a href="javascript:;">后台模版</a></dd>
+							<dd><a href="javascript:;">电商平台</a></dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item">
+						<a href="javascript:;"><img src="../images/level-5.png" class="img">养护管理</a>
+						<dl class="layui-nav-child">
+							<dd><a href="javascript:;">移动模块</a></dd>
+							<dd><a href="javascript:;">后台模版</a></dd>
+							<dd><a href="javascript:;">电商平台</a></dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item">
+						<a href="javascript:;"><img src="../images/level-7.png" class="img">基础信息</a>
+						<dl class="layui-nav-child">
+							<dd><a href="javascript:;">移动模块</a></dd>
+							<dd><a href="javascript:;">后台模版</a></dd>
+							<dd><a href="javascript:;">电商平台</a></dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item">
+						<a href="javascript:;"><img src="../images/level-8.png" class="img">消息管理</a>
+						<dl class="layui-nav-child">
+							<dd><a href="javascript:;">移动模块</a></dd>
+							<dd><a href="javascript:;">后台模版</a></dd>
+							<dd><a href="javascript:;">电商平台</a></dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item">
+						<a href="javascript:;"><img src="../images/level-6.png" class="img">系统设置</a>
+						<dl class="layui-nav-child">
+							<dd><a href="javascript:;">移动模块</a></dd>
+							<dd><a href="javascript:;">后台模版</a></dd>
+							<dd><a href="javascript:;">电商平台</a></dd>
+						</dl>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="page-con">
+			<!-- tab导航 -->
+			<div class="breadcrumb-nav" id="breadcrumb-nav">
+				<div class="breadcrumb-nav-list l">
+					首页 > 路产管理 > 路产管理
+				</div>
+			</div>
+			<div class="nav-body">
+				<div class="iframe-content">
+					<div class="map-content-warp">
+						<div class="check-map-warp">
+							<div class="check-map-btn"></div>
+							<div class="check-map-warp-con">
+								<div class="check-map-warp-header layui-form">
+									<div class="span">单位组织</div>
+									<div class="select-div">
+										<select name="modules" lay-verify="required" lay-search="">
+											<option value="">直接选择或搜索选择</option>
+											<option value="1">layer</option>
+											<option value="2">form</option>
+											<option value="3">layim</option>
+											<option value="4">element</option>
+											<option value="5">laytpl</option>
+											<option value="6">upload</option>
+										</select>
+									</div>
+									<div class="select-div">
+										<select name="modules" lay-verify="required" lay-search="">
+											<option value="">直接选择或搜索选择</option>
+											<option value="1">layer</option>
+											<option value="2">form</option>
+											<option value="3">layim</option>
+											<option value="4">element</option>
+											<option value="5">laytpl</option>
+											<option value="6">upload</option>
+										</select>
+									</div>
+								</div>
+								<div class="check-map-warp-content">
+									<div class="user-warp">
+										<div class="user-warp-header">养护人员</div>
+										<ul>
+											<li>
+												<div class="li-con check">
+													<div class="user-img"><span>徐志刚</span></div>
+													<p class="name">角色：养护人员</p>
+													<p>电话：13770925429</p>
+												</div>
+											</li>
+											<li>
+												<div class="li-con">
+													<div class="user-img"><span>徐志刚</span></div>
+													<p class="name">角色：养护人员</p>
+													<p>电话：13770925429</p>
+												</div>
+											</li>
+											<li>
+												<div class="li-con">
+													<div class="user-img"><span>徐志刚</span></div>
+													<p class="name">角色：养护人员</p>
+													<p>电话：13770925429</p>
+												</div>
+											</li>
+											<li>
+												<div class="li-con on">
+													<div class="user-img"><span>徐志刚</span></div>
+													<p class="name">角色：养护人员</p>
+													<p>电话：13770925429</p>
+												</div>
+											</li>
+											<li>
+												<div class="li-con on">
+													<div class="user-img"><span>徐志刚</span></div>
+													<p class="name">角色：养护人员</p>
+													<p>电话：13770925429</p>
+												</div>
+											</li>
+											<li>
+												<div class="li-con on">
+													<div class="user-img"><span>徐志刚</span></div>
+													<p class="name">角色：养护人员</p>
+													<p>电话：13770925429</p>
+												</div>
+											</li>
+											<li>
+												<div class="li-con on">
+													<div class="user-img"><span>徐志刚</span></div>
+													<p class="name">角色：养护人员</p>
+													<p>电话：13770925429</p>
+												</div>
+											</li>
+											<li>
+												<div class="li-con on">
+													<div class="user-img"><span>徐志刚</span></div>
+													<p class="name">角色：养护人员</p>
+													<p>电话：13770925429</p>
+												</div>
+											</li>
+											<li>
+												<div class="li-con on">
+													<div class="user-img"><span>徐志刚</span></div>
+													<p class="name">角色：养护人员</p>
+													<p>电话：13770925429</p>
+												</div>
+											</li>
+										</ul>
+									</div>
+
+									<div class="patrol-route-warp">
+										<div class="patrol-route-warp-header layui-form">
+											<div class="label-text">巡查路线</div>
+											<div class="text">日期</div>
+											<input type="text" class="layui-input layui-date-input" id="date"
+												placeholder="yyyy-MM-dd HH:mm:ss">
+										</div>
+										<!-- <table class="layui-hide" id="test"  lay-even="" lay-skin="nob" ></table>	 -->
+										<ul class="tabelBox">
+											<li style="display:block">
+												<table class="layui-table" lay-skin="nob">
+													<!-- <colgroup>
+														<col width="150">
+														<col width="200">
+														<col>
+													</colgroup> -->
+													<thead>
+														<tr>
+															<th style="width: 80px;text-align: center">序号</th>
+															<th style="text-align: center">路线代码</th>
+															<th style="text-align: center">路线名称</th>
+															<th style="text-align: center">巡查时间</th>
+															<th style="text-align: center">巡查人</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr class="try01">
+															<td>1</td>
+															<td>X253</td>
+															<td>洋兴线</td>
+															<td>2018-11-30</td>
+															<td>张三</td>
+														</tr>
+														<tr class="try01">
+															<td>2</td>
+															<td>X253</td>
+															<td>洋兴线</td>
+															<td>2018-11-30</td>
+															<td>张三</td>
+														</tr>
+														<tr class="try01">
+															<td>2</td>
+															<td>X253</td>
+															<td>洋兴线</td>
+															<td>2018-11-30</td>
+															<td>张三</td>
+														</tr>
+
+													</tbody>
+												</table>
+												<div id="test1" style="margin-right:60px;">
+
+												</div>
+
+											</li>
+											<li>
+												<table class="layui-table" lay-skin="nob">
+													<thead>
+														<tr>
+															<th style="width: 80px;text-align: center">序号</th>
+															<th style="text-align: center">路线代码</th>
+															<th style="text-align: center">路线名称</th>
+															<th style="text-align: center">巡查时间</th>
+															<th style="text-align: center">巡查人</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr class="try02">
+															<td>1</td>
+															<td>X253</td>
+															<td>洋兴线</td>
+															<td>2018-11-30</td>
+															<td>张</td>
+														</tr>
+														<tr class="try02">
+															<td>2</td>
+															<td>X253</td>
+															<td>洋兴线</td>
+															<td>2018-11-30</td>
+															<td>张</td>
+														</tr>
+													</tbody>
+												</table>
+												<div id="test2" style="margin-right:60px;">
+												</div>
+											</li>
+											<li>
+												<table class="layui-table" lay-skin="nob">
+													<!-- <colgroup>
+														<col width="150">
+														<col width="200">
+														<col>
+													</colgroup> -->
+													<thead>
+														<tr>
+															<th style="width: 80px;text-align: center">序号</th>
+															<th style="text-align: center">路线代码</th>
+															<th style="text-align: center">路线名称</th>
+															<th style="text-align: center">巡查时间</th>
+															<th style="text-align: center">巡查人</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr class="try03">
+															<td>1</td>
+															<td>X253</td>
+															<td>洋兴线</td>
+															<td>2018-11-30</td>
+															<td>张</td>
+														</tr>
+														<tr class="try03">
+															<td>2</td>
+															<td>X253</td>
+															<td>洋兴线</td>
+															<td>2018-11-30</td>
+															<td>张</td>
+														</tr>
+													</tbody>
+												</table>
+												<div id="test3" style="margin-right:60px;">
+												</div>
+											</li>
+											<li>
+												<table class="layui-table" lay-skin="nob">
+													<thead>
+														<tr>
+															<th style="width: 80px;text-align: center">序号</th>
+															<th style="text-align: center">路线代码</th>
+															<th style="text-align: center">路线名称</th>
+															<th style="text-align: center">巡查时间</th>
+															<th style="text-align: center">巡查人</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr class="try04">
+															<td>1</td>
+															<td>X253</td>
+															<td>洋兴线</td>
+															<td>2018-11-30</td>
+															<td>张</td>
+														</tr>
+													</tbody>
+												</table>
+												<div id="test4" style="margin-right:60px;">
+												</div>
+											</li>
+											<li>
+												<table class="layui-table" lay-skin="nob">
+
+													<thead>
+														<tr>
+															<th style="width: 80px;text-align: center">序号</th>
+															<th style="text-align: center">路线代码</th>
+															<th style="text-align: center">路线名称</th>
+															<th style="text-align: center">巡查时间</th>
+															<th style="text-align: center">巡查人</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr class="try05">
+															<td>1</td>
+															<td>X253</td>
+															<td>洋兴线</td>
+															<td>2018-11-30</td>
+															<td>张</td>
+														</tr>
+														<tr class="try05">
+															<td>2</td>
+															<td>X253</td>
+															<td>洋兴线</td>
+															<td>2018-11-30</td>
+															<td>张</td>
+														</tr>
+
+
+													</tbody>
+												</table>
+												<div id="test5" style="margin-right:60px;">
+												</div>
+											</li>
+											<li>
+												<table class="layui-table" lay-skin="nob">
+
+													<thead>
+														<tr>
+															<th style="width: 80px;text-align: center">序号</th>
+															<th style="text-align: center">路线代码</th>
+															<th style="text-align: center">路线名称</th>
+															<th style="text-align: center">巡查时间</th>
+															<th style="text-align: center">巡查人</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr class="try06">
+															<td>1</td>
+															<td>X253</td>
+															<td>洋兴线</td>
+															<td>2018-11-30</td>
+															<td>张</td>
+														</tr>
+
+													</tbody>
+												</table>
+												<div id="test6" style="margin-right:60px;">
+												</div>
+											</li>
+											<li>
+												<table class="layui-table" lay-skin="nob">
+
+													<thead>
+														<tr>
+															<th style="width: 80px;text-align: center">序号</th>
+															<th style="text-align: center">路线代码</th>
+															<th style="text-align: center">路线名称</th>
+															<th style="text-align: center">巡查时间</th>
+															<th style="text-align: center">巡查人</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr class="try07">
+															<td>1</td>
+															<td>X253</td>
+															<td>洋兴线</td>
+															<td>2018-11-30</td>
+															<td>张</td>
+														</tr>
+														<tr class="try07">
+															<td>2</td>
+															<td>X253</td>
+															<td>洋兴线</td>
+															<td>2018-11-30</td>
+															<td>张</td>
+														</tr>
+
+													</tbody>
+												</table>
+												<div id="test7" style="margin-right:60px;">
+												</div>
+											</li>
+											<li>
+												<table class="layui-table" lay-skin="nob">
+
+													<thead>
+														<tr>
+															<th style="width: 80px;text-align: center">序号</th>
+															<th style="text-align: center">路线代码</th>
+															<th style="text-align: center">路线名称</th>
+															<th style="text-align: center">巡查时间</th>
+															<th style="text-align: center">巡查人</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr class="try08">
+															<td>1</td>
+															<td>X253</td>
+															<td>洋兴线</td>
+															<td>2018-11-30</td>
+															<td>张</td>
+														</tr>
+														<tr class="try08">
+															<td>2</td>
+															<td>X253</td>
+															<td>洋兴线</td>
+															<td>2018-11-30</td>
+															<td>张</td>
+														</tr>
+
+													</tbody>
+												</table>
+												<div id="test8" style="margin-right:60px;">
+												</div>
+											</li>
+											<li>
+												<table class="layui-table" lay-skin="nob">
+
+													<thead>
+														<tr>
+															<th style="width: 80px;text-align: center">序号</th>
+															<th style="text-align: center">路线代码</th>
+															<th style="text-align: center">路线名称</th>
+															<th style="text-align: center">巡查时间</th>
+															<th style="text-align: center">巡查人</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr class="try09">
+															<td>1</td>
+															<td>X253</td>
+															<td>洋兴线</td>
+															<td>2018-11-30</td>
+															<td>张</td>
+														</tr>
+														<tr class="try09">
+															<td>2</td>
+															<td>X253</td>
+															<td>洋兴线</td>
+															<td>2018-11-30</td>
+															<td>张</td>
+														</tr>
+
+													</tbody>
+												</table>
+												<div id="test9" style="margin-right:60px;">
+												</div>
+											</li>
+
+
+										</ul>
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="baiduMap"></div>
+						<div class="time-choose">
+							<div class="choose-box">
+								<img src="../images/icon-3.png" alt="" class="time-img">
+								<input type="text" class="layui-input layui-date-input" id="date2" placeholder="请选择日期">
+
+							</div>
+							<ul class="levels-box">
+								<li class="levels-list">
+									<p class="level-detail detail-green"></p>
+									<p class="level-name">初级预警</p>
+								</li>
+								<li class="levels-list">
+									<p class="level-detail detail-yellow"></p>
+									<p class="level-name">中级预警</p>
+								</li>
+								<li class="levels-list">
+									<p class="level-detail detail-red"></p>
+									<p class="level-name">高级预警</p>
+								</li>
+								<li class="levels-list">
+									<p class="level-detail detail-gray"></p>
+									<p class="level-name">未巡查</p>
+								</li>
+
+							</ul>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 右边定位 -->
+
+		</div>
+	</div>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/rural-roads.js"></script>
+	<script type="text/javascript" src="../layui/layui.js"></script>
+	<script type="text/javascript" src="../layui/layer/mobile/layer.js"></script>
+	<script type="text/javascript" src=" ../js/utils.js"></script>
+	<script type="text/javascript" src="../js/baidumap.js"></script>
+	<script type="text/javascript" src="../js/ponts.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/library/CurveLine/1.5/src/CurveLine.min.js"></script>
+</body>
+
+</html>
+<script type="text/javascript">
+	layInit(function (layui, $) {
+		//初始化日期控件
+		layui.laydate.render({
+			elem: '#date',
+			type: 'datetime',
+			range: true
+		});
+		layui.laydate.render({
+			elem: '#date2',
+			type: 'datetime',
+			range: true
+		});
+
+		//初始化地图控件
+		var map = new BMap.Map("baiduMap");    // 创建Map实例
+		map.centerAndZoom(new BMap.Point(121.478993,31.99075), 12);  // 初始化地图,设置中心点坐标和地图级别
+		map.enableScrollWheelZoom(true);
+		//动态计算尺寸
+		px();
+		$(window).resize(function () {
+			px();
+		});
+		function px() {
+			$(".check-map-warp-content").height($(".iframe-content").height() - 56);
+			$(".packUP").height($(".iframe-content").height() - 56);
+		}
+		var polyline = new BMap.Polyline([
+			new BMap.Point(116.399, 39.910),
+			new BMap.Point(116.405, 39.920),
+			new BMap.Point(116.423493, 39.907445)
+		], { strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.5 });
+
+		layui.use('laypage', function () {
+			var laypage = layui.laypage;
+
+			//执行一个laypage实例
+			laypage.render({
+				elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
+				, count: 1 //数据总数，从服务端得到
+			});
+			laypage.render({
+				elem: 'test2' //注意，这里的 test1 是 ID，不用加 # 号
+				, count: 1 //数据总数，从服务端得到
+			});
+			laypage.render({
+				elem: 'test3' //注意，这里的 test1 是 ID，不用加 # 号
+				, count: 1 //数据总数，从服务端得到
+			});
+			laypage.render({
+				elem: 'test4' //注意，这里的 test1 是 ID，不用加 # 号
+				, count: 1 //数据总数，从服务端得到
+			});
+			laypage.render({
+				elem: 'test5'
+				, count: 1
+			});
+			laypage.render({
+				elem: 'test6'
+				, count: 1
+			});
+			laypage.render({
+				elem: 'test7'
+				, count: 1
+			});
+
+			laypage.render({
+				elem: 'test8'
+				, count: 1
+			});
+			laypage.render({
+				elem: 'test9'
+				, count: 1
+			});
+
+		});
+		//养护人员点击事件
+		$(".user-warp ul li .li-con").click(function () {
+			map.clearOverlays();
+			var i = $(this).parent().index();
+			$(this).addClass("check").parent().siblings().find(".li-con").removeClass("check");
+			$(".tabelBox li").eq(i).show().siblings().hide();
+		});
+
+		// function showTips(e){
+		// 		console.log('11',e)
+		// }
+
+		// map.addEventListener("mousemove",showTips)
+
+		//收起-展开操作栏
+		$(".check-map-btn").click(function () {
+
+			map.clearOverlays();//收起之后清除点
+			if (!$(this).hasClass("on")) {
+				$(".check-map-warp").stop().animate({
+					left: "-700px",
+				}, 200);
+				$(this).addClass("on");
+				$('.time-choose').show();
+				// colorLine(cooneArr,cotwoArr,cothreeArr,cofouthArr);
+				colorLine(ctooneArr,ctotwoArr,ctothreeArr,ctofoutthArr);
+			//  colorLine(throneArr,thrtwoArr,thrthreeArr,thrfoutthAr);
+			//  colorLine(foroneArr,fortwoArr,forthree,forfoutArr);
+				
+			} else {
+				$(".check-map-warp").stop().animate({
+					left: 0
+				}, 200);
+				$(this).removeClass("on");
+				$('.time-choose').hide()
+			}
+		});
+		function drawLine(forArr) {
+			var pointArr=forArr
+			map.centerAndZoom(new BMap.Point(121.519094,32.027553), 20);
+			var points = [];
+			pointArr.map(function(item,index){
+				points[index] = new BMap.Point(item[0],item[1]);
+			});
+			var curve = new BMap.Polyline(points, {strokeColor: "blue", strokeWeight: 3, strokeOpacity:1}); 
+			map.addOverlay(curve); //添加到地图
+			map.centerAndZoom(new BMap.Point(pointArr[0][0],pointArr[0][1]), 15);
+			var opts= {
+				width: 100,     // 信息窗口宽度
+				height: 100,     // 信息窗口高度
+				title: "初级预警",
+				message : "标段信息"// 信息窗口标题
+			};
+			var infoWindow = new BMap.InfoWindow("",opts);  // 创建信息窗口对象 
+	 		curve.addEventListener("click",function(e){
+	 			map.openInfoWindow(infoWindow,e.point);
+			});
+		};
+		function colorLine(firstArr,sedArr,thArr,fothArr) {
+			var pointArr01=firstArr;
+			var pointArr02=sedArr;
+			var pointArr03=thArr;
+			var pointArr04=fothArr;
+			map.centerAndZoom(new BMap.Point(121.519094,32.027553), 20);
+			var points01 = [];
+			var points02 =[];
+			var points03 =[];
+			var points04 =[];
+			pointArr01.map(function(item,index){
+				points01[index] = new BMap.Point(item[0],item[1]);
+			});
+			pointArr02.map(function(item,index){
+				points02[index] = new BMap.Point(item[0],item[1]);
+			});
+			pointArr03.map(function(item,index){
+				points03[index] = new BMap.Point(item[0],item[1]);
+			});
+			pointArr04.map(function(item,index){
+				points04[index] = new BMap.Point(item[0],item[1]);
+			});
+			var curve01 = new BMap.Polyline(points01, {strokeColor: "#44D268", strokeWeight: 3, strokeOpacity:1}); 
+			var curve02 = new BMap.Polyline(points02, {strokeColor: "#F3BA58", strokeWeight: 3, strokeOpacity:1}); 
+			var curve03 = new BMap.Polyline(points03, {strokeColor: "#FF0000", strokeWeight: 3, strokeOpacity:1}); 
+			var curve04 = new BMap.Polyline(points04, {strokeColor: "#999", strokeWeight: 3, strokeOpacity:1}); 
+			map.addOverlay(curve01);
+			map.addOverlay(curve02);
+			map.addOverlay(curve03); 
+			map.addOverlay(curve04);
+			map.centerAndZoom(new BMap.Point(pointArr01[0][0],pointArr01[0][1]), 15);
+			map.centerAndZoom(new BMap.Point(pointArr02[0][0],pointArr02[0][1]), 15);
+			map.centerAndZoom(new BMap.Point(pointArr03[0][0],pointArr03[0][1]), 15);
+			map.centerAndZoom(new BMap.Point(pointArr04[0][0],pointArr04[0][1]), 15);
+			var opt01= {
+				width: 100,     // 信息窗口宽度
+				height: 100,     // 信息窗口高度
+				title: "初级预警",
+				message : "标段信息"// 信息窗口标题
+			};
+			var opt02= {
+				width: 100,     // 信息窗口宽度
+				height: 100,     // 信息窗口高度
+				title: "中级预警",
+				message : "标段信息"// 信息窗口标题
+			};
+			var opt03= {
+				width: 100,     // 信息窗口宽度
+				height: 100,     // 信息窗口高度
+				title: "高级预警",
+				message : "标段信息"// 信息窗口标题
+			};
+			var opt04= {
+				width: 100,     // 信息窗口宽度
+				height: 100,     // 信息窗口高度
+				title: "未巡查",
+				message : "标段信息"// 信息窗口标题
+			};
+			var infoWindow01 = new BMap.InfoWindow("",opt01);
+			var infoWindow02 = new BMap.InfoWindow("",opt02);
+			var infoWindow03 = new BMap.InfoWindow("",opt03);
+			var infoWindow04 = new BMap.InfoWindow("",opt04);
+	 		curve01.addEventListener("click",function(e){
+	 			map.openInfoWindow(infoWindow01,e.point);
+			});
+			curve02.addEventListener("click",function(e){
+	 			map.openInfoWindow(infoWindow02,e.point);
+			});
+			curve03.addEventListener("click",function(e){
+	 			map.openInfoWindow(infoWindow03,e.point);
+			});
+			curve04.addEventListener("click",function(e){
+	 			map.openInfoWindow(infoWindow04,e.point);
+			});
+		};
+		function colorLine02(firstArr,sedArr,thArr,fothArr) {
+			var pointArr01=firstArr;
+			var pointArr02=sedArr;
+			var pointArr03=thArr;
+			var pointArr04=fothArr;
+			map.centerAndZoom(new BMap.Point(121.519094,32.027553), 20);
+			var points01 = [];
+			var points02 =[];
+			var points03 =[];
+			var points04 =[];
+			
+			pointArr01.map(function(item,index){
+				points01[index] = new BMap.Point(item[0],item[1]);
+			});
+			pointArr02.map(function(item,index){
+				points02[index] = new BMap.Point(item[0],item[1]);
+			});
+			pointArr03.map(function(item,index){
+				points03[index] = new BMap.Point(item[0],item[1]);
+			});
+			pointArr04.map(function(item,index){
+				points04[index] = new BMap.Point(item[0],item[1]);
+			});
+			var curve01 = new BMap.Polyline(points01, {strokeColor: "#44D268", strokeWeight: 3, strokeOpacity:1}); 
+			var curve02 = new BMap.Polyline(points02, {strokeColor: "#F3BA58", strokeWeight: 3, strokeOpacity:1}); 
+			var curve03 = new BMap.Polyline(points03, {strokeColor: "#FF0000", strokeWeight: 3, strokeOpacity:1}); 
+			var curve04 = new BMap.Polyline(points04, {strokeColor: "#999", strokeWeight: 3, strokeOpacity:1}); 
+			map.addOverlay(curve01);
+			map.addOverlay(curve02);
+			map.addOverlay(curve03); 
+			map.addOverlay(curve04);
+			map.centerAndZoom(new BMap.Point(pointArr01[0][0],pointArr01[0][1]), 15);
+			map.centerAndZoom(new BMap.Point(pointArr02[0][0],pointArr02[0][1]), 15);
+			map.centerAndZoom(new BMap.Point(pointArr03[0][0],pointArr03[0][1]), 15);
+			map.centerAndZoom(new BMap.Point(pointArr04[0][0],pointArr04[0][1]), 15);
+			var opt01= {
+				width: 100,     // 信息窗口宽度
+				height: 100,     // 信息窗口高度
+				title: "初级预警",
+				message : "标段信息"// 信息窗口标题
+			};
+			var opt02= {
+				width: 100,     // 信息窗口宽度
+				height: 100,     // 信息窗口高度
+				title: "中级预警",
+				message : "标段信息"// 信息窗口标题
+			};
+			var opt03= {
+				width: 100,     // 信息窗口宽度
+				height: 100,     // 信息窗口高度
+				title: "高级预警",
+				message : "标段信息"// 信息窗口标题
+			};
+			var opt04= {
+				width: 100,     // 信息窗口宽度
+				height: 100,     // 信息窗口高度
+				title: "未巡查",
+				message : "标段信息"// 信息窗口标题
+			};
+			var infoWindow01 = new BMap.InfoWindow("",opt01);
+			var infoWindow02 = new BMap.InfoWindow("",opt02);
+			var infoWindow03 = new BMap.InfoWindow("",opt03);
+			var infoWindow04 = new BMap.InfoWindow("",opt04);
+	 		curve01.addEventListener("click",function(e){
+	 			map.openInfoWindow(infoWindow01,e.point);
+			});
+			curve02.addEventListener("click",function(e){
+	 			map.openInfoWindow(infoWindow02,e.point);
+			});
+			curve03.addEventListener("click",function(e){
+	 			map.openInfoWindow(infoWindow03,e.point);
+			});
+			curve04.addEventListener("click",function(e){
+	 			map.openInfoWindow(infoWindow04,e.point);
+			});
+		};
+		$('.try01').click(function () {
+			drawLine(pointArr)
+		});
+		$('.try02').click(function () {
+			drawLine(twoArr)
+		});
+		$('.try03').click(function () {
+			drawLine(threeArr)
+		})
+		$('.try04').click(function () {
+			drawLine(fourArr)
+		})
+		$('.try05').click(function () {
+			drawLine(fiveArr)
+		})
+		$('.try06').click(function () {
+			drawLine(sixArr)
+		});
+		$('.try07').click(function () {
+			drawLine(sevenArr)
+		})
+		$('.try08').click(function () {
+			drawLine(eightArr)
+		})
+		$('.try09').click(function () {
+			drawLine(nineArr)
+		})
+	});
+</script>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>南京市农路智慧管理平台</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link rel="stylesheet" href="../../../css/common.css" />
+		<link rel="stylesheet" href="../../../css/rural-roads.css">
+		<link rel="stylesheet" href="../../../layui/css/layui.css">
+		<link rel="stylesheet" href="../../../layui/component/formSelects-v4.css">
+		<link rel="stylesheet" type="text/css" href="../../../css/component.css"/>
+	</head>
+	<body class="project-manage-statistical">
+		<div class="iframe-content">
+			<div class="page-header">
+				<span class="l">汇总统计</span>
+				<div class="layui-form">
+					<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md12"style="width:500px;">
+						<label class="layui-form-label">时间</label>
+						<div class="layui-input-block">
+						   <input type="text" class="layui-input layui-date-input" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
+						</div>
+					</div>
+				</div>
+				<div class="search-btn-warp r"style="width:410px;">
+					<button class="layui-btn search-btn">查询</button>
+					<button class="layui-btn reset-btn">重置</button>
+				</div>
+			</div>
+			<div class="bar-char" >
+				<div id="bar-char"></div>
+				<div class="char-title">
+					各行政区年度计划完成情况统计图
+				</div>
+			</div>
+			<div class="table-warp layui-row">
+				<div class="layui-col-xs12 layui-col-sm12 layui-col-md12 table-warp-list"style="padding-right:5px;">
+					<div class="table-warp-list-con">
+						<div class="table-header">
+							各行政区年度计划完成情况统计表
+							<div class="layui-form table-layui-form">
+								<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md12"style="width:350px;">
+									<label class="layui-form-label">行政区</label>
+									<div class="layui-input-block">
+									   <select name="city" xm-select="selectId1" xm-select-search="" xm-select-search-type="dl"></select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="table-con">
+							<table class="layui-hide" id="test"  lay-even="" lay-skin="nob"width="100%"></table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../../../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../../../js/echarts.min.js"></script>
+		<script type="text/javascript" src="../../../js/rural-roads.js"></script>
+		<script type="text/javascript" src="../../../layui/layui.js"></script>
+		<script type="text/javascript" src="../../../js/utils.js"></script>
+	</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		highwayAdminGrade();
+	})
+	layInit(function(layui,$){
+		layui.laydate.render({
+			elem: '#test5'
+			,type: 'datetime'
+		  });
+		  layui.table.render({
+		  	elem: '#test',
+		  	cols: [[
+					{field: 'th1', title: '序号', width:80},
+					{field: 'th2', title: '行政区'},
+		  			{field: 'th3', title: '道路工程(个)'},
+		  			{field: 'th4', title: '桥梁工程(座)'},
+		  			{field: 'th5', title: '生命安全防护(个)'},
+		  			{field: 'th6', title: '总计'}
+		  	]],
+		  	data: [
+		  			{"th1": "1","th2": "江宁区","th3": "30","th4": "30","th5": "30","th6": "90"},
+					{"th1": "1","th2": "栖霞区","th3": "30","th4": "30","th5": "30","th6": "90"},
+					{"th1": "1","th2": "六合区","th3": "30","th4": "30","th5": "30","th6": "90"},
+					{"th1": "1","th2": "浦口区","th3": "30","th4": "30","th5": "30","th6": "90"},
+					{"th1": "1","th2": "高淳区","th3": "30","th4": "30","th5": "30","th6": "90"}
+		  	]
+		  	,skin:"nob"
+		  	,even: true
+		  });
+	});
+	function highwayAdminGrade(){
+		var charContent = document.getElementById('bar-char');
+		var barChar = echarts.init(charContent);
+		var options = {
+			color:["#059af9","#f3bb57"],
+			tooltip : {
+				trigger: 'axis',
+				axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+					type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+				}
+			},
+			legend: {
+				data:['已完工', '未完工'],
+				top:"10%"
+			},
+			grid:{
+				top:"35%",
+				left:"5%",
+				right:"3%"
+			},
+			xAxis: {
+				type: 'category',
+				data: ['未完工', '已开工', '已完工', '已经验收','申请开工','申请完工','申请置换','申请终止','已置换','已终止'],
+				axisTick:{
+					show:false
+				},
+				nameTextStyle:{
+					color:"#737373"
+				},
+				axisLabel:{
+					color:"#737373"
+				},
+				axisLine:{
+				   lineStyle:{
+						color:"#d9d9d9"
+					}
+				},
+				splitLine:{
+					lineStyle:{
+						color:"#ededed"
+					}
+				}
+			},
+			yAxis: {
+				splitNumber:4,
+				name:"单位:个",
+				type: 'value',
+				axisTick:{
+					show:false
+				},
+				nameTextStyle:{
+					color:"#737373"
+				},
+				axisLabel:{
+					color:"#737373"
+				},
+				axisLine:{
+				   lineStyle:{
+						color:"#d9d9d9"
+					}
+				},
+				splitLine:{
+					lineStyle:{
+						color:"#ededed"
+					}
+				}
+			},
+			series: [{
+				barWidth:"15%",
+				name:"已完工",
+				data: [470,530,390,370,470,508,560,280,470,550],
+				type: 'bar',
+				label: {
+					normal: {
+						color:"#484848",
+						show: true,
+						position: 'top'
+					}
+				}
+			},
+			{
+				barWidth:"15%",
+				name:"未完工",
+				data: [470,530,390,370,470,508,560,280,470,550],
+				type: 'bar',
+				label: {
+					normal: {
+						color:"#484848",
+						show: true,
+						position: 'top'
+					}
+				}
+			}]
+		};
+		barChar.setOption(options);
+		$(window).resize(function() {
+			barChar.resize();
+		});
+	}
+</script>

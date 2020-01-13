@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+	<head>
+		<meta charset="UTF-8">
+		<title>南京市农路智慧管理平台</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link rel="stylesheet" href=" ../../../css/common.css" />
+		<link rel="stylesheet" href=" ../../../css/rural-roads.css">
+		<link rel="stylesheet" href=" ../../../layui/css/layui.css">
+		<link rel="stylesheet" href=" ../../../layui/component/formSelects-v4.css">
+		<link rel="stylesheet" type="text/css" href=" ../../../css/component.css"/>
+	</head>
+	<body class="table-page">
+		<style type="text/css">
+			table .layui-btn {
+				float:left;
+			}
+			.layui-upload-img {
+				width:112px;
+				height:112px;
+				background:#eee;
+				border:none!important;
+				cursor:pointer;
+			}
+		</style>
+		<div class="iframe-content">
+			<!-- 搜索区域 -->
+			<div class="search-warp">
+				<form class="layui-form l" action="">
+					<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md4">
+						<label class="layui-form-label">计划年份</label>
+						<div class="layui-input-block">
+						  <input type="text" class="layui-input">
+						</div>
+					  </div>
+					  
+					  <div class="layui-form-item layui-col-xs10 layui-col-sm12 layui-col-md4">
+						<label class="layui-form-label">唯一编码</label>
+						<div class="layui-input-block">
+							 <input type="text" class="layui-input" >
+						</div>
+					 </div>
+					  
+					  <div class="layui-form-item layui-col-xs10 layui-col-sm12 layui-col-md4">
+						<label class="layui-form-label">项目名称</label>
+						<div class="layui-input-block">
+								 <input type="text" class="layui-input" >
+						</div>
+					 </div>
+					  
+					  <div class="layui-form-item layui-col-xs10 layui-col-sm12 layui-col-md4">
+						<label class="layui-form-label">行政区划</label>
+						<div class="layui-input-block">
+						   <select name="city" xm-select="selectId1" xm-select-search="" xm-select-search-type="dl">
+							  <option>江宁区</option>
+							  <option>江北新区</option>
+							  <option>六合区</option>
+							  <option>高淳区</option>
+							  <option>溧水区</option>
+							  <option>浦口区</option>
+						  </select>
+						</div>
+					 </div>
+					 
+				</form>
+				<div class="search-btn-warp r"style="width:410px;">
+					<button class="layui-btn search-btn">查询</button>
+					<button class="layui-btn reset-btn">重置</button>
+				</div>
+			</div>
+			
+			<!-- table区域 -->
+			<div class="table-con"style="width:100%;">
+				<div class="table-top-btn">
+					<button class="layui-btn"style="background:#01AAED;">excel模板下载</button>
+					<button class="layui-btn"style="background:#5FB878;">项目导入</button>
+					<button class="layui-btn"style="background:#009688;">excel数据导出</button>
+					<!--<button class="layui-btn add-btn"onclick="$('iframe', window.parent.document).css('z-index','999999999999999');$('.add-pop').show()">新增</button>-->
+					<button class="layui-btn add-btn">新增</button>
+				</div>
+				<table class="layui-hide" id="test"  lay-even="" lay-skin="nob"width="100%"></table>
+			</div>
+		</div>
+		<!-- 新增弹窗 -->
+		<div class="page-layer add-pop">
+			<div class="dlgc-add-pop page-pop">
+				<div class="dlgc-add-pop-header pop-header">
+					<span class="header-text">新增计划</span>
+					<div class="close-pop-btn closePop"></div>
+				</div>
+				<div class="dlgc-add-pop-content">
+					<form class="layui-form" action="">
+						<div class="layui-form-item layui-col-xs6 layui-col-sm6 layui-col-md6">
+							<label class="layui-form-label">计划名称</label>
+							<div class="layui-input-block">
+								 <select name="city" xm-select="selectId1" xm-select-search="" xm-select-search-type="dl"></select>
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs6 layui-col-sm6 layui-col-md6">
+							<label class="layui-form-label">计划类型</label>
+							<div class="layui-input-block">
+								<select name="city" xm-select="selectId1" xm-select-search="" xm-select-search-type="dl"></select>
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs6 layui-col-sm6 layui-col-md6">
+							<label class="layui-form-label">截止填报日期</label>
+							<div class="layui-input-block">
+							  <input type="text" class="layui-input layui-date-input" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs6 layui-col-sm6 layui-col-md6">
+							<label class="layui-form-label">计划年份</label>
+							<div class="layui-input-block">
+							 <input type="text" class="layui-input layui-date-input" id="test6" placeholder="yyyy-MM-dd">
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md12">
+							<label class="layui-form-label">计划附件</label>
+							<div class="layui-input-block">
+								<input type="text"class="upload-input layui-input" disabled="disabled" style="width:575px;float:left;border-radius:2px 0 0 2px;">
+								<button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md12">
+							<label class="layui-form-label">计划概述</label>
+							<div class="layui-input-block">
+								<textarea placeholder="请输入内容" class="layui-textarea"style="height:120px;"></textarea>
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md12">
+							<label class="layui-form-label">是否直接通知</label>
+							<div class="layui-input-block">
+								<input type="radio" name="yes" value="是" title="是" checked="">
+								<input type="radio" name="yes" value="否" title="否">
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs6 layui-col-sm6 layui-col-md6">
+							<label class="layui-form-label">通知标题</label>
+							<div class="layui-input-block">
+							  <input type="text" class="layui-input ">
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs6 layui-col-sm6 layui-col-md6">
+							<label class="layui-form-label">接收人</label>
+							<div class="layui-input-block">
+							  <input type="text" class="layui-input" >
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md12">
+							<label class="layui-form-label">计划附件</label>
+							<div class="layui-input-block">
+								<input type="text"class="upload-input layui-input" disabled="disabled" style="width:575px;float:left;border-radius:2px 0 0 2px;">
+								<button type="button" class="layui-btn layui-btn-normal" id="test9">选择文件</button>
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md12">
+							<label class="layui-form-label">计划概述</label>
+							<div class="layui-input-block">
+								<textarea placeholder="请输入内容" class="layui-textarea"style="height:120px;"></textarea>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="dlgc-add-pop-footer page-pop-footer">
+					<button class="layui-btn red-btn closePop">取消</button>
+					<button class="layui-btn blue-btn">保存</button>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src=" ../../../js/jquery.min.js"></script>
+		<script type="text/javascript" src=" ../../../js/rural-roads.js"></script>
+		<script type="text/javascript" src=" ../../../layui/layui.js"></script>
+		<script type="text/javascript" src=" ../../../js/utils.js"></script>
+	</body>
+</html>
+<script type="text/javascript">
+	layInit(function(layui,$){
+		//日期控件
+		layui.laydate.render({
+			elem: '#test5'
+			,type: 'datetime'
+		  });
+		layui.laydate.render({
+		  	elem: '#test6'
+		  	,type: 'year'
+		});
+		//普通图片上传
+	  layui.upload.render({
+	  	elem: '#demo1'
+	  	,auto: false
+	  	,choose: function(res){
+	  	  res.preview(function(index, file, result){
+			$('#demo1').attr("src",result);
+	  	  });
+	  	}
+	    });
+		//文件上传
+		layui.upload.render({
+			elem: '#test8'
+			,auto: false
+			,choose: function(res){
+			  res.preview(function(index, file, result){
+				  $(".upload-input").val(file.name);
+			  });
+			}
+		  });
+		var table = layui.table;
+// 		layui.formSelects.on('selectId1', function(id, vals, val, isAdd, isDisabled){
+// 		    //id:           点击select的id
+// 		    //vals:         当前select已选中的值
+// 		    //val:          当前select点击的值
+// 		    //isAdd:        当前操作选中or取消
+// 		    //isDisabled:   当前选项是否是disabled
+// 		    console.log("当前选择了: " + JSON.stringify(vals));
+// 		}, true);
+	  layui.table.render({
+	  	elem: '#test',
+	  	cols: [[
+	  		{field: 'th1', title: '项目名称', width:180},
+	  		{field: 'th2', title: '项目编号', width:180},
+			{field: 'th3', title: '项目类型', width:180},
+			{field: 'th4', title: '项目类型代码', width:180},
+			{field: 'th8', title: '行政区划代码', width:180},
+			{field: 'th5', title: '行政区划', width:180},
+			{field: 'th7', title: '行政区划乡镇代码', width:180},
+			{field: 'th6', title: '行政区划乡镇', width:180},
+			{field: 'th9', title: '建设性质代码', width:180},
+			{field: 'th10', title: '建设性质', width:180},
+			{field: 'th11', title: '备注', width:180},
+			{field: 'th12', title: '项目状态', width:180},
+			{field: 'th13', title: '计划年份', width:180},
+			{field: 'th14', title: '总投资（万元）', width:180},
+			{field: 'th15', title: '省财政补助投资（万元）', width:180},
+			{field: 'th16', title: '省财政补助标准（万元）', width:180},
+			{field: 'th17', title: '地市补助投资（万元）', width:180},
+			{field: 'th18', title: '地市补助标准（万元）', width:180},
+			{field: 'th20', title: '是否分年度计划代码', width:180},
+			{field: 'th21', title: '是否分年度计划', width:180},
+			{field: 'th22', title: '到上年底累计完成投资（万元）', width:180},
+			{field: 'th23', title: '到上年底累计完成车购税投资（万元）', width:180},
+			{field: 'th24', title: '年度计划投资合计（万元）', width:180},
+			{field: 'th25', title: '年度计划地方投资', width:180},
+			{field: 'th18', title: '主要建设内容', width:180},
+			{field: 'th19', title: '操作', width:180},
+	  	]],
+	  	data: [
+			{"th15":"4.00","th16":"5.00","th17":"6.00","th18":"7.00","th19":"8.00","th20":"9.00","th21":"12.00","th22":"21.00","th23":"22.00","th24":"32.00","th25":"33.00","th4": "32","th2": "3","th1": "项目名称1","th3": "危桥整治","th5":"江宁区","th6":"东山镇","th7":"320115-01","th8":"320115","th9":"2","th10":"改建","th11":"备注","th12":"<span style='color:#f3a827'>未开工</span>","th13":"2018","th14":"77.87","th14":"2018","th18":"路基路面","th19":"<button class='layui-btn blue-btn'>查看</button>"},
+			{"th15":"4.00","th16":"5.00","th17":"6.00","th18":"7.00","th19":"8.00","th20":"9.00","th21":"12.00","th22":"21.00","th23":"22.00","th24":"32.00","th25":"33.00","th4": "32","th2": "4","th1": "项目名称1","th3": "危桥整治","th5":"江宁区","th6":"东山镇","th7":"320115-01","th8":"320115","th9":"2","th10":"改建","th11":"备注","th12":"<span style='color:#45d269'>已完工</span>","th13":"2019","th14":"331.85","th18":"路基路面","th19":"<button class='layui-btn blue-btn'>查看</button>"}]
+	  	,skin:"nob"
+	  	,even: true
+	  	,page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+	  		layout: [ 'prev', 'page', 'next', 'skip','count'] //自定义分页布局
+	  		//,curr: 5 //设定初始在第 5 页
+	  		,groups: 1 //只显示 1 个连续页码
+	  		,first: false //不显示首页
+	  		,last: false //不显示尾页
+	  		,jump: function(obj, first){
+	  		alert(1)
+	  	}
+	  		
+	  	}
+	  });
+		$("table .blue-btn").click(function(){
+			$('iframe', window.parent.document).attr("src","建设工程/计划管理/桥梁项目查询列表-详情.html");
+		});
+		
+	});
+</script>

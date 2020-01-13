@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+	<head>
+		<meta charset="UTF-8">
+		<title>南京市农路智慧管理平台</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/rural-roads.css">
+	</head>
+	<body class="road-map-page">
+		<div class="iframe-content">
+			<div id="map"></div>
+			<div class="search-input">
+				<input type="text"class="l">
+				<div class="search-btn l"></div>
+			</div>
+			<div class="check-map" style="width: auto;right: 160px;">
+				<div class="l check-map4"style="border-right:none;"><span>道路</span></div>
+				<!--<div class="l check-map2"><span>物流点</span></div>-->
+				<div class="l check-map3 on"><span>桥梁</span></div>
+				<div class="l check-map1"><span>行政村</span></div>
+			</div>
+			<div class="two-type">
+				<div class="l"><p class="p1"></p>大桥</div>
+				<div class="l"><p class="p2"></p>中桥</div>
+				<div class="l"><p></p>小桥</div>
+			</div>
+		</div>
+		<div class="iframe-btn">
+			<div class="iframe-btn-list toHome"data-url="首页/home-iframe.html">
+				<div class="img">
+					<img src="../../images/toHome.png" >
+				</div>
+				首页
+			</div>
+			<div class="iframe-btn-list toMap"data-url="首页/农路地图.html">
+				<div class="img">
+					<img src="../../images/toMap.png" >
+				</div>
+				农路地图
+			</div>
+		</div>
+		<script type="text/javascript" src="../../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../../js/rural-roads.js"></script>
+		<script type="text/javascript"src="http://api.map.baidu.com/api?v=3.0&ak=EMU0q1jOBYqmg8Tvl2RYws7hNw6PHyyR"></script>
+	</body>
+</html>
+<script type="text/javascript">
+	$(".iframe-btn .iframe-btn-list").click(function(){
+		if($(this).attr("data-url")!="首页/农路地图.html"){
+			window.location.reload();
+			$('iframe', window.parent.document).attr("src",$(this).attr("data-url"));
+		}
+	});
+	var map = new BMap.Map("map");
+	var x=[118.62913,118.672249,118.684322,118.626256,118.652702,118.683747,118.522771,118.675123,118.621081,118.716517,118.669374,118.709618,118.740664,118.652127,118.888992,118.782058,118.801605,118.849323];
+	var y=[32.407959,32.374299,32.347947,32.406495,32.468417,32.332328,32.372835,32.357708,32.396252,32.339162,32.358196,32.328911,32.350876,32.361124,32.368932,32.3499,32.316218,32.384057]
+	setTimeout(function(){
+		for(var i = 0;i<x.length;i++){
+			var point = new BMap.Point(x[i],y[i]);
+			map.centerAndZoom(new BMap.Point(118.652127,32.361124), 12);
+			var marker = new BMap.Marker(point);  // 创建标注
+			map.addOverlay(marker);               // 将标注添加到地图中
+		}
+		
+		map.enableScrollWheelZoom(true);
+	},200);
+	
+</script>

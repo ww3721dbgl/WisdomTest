@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+	<head>
+		<meta charset="UTF-8">
+		<title>南京市农路智慧管理平台</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link rel="stylesheet" href="../../../css/common.css" />
+		<link rel="stylesheet" href="../../../css/rural-roads.css">
+		<link rel="stylesheet" href="../../../layui/css/layui.css">
+		<link rel="stylesheet" href="../../../layui/component/formSelects-v4.css">
+		<link rel="stylesheet" type="text/css" href="../../../css/component.css"/>
+	</head>
+	<body class="dlgcxmzl-view">
+		<div class="iframe-content">
+			<div class="layui-tab layui-tab-brief">
+			  <ul class="layui-tab-title">
+				<li class="layui-this">计划信息</li>
+				<li>文件资料</li>
+				<button class="layui-btn back-btn r">返回</button>
+			  </ul>
+			  <div class="layui-tab-content layui-col-sm12" style="height: 100px;">
+				<div class="layui-tab-item  layui-show">
+					<div class="card">
+						<ul>
+							<li>
+								<div class="layui-form">
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">计划名称</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"value="1"disabled="disabled">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">计划年份</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">计划类型</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"value="1"disabled="disabled">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">标准公里数</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">计划总公里数</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"value="1"disabled="disabled">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">计划概数</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">计划状态</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"value="1"disabled="disabled">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+										<label class="layui-form-label">.</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md12">
+										<label class="layui-form-label">计划附件</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="无">
+										</div>
+									</div>
+									<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md12">
+										<label class="layui-form-label">备注</label>
+										<div class="layui-input-block">
+										  <input type="text" class="layui-input"disabled="disabled"value="1">
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="layui-tab-item">
+					<table class="layui-hide" id="test"  lay-even="" lay-skin="nob"width="100%"></table>
+				</div>
+			  </div>
+			</div> 
+		</div>
+		<!-- 上传编辑弹窗 -->
+		<div class="page-layer add-pop">
+			<div class="dlgc-add-pop page-pop">
+				<div class="dlgc-add-pop-header pop-header">
+					<span class="header-text">上传文件资料</span>
+					<div class="close-pop-btn closePop"></div>
+				</div>
+				<div class="dlgc-add-pop-content">
+					<form class="layui-form" action="">
+						<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md12">
+							<label class="layui-form-label">文件名称</label>
+							<div class="layui-input-block">
+							  <input type="text" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md12">
+							<label class="layui-form-label">文件类型</label>
+							<div class="layui-input-block">
+							 <select name="city" xm-select="selectId1" xm-select-search="" xm-select-search-type="dl"></select>
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md12">
+							<label class="layui-form-label">附件</label>
+							<div class="layui-input-block">
+								<input type="text"class="upload-input layui-input" disabled="disabled" style="width:580px;float:left;border-radius:2px 0 0 2px;">
+								<button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md12">
+							<label class="layui-form-label">备注</label>
+							<div class="layui-input-block">
+								<textarea placeholder="请输入内容" class="layui-textarea"style="height:120px;"></textarea>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="dlgc-add-pop-footer page-pop-footer">
+					<button class="layui-btn red-btn closePop">取消</button>
+					<button class="layui-btn blue-btn">保存</button>
+				</div>
+			</div>
+		</div>
+		
+		<script type="text/javascript" src="../../../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../../../js/rural-roads.js"></script>
+		<script type="text/javascript" src="../../../layui/layui.js"></script>
+		<script type="text/javascript" src="../../../js/utils.js"></script>
+	</body>
+</html>
+<script type="text/javascript">
+	layInit(function(layui,$){
+		$(".back-btn").click(function(){
+			$('iframe', window.parent.document).attr("src","养护工程/大中修管理/大中修工程管理-桥梁.html");
+		});
+		layui.table.render({
+			elem: '#test',
+			cols: [[
+					{field: 'th1', title: '文件名称', width:180},
+					{field: 'th2', title: '文件类型'},
+					{field: 'th3', title: '状态'},
+					{field: 'th4', title: '文档资料主键'},
+					{field: 'th5', title: '修改时间'},
+					{field: 'th6', title: '备注'},
+					{field: 'th7', title: '操作', width:180}
+			]],
+			data: [
+					{"th1": "文件名称","th2": "文件类型","th3": "状态","th4": "1","th5": "2019-01-12 12:36:36","th6": "","th7": "<button class='layui-btn blue-btn'>下载</button><button class='layui-btn yellow-btn'>编辑</button>"},
+					{"th1": "文件名称","th2": "文件类型","th3": "状态","th4": "1","th5": "2019-01-12 12:36:36","th6": "","th7": "<button class='layui-btn blue-btn'>下载</button><button class='layui-btn yellow-btn'>编辑</button>"},
+			]
+			,skin:"nob"
+			,even: true
+			,page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+				layout: [ 'prev', 'page', 'next','count'] //自定义分页布局
+				//,curr: 5 //设定初始在第 5 页
+				,groups: 1 //只显示 1 个连续页码
+				,first: false //不显示首页
+				,last: false //不显示尾页
+				,jump: function(obj, first){
+			}
+				
+			}
+		});
+		$("table .yellow-btn,table .blue-btn").click(function(){
+			$('iframe', window.parent.document).css('z-index','999999999999999');$('.add-pop').show()
+		});
+		
+	});
+</script>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+	<head>
+		<meta charset="UTF-8">
+		<title>南京市农路智慧管理平台</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link rel="stylesheet" href=" ../../../css/common.css" />
+		<link rel="stylesheet" href=" ../../../css/rural-roads.css">
+		<link rel="stylesheet" href=" ../../../layui/css/layui.css">
+		<link rel="stylesheet" href=" ../../../layui/component/formSelects-v4.css">
+		<link rel="stylesheet" type="text/css" href=" ../../../css/component.css"/>
+	</head>
+	<body class="table-page">
+		<style type="text/css">
+			table .layui-btn {
+				float:left;
+			}
+			.layui-upload-img {
+				width:112px;
+				height:112px;
+				background:#eee;
+				border:none!important;
+				cursor:pointer;
+			}
+		</style>
+		<div class="iframe-content">
+			<!-- 搜索区域 -->
+			<div class="search-warp">
+				<form class="layui-form l" action="">
+					<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md4">
+						<label class="layui-form-label">计划年份</label>
+						<div class="layui-input-block">
+						  <input type="text" class="layui-input">
+						</div>
+					  </div>
+					  
+					  <div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md4">
+						<label class="layui-form-label">项目类型</label>
+						<div class="layui-input-block">
+						  <select name="city" xm-select="selectId2" xm-select-search="" xm-select-search-type="dl">
+							  <option value ="0">10.行政村通达双车道</option>
+							  <option value ="0">20.镇村公交配套</option>
+							  <option value ="0">32.危桥政治</option>
+						  </select>
+						</div>
+					 </div>
+					  
+					  <div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md4">
+						<label class="layui-form-label">项目状态</label>
+						<div class="layui-input-block">
+						  <select name="city" xm-select="selectId3" xm-select-search="" xm-select-search-type="dl">
+						  		<option>在编制待上报</option>
+						  		<option>已上报待审批</option>
+						  		<option>审批已通过</option>
+						  		<option>审批未通过</option>
+						  </select>
+						</div>
+					 </div>
+					  
+					  <div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md4">
+						<label class="layui-form-label">填报单位</label>
+						<div class="layui-input-block">
+						   <select name="city" xm-select="selectId1" xm-select-search="" xm-select-search-type="dl">
+							  <option>江宁区</option>
+							  <option>江北新区</option>
+							  <option>六合区</option>
+							  <option>高淳区</option>
+							  <option>溧水区</option>
+							  <option>浦口区</option>
+						  </select>
+						</div>
+					 </div>
+					 
+				</form>
+				<div class="search-btn-warp r"style="width:410px;">
+					<button class="layui-btn search-btn">查询</button>
+					<button class="layui-btn reset-btn">重置</button>
+				</div>
+			</div>
+			
+			<!-- table区域 -->
+			<div class="table-con"style="width:100%;">
+				<div class="table-top-btn">
+					<button class="layui-btn"style="background:#01AAED;">excel模板下载</button>
+					<button class="layui-btn"style="background:#5FB878;">项目导入</button>
+					<button class="layui-btn"style="background:#009688;">excel数据导出</button>
+					<button class="layui-btn add-btn"onclick="$('iframe', window.parent.document).css('z-index','999999999999999');$('.add-pop').show()">新增</button>
+				</div>
+				<table class="layui-hide" id="test"  lay-even="" lay-skin="nob"width="100%"></table>
+			</div>
+		</div>
+		<!-- 新增弹窗 -->
+		<div class="page-layer add-pop">
+			<div class="dlgc-add-pop page-pop">
+				<div class="dlgc-add-pop-header pop-header">
+					<span class="header-text">新增计划</span>
+					<div class="close-pop-btn closePop"></div>
+				</div>
+				<div class="dlgc-add-pop-content">
+					<form class="layui-form" action="">
+						<div class="layui-form-item layui-col-xs6 layui-col-sm6 layui-col-md6">
+							<label class="layui-form-label">计划名称</label>
+							<div class="layui-input-block">
+								 <select name="city" xm-select="selectId1" xm-select-search="" xm-select-search-type="dl"></select>
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs6 layui-col-sm6 layui-col-md6">
+							<label class="layui-form-label">计划类型</label>
+							<div class="layui-input-block">
+								<select name="city" xm-select="selectId1" xm-select-search="" xm-select-search-type="dl"></select>
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs6 layui-col-sm6 layui-col-md6">
+							<label class="layui-form-label">截止填报日期</label>
+							<div class="layui-input-block">
+							  <input type="text" class="layui-input layui-date-input" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs6 layui-col-sm6 layui-col-md6">
+							<label class="layui-form-label">计划年份</label>
+							<div class="layui-input-block">
+							 <input type="text" class="layui-input layui-date-input" id="test6" placeholder="yyyy-MM-dd">
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md12">
+							<label class="layui-form-label">计划附件</label>
+							<div class="layui-input-block">
+								<input type="text"class="upload-input layui-input" disabled="disabled" style="width:575px;float:left;border-radius:2px 0 0 2px;">
+								<button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md12">
+							<label class="layui-form-label">计划概述</label>
+							<div class="layui-input-block">
+								<textarea placeholder="请输入内容" class="layui-textarea"style="height:120px;"></textarea>
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md12">
+							<label class="layui-form-label">是否直接通知</label>
+							<div class="layui-input-block">
+								<input type="radio" name="yes" value="是" title="是" checked="">
+								<input type="radio" name="yes" value="否" title="否">
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs6 layui-col-sm6 layui-col-md6">
+							<label class="layui-form-label">通知标题</label>
+							<div class="layui-input-block">
+							  <input type="text" class="layui-input ">
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs6 layui-col-sm6 layui-col-md6">
+							<label class="layui-form-label">接收人</label>
+							<div class="layui-input-block">
+							  <input type="text" class="layui-input" >
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md12">
+							<label class="layui-form-label">计划附件</label>
+							<div class="layui-input-block">
+								<input type="text"class="upload-input layui-input" disabled="disabled" style="width:575px;float:left;border-radius:2px 0 0 2px;">
+								<button type="button" class="layui-btn layui-btn-normal" id="test9">选择文件</button>
+							</div>
+						</div>
+						<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md12">
+							<label class="layui-form-label">计划概述</label>
+							<div class="layui-input-block">
+								<textarea placeholder="请输入内容" class="layui-textarea"style="height:120px;"></textarea>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="dlgc-add-pop-footer page-pop-footer">
+					<button class="layui-btn red-btn closePop">取消</button>
+					<button class="layui-btn blue-btn">保存</button>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src=" ../../../js/jquery.min.js"></script>
+		<script type="text/javascript" src=" ../../../js/rural-roads.js"></script>
+		<script type="text/javascript" src=" ../../../layui/layui.js"></script>
+		<script type="text/javascript" src=" ../../../js/utils.js"></script>
+	</body>
+</html>
+<script type="text/javascript">
+	layInit(function(layui,$){
+		//日期控件
+		layui.laydate.render({
+			elem: '#test5'
+			,type: 'datetime'
+		  });
+		layui.laydate.render({
+		  	elem: '#test6'
+		  	,type: 'year'
+		});
+		//普通图片上传
+	  layui.upload.render({
+	  	elem: '#demo1'
+	  	,auto: false
+	  	,choose: function(res){
+	  	  res.preview(function(index, file, result){
+			$('#demo1').attr("src",result);
+	  	  });
+	  	}
+	    });
+		//文件上传
+		layui.upload.render({
+			elem: '#test8'
+			,auto: false
+			,choose: function(res){
+			  res.preview(function(index, file, result){
+				  $(".upload-input").val(file.name);
+			  });
+			}
+		  });
+		var table = layui.table;
+// 		layui.formSelects.on('selectId1', function(id, vals, val, isAdd, isDisabled){
+// 		    //id:           点击select的id
+// 		    //vals:         当前select已选中的值
+// 		    //val:          当前select点击的值
+// 		    //isAdd:        当前操作选中or取消
+// 		    //isDisabled:   当前选项是否是disabled
+// 		    console.log("当前选择了: " + JSON.stringify(vals));
+// 		}, true);
+	  layui.table.render({
+	  	elem: '#test',
+	  	cols: [[
+	  		{field: 'th1', title: '项目状态', width:180},
+	  		{field: 'th2', title: '项目编号', width:180},
+			{field: 'th3', title: '项目名称', width:180},
+			{field: 'th4', title: '项目类型', width:180},
+			{field: 'th5', title: '所在行政区划', width:180},
+			{field: 'th6', title: '所在乡镇', width:180},
+			{field: 'th7', title: '建设性质', width:180},
+			{field: 'th8', title: '填报单位', width:180},
+			{field: 'th9', title: '操作', width:280},
+	  	]],
+	  	data: [
+			{"th1": "<span style='color:#f3a827'>未提交</span>","th2": "1","th3": "项目名称1","th4": "危桥整治","th5":"江宁区","th6":"东山镇","th7":"改建","th8":"填报单位","th9":"<button class='layui-btn blue-btn'>查看</button><button class='layui-btn yellow-btn'>上报地市</button>"},
+			{"th1": "<span style='color:#45d269'>审核通过</span>","th2": "2","th3": "项目名称1","th4": "危桥整治","th5":"六合区","th6":" 东旺镇","th7":"改建","th8":"填报单位","th9":"<button class='layui-btn blue-btn'>查看</button><button class='layui-btn yellow-btn'>上报地市</button>"},
+			{"th1": "<span style='color:#45d269'>审核通过</span>","th2": "3","th3": "项目名称1","th4": "行政村通达双车道","th5":"栖霞区","th6":"西城镇","th7":"改建","th8":"填报单位","th9":"<button class='layui-btn blue-btn'>查看</button><button class='layui-btn yellow-btn'>上报地市</button>"},
+			{"th1": "<span style='color:#f3a827'>未提交</span>","th2": "4","th3": "项目名称1","th4": "行政村通达双车道","th5":"浦口区","th6":"乌江镇","th7":"改建","th8":"填报单位","th9":"<button class='layui-btn blue-btn'>查看</button><button class='layui-btn yellow-btn'>上报地市</button>"},
+	  	]
+	  	,skin:"nob"
+	  	,even: true
+	  	,page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+	  		layout: [ 'prev', 'page', 'next', 'skip','count'] //自定义分页布局
+	  		//,curr: 5 //设定初始在第 5 页
+	  		,groups: 1 //只显示 1 个连续页码
+	  		,first: false //不显示首页
+	  		,last: false //不显示尾页
+	  		,jump: function(obj, first){
+	  		alert(1)
+	  	}
+	  		
+	  	}
+	  });
+		$("table .blue-btn").click(function(){
+			$('iframe', window.parent.document).attr("src","建设工程/计划管理/报送审批-区局-计划详情.html");
+		});
+		
+	});
+</script>

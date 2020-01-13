@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+	<head>
+		<meta charset="UTF-8">
+		<title>南京市农路智慧管理平台</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link rel="stylesheet" href=" ../../../css/common.css" />
+		<link rel="stylesheet" href=" ../../../css/rural-roads.css">
+		<link rel="stylesheet" href=" ../../../layui/css/layui.css">
+		<link rel="stylesheet" href=" ../../../layui/component/formSelects-v4.css">
+		<link rel="stylesheet" type="text/css" href=" ../../../css/component.css"/>
+	</head>
+	<body class="table-page">
+		<style type="text/css">
+			table .layui-btn {
+				float:left;
+			}
+			.layui-upload-img {
+				width:112px;
+				height:112px;
+				background:#eee;
+				border:none!important;
+				cursor:pointer;
+			}
+		</style>
+		<div class="iframe-content">
+			<!-- 搜索区域 -->
+			<div class="search-warp">
+				<form class="layui-form l" action="">
+					<div class="layui-form-item layui-col-xs12 layui-col-sm12 layui-col-md6">
+						<label class="layui-form-label">角色名</label>
+						<div class="layui-input-block">
+						  <select name="city" xm-select="selectId1" xm-select-search="" xm-select-search-type="dl">
+						  		<option>角色名1</option>
+						  		<option>角色名2</option>
+						  		<option>角色名3</option>
+						  </select>
+						</div>
+					</div>
+				</form>
+				<div class="search-btn-warp r"style="width:410px;">
+					<button class="layui-btn search-btn">查询</button>
+					<button class="layui-btn reset-btn">重置</button>
+				</div>
+			</div>
+			<!-- table区域 -->
+			<div class="table-con"style="width:100%;">
+				<div class="table-top-btn">
+					<button class="layui-btn add-btn">新增</button>
+					<button class="layui-btn del-btn"onclick="$('iframe', window.parent.document).css('z-index','999999999999999');$('.del-pop').show()">删除</button>
+				</div>
+				<table class="layui-hide" id="test"  lay-even="" lay-skin="nob"width="100%"></table>
+			</div>
+		</div>
+		<!--删除弹窗-->
+		<div class="page-layer del-pop ">
+			<div class="page-pop confrim-pop">
+				<div class="confrim-pop-content">
+					<p class="p1">您确定删除这项内容吗?</p>
+					<p class="p2">删除这项内容后，将无法恢复。</p>
+				</div>
+				<div class="page-pop-footer">
+					<button class="layui-btn cancel-btn closePop">取消</button>
+					<button class="layui-btn confirm-btn closePop">确定</button>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src=" ../../../js/jquery.min.js"></script>
+		<script type="text/javascript" src=" ../../../js/rural-roads.js"></script>
+		<script type="text/javascript" src=" ../../../layui/layui.js"></script>
+		<script type="text/javascript" src=" ../../../js/utils.js"></script>
+	</body>
+</html>
+<script type="text/javascript">
+	layInit(function(layui,$){
+	  layui.table.render({
+	  	elem: '#test',
+	  	cols: [[
+	  		{type: 'checkbox', fixed: 'left'},
+	  		{field: 'th1', title: '桥梁名称', width:180},
+	  		{field: 'th2', title: '桥梁编码'},
+			{field: 'th3', title: '路线编码'},
+			{field: 'th4', title: '路段序列号'},
+			{field: 'th5', title: '填报单位'},
+			{field: 'th6', title: '操作', width:390,className:"qweqwe"},
+	  	]],
+	  	data: [
+			{"th1": "桥梁1","th2": "	X302321023L0060","th3": "X029 ","th4": "1","th5": "江宁区","th6": "<button class='layui-btn blue-btn view-btn'>查看</button><button class='layui-btn yellow-btn'>修改</button><button class='layui-btn blue-btn permissions-set-btn'>权限管理</button><button class='layui-btn oregin-btn'lay-filter='addLower'>分配用户</button>"},
+	  	]
+	  	,skin:"nob"
+	  	,even: true
+	  	,page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+	  		layout: [ 'prev', 'page', 'next', 'skip','count'] //自定义分页布局
+	  		//,curr: 5 //设定初始在第 5 页
+	  		,groups: 1 //只显示 1 个连续页码
+	  		,first: false //不显示首页
+	  		,last: false //不显示尾页
+	  		,jump: function(obj, first){
+	  		alert(1)
+	  	}
+	  		
+	  	}
+	  });
+	  
+	  
+		  //新增弹窗
+		  $(".add-btn").click(function(){
+		  		layer.open({
+				  type: 2,
+				  area: ['1000px', '650px'],
+				  btn: ['取消','保存'],
+				  title: '新增角色',
+				  fixed: false, //不固定
+				  maxmin: false,
+				  btnAlign:'c',
+				  content: '../../弹窗/系统设置/1-0角色管理-新增弹窗.html'
+				});	
+		  });
+	  
+		//监听查看按钮
+		$(document).on("click","table .view-btn",function(){
+			$('iframe', window.parent.document).attr("src","系统设置-new/9.4.2角色管理/1-2查看详情.html");
+		});
+		
+		//监听修改按钮
+		$(document).on("click","table .yellow-btn",function(){
+			layer.open({
+			  type: 2,
+			  area: ['1000px', '650px'],
+			  btn: ['取消','保存'],
+			  title: '修改角色',
+			  fixed: false, //不固定
+			  maxmin: false,
+			  btnAlign:'c',
+			  content: '../../弹窗/系统设置/1-0角色管理-新增弹窗.html'
+			});	
+		});
+		
+		//监听权限设置按钮按钮
+		$(document).on("click","table .permissions-set-btn",function(){
+			$('iframe', window.parent.document).attr("src","系统设置-new/9.4.2角色管理/设置权限.html");
+		});
+		
+	});
+</script>
